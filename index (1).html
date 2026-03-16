@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mueez Ahmed - 開発者 (Developer)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Theme (Day) */
+            --bg-primary: #f5f5dc;
+            --bg-secondary: #fff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --accent: #d32f2f;
+            --accent-light: #ff6659;
+            --border: #1a1a1a;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --panel-bg: #fff;
+            --ink-overlay: rgba(26, 26, 26, 0.05);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme (Night) */
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2a2a2a;
+            --text-primary: #f5f5dc;
+            --text-secondary: #c0c0c0;
+            --accent: #ff6b6b;
+            --accent-light: #ff8787;
+            --border: #f5f5dc;
+            --shadow: rgba(255, 255, 255, 0.1);
+            --panel-bg: #2a2a2a;
+            --ink-overlay: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            font-family: 'Noto Serif JP', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+            position: relative;
+        }
+
+        /* Japanese Paper Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    var(--ink-overlay) 2px,
+                    var(--ink-overlay) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        /* Manga Speed Lines Background */
+        .speed-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .speed-line {
+            position: absolute;
+            background: var(--border);
+            opacity: 0.05;
+            transform-origin: center;
+        }
+
+        /* Top Navigation Bar (Manga Panel Style) */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--panel-bg);
+            border-bottom: 3px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo-japanese {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            writing-mode: horizontal-tb;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .logo-japanese::after {
+            content: '開発者';
+            font-size: 0.7rem;
+            position: absolute;
+            bottom: -1.2rem;
+            left: 0;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.3em;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--border);
+            background: var(--bg-primary);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: rotate(15deg);
+        }
+
+        .chat-toggle {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--border);
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--text-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .chat-toggle:hover::before {
+            left: 0;
+        }
+
+        .chat-toggle:hover {
+            color: var(--bg-primary);
+        }
+
+        /* Hero Section - Manga Cover Style */
+        .hero-manga {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6rem 2rem 2rem;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            position: relative;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-title-japanese {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 2rem;
+            letter-spacing: 0.3em;
+            color: var(--text-secondary);
+        }
+
+        /* Manga Speech Bubble */
+        .speech-bubble {
+            position: relative;
+            background: var(--panel-bg);
+            border: 3px solid var(--border);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid var(--border);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 17px solid transparent;
+            border-right: 17px solid transparent;
+            border-top: 17px solid var(--panel-bg);
+        }
+
+        /* Panel Layout System */
+        .manga-panel {
+            background: var(--panel-bg);
+            border: 3px solid var(--border);
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .panel-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--accent);
+        }
+
+        .panel-corner.top-left {
+            top: -3px;
+            left: -3px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .panel-corner.top-right {
+            top: -3px;
+            right: -3px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .panel-corner.bottom-left {
+            bottom: -3px;
+            left: -3px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .panel-corner.bottom-right {
+            bottom: -3px;
+            right: -3px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        /* Skills Grid - Manga Style */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-box {
+            border: 3px solid var(--border);
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .skill-box:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: translate(-5px, -5px);
+            box-shadow: 5px 5px 0 var(--border);
+        }
+
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .skill-list {
+            list-style: none;
+            font-size: 0.95rem;
+        }
+
+        .skill-list li {
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .skill-box:hover .skill-list li::before {
+            color: var(--bg-primary);
+        }
+
+        /* Project Cards - Manga Panels */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            border: 3px solid var(--border);
+            background: var(--bg-primary);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translate(-8px, -8px);
+            box-shadow: 8px 8px 0 var(--border);
+        }
+
+        .project-header {
+            padding: 1.5rem;
+            border-bottom: 3px solid var(--border);
+            background: var(--panel-bg);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            border: 2px solid var(--border);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        /* Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 400px;
+            max-height: 600px;
+            background: var(--panel-bg);
+            border: 3px solid var(--border);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            box-shadow: 8px 8px 0 var(--border);
+        }
+
+        .chatbot-container.active {
+            display: flex;
+            animation: slideInChat 0.3s ease;
+        }
+
+        @keyframes slideInChat {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .chatbot-header {
+            padding: 1rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-bottom: 3px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: var(--bg-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 400px;
+        }
+
+        .chat-message {
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            max-width: 80%;
+            position: relative;
+            animation: messageSlide 0.3s ease;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-message.user {
+            background: var(--accent);
+            color: var(--bg-primary);
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-message.bot {
+            background: var(--bg-primary);
+            border-color: var(--border);
+            align-self: flex-start;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 3px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.95rem;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .chat-send {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--border);
+            background: var(--accent);
+            color: var(--bg-primary);
+            cursor: pointer;
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send:hover {
+            background: var(--text-primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            border: 3px solid var(--border);
+            padding: 1.5rem;
+            background: var(--panel-bg);
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border: 4px solid var(--border);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quick Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            border: 3px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            background: var(--panel-bg);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            border: 3px solid var(--border);
+            padding: 2rem;
+            background: var(--bg-primary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+        }
+
+        .contact-form {
+            border: 3px solid var(--border);
+            padding: 2rem;
+            background: var(--panel-bg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            border: 3px solid var(--border);
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            background: var(--text-primary);
+            transform: translate(-3px, -3px);
+            box-shadow: 3px 3px 0 var(--border);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 3px solid var(--border);
+            text-align: center;
+            background: var(--panel-bg);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border);
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-size: 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 0 var(--border);
+        }
+
+        /* Weather Widget */
+        .weather-widget {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            padding: 1rem;
+            border: 3px solid var(--border);
+            background: var(--panel-bg);
+            z-index: 100;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .weather-icon {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-bar {
+                padding: 1rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .manga-panel {
+                padding: 2rem 1rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+            }
+
+            .timeline-content {
+                width: 100%;
+                margin-left: 2rem;
+            }
+
+            .timeline-dot {
+                left: 0;
+                transform: translateX(-50%);
+            }
+
+            .chatbot-container {
+                width: calc(100% - 2rem);
+                right: 1rem;
+                left: 1rem;
+                bottom: 1rem;
+            }
+
+            .weather-widget {
+                top: 80px;
+                right: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .scroll-top {
+                left: 1rem;
+                bottom: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-text {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-text">読み込み中...</div>
+    </div>
+
+    <!-- Speed Lines Background -->
+    <div class="speed-lines" id="speedLines"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="logo-japanese">MA</div>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="themeToggle" title="Toggle Day/Night">☀️</button>
+            <button class="chat-toggle" id="chatToggle">チャット</button>
+        </div>
+    </nav>
+
+    <!-- Weather Widget -->
+    <div class="weather-widget" id="weatherWidget">
+        <div class="weather-icon">🌤️</div>
+        <div id="weatherTemp">25°C</div>
+        <div id="weatherDesc">Partly Cloudy</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-manga">
+        <div class="hero-content">
+            <h1 class="hero-title">MUEEZ AHMED</h1>
+            <h2 class="hero-title-japanese">アーメド・ムイーズ</h2>
+            <div class="speech-bubble">
+                <p>フルスタック開発者 • Full-Stack Engineer<br>
+                クラウドアーキテクト • Cloud Architect<br>
+                AI システム設計者 • AI Systems Designer</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="manga-panel">
+        <div class="panel-corner top-left"></div>
+        <div class="panel-corner top-right"></div>
+        <div class="panel-corner bottom-left"></div>
+        <div class="panel-corner bottom-right"></div>
+        
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-number">3.8</div>
+                <div class="stat-label">GPA • 成績</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">PROJECTS • 案件</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">5</div>
+                <div class="stat-label">AWARDS • 受賞</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">2028</div>
+                <div class="stat-label">GRAD YEAR • 卒業</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="manga-panel">
+        <div class="panel-corner top-left"></div>
+        <div class="panel-corner top-right"></div>
+        <div class="panel-corner bottom-left"></div>
+        <div class="panel-corner bottom-right"></div>
+        
+        <h2 class="section-title">技術スキル • SKILLS</h2>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <div class="skill-title">Frontend 前端</div>
+                <ul class="skill-list">
+                    <li>React.js & Next.js</li>
+                    <li>TypeScript</li>
+                    <li>HTML5/CSS3/Tailwind</li>
+                    <li>Three.js & WebGL</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <div class="skill-title">Backend 後端</div>
+                <ul class="skill-list">
+                    <li>Node.js & Express</li>
+                    <li>Python & FastAPI</li>
+                    <li>C++ Programming</li>
+                    <li>REST & GraphQL</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <div class="skill-title">Database 数据庫</div>
+                <ul class="skill-list">
+                    <li>MongoDB</li>
+                    <li>PostgreSQL</li>
+                    <li>DynamoDB</li>
+                    <li>Schema Design</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <div class="skill-title">Cloud クラウド</div>
+                <ul class="skill-list">
+                    <li>AWS (EC2, S3, Lambda)</li>
+                    <li>Azure Services</li>
+                    <li>Docker & Kubernetes</li>
+                    <li>CI/CD Pipelines</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <div class="skill-title">Security 安全</div>
+                <ul class="skill-list">
+                    <li>JWT Authentication</li>
+                    <li>OAuth 2.0</li>
+                    <li>bcrypt Encryption</li>
+                    <li>RBAC Systems</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <div class="skill-title">AI/ML 機械学習</div>
+                <ul class="skill-list">
+                    <li>TensorFlow</li>
+                    <li>Neural Networks</li>
+                    <li>Computer Vision</li>
+                    <li>System Design</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="manga-panel">
+        <div class="panel-corner top-left"></div>
+        <div class="panel-corner top-right"></div>
+        <div class="panel-corner bottom-left"></div>
+        <div class="panel-corner bottom-right"></div>
+        
+        <h2 class="section-title">プロジェクト • PROJECTS</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🛒</div>
+                    <h3 class="project-title">E-Commerce Platform</h3>
+                    <div class="project-meta">2025-2026 • PRODUCTION</div>
+                </div>
+                <div class="project-body">
+                    <p>Enterprise MERN stack platform. 2,000+ transactions/hr, sub-50ms latency. JWT auth, real-time inventory, payment processing.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">📋</div>
+                    <h3 class="project-title">Task Management SaaS</h3>
+                    <div class="project-meta">2025 • AZURE DEPLOYED</div>
+                </div>
+                <div class="project-body">
+                    <p>Next.js collaborative platform. 1,000+ concurrent users, 40% faster loads. OAuth 2.0, WebSockets, microservices.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Azure</span>
+                        <span class="tech-tag">OAuth</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">☁️</div>
+                    <h3 class="project-title">Decentralized Storage</h3>
+                    <div class="project-meta">2024-2025 • RESEARCH</div>
+                </div>
+                <div class="project-body">
+                    <p>IPFS + AI compression. Python backend, DynamoDB, AWS Lambda. 30% storage efficiency improvement.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">IPFS</span>
+                        <span class="tech-tag">DynamoDB</span>
+                        <span class="tech-tag">ML</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🤖</div>
+                    <h3 class="project-title">AI Robot Car</h3>
+                    <div class="project-meta">2022-2023 • AWARD WINNER</div>
+                </div>
+                <div class="project-body">
+                    <p>Autonomous navigation with Raspberry Pi and ML. 95% accuracy. 1st place NUST National Science Bee.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">RPi</span>
+                        <span class="tech-tag">CV</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🧠</div>
+                    <h3 class="project-title">NeuralOS Portfolio</h3>
+                    <div class="project-meta">2025 • INTERACTIVE</div>
+                </div>
+                <div class="project-body">
+                    <p>Terminal-based OS interface. React + Three.js + custom terminal emulation. Neural network background rendering.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">WebGL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🔌</div>
+                    <h3 class="project-title">API Gateway</h3>
+                    <div class="project-meta">2024 • INFRASTRUCTURE</div>
+                </div>
+                <div class="project-body">
+                    <p>Custom API gateway for microservices. Load balancing, rate limiting, auth middleware. 10,000+ req/min.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">K8s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Timeline -->
+    <div class="manga-panel">
+        <div class="panel-corner top-left"></div>
+        <div class="panel-corner top-right"></div>
+        <div class="panel-corner bottom-left"></div>
+        <div class="panel-corner bottom-right"></div>
+        
+        <h2 class="section-title">経験 • EXPERIENCE</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">2024 - PRESENT</div>
+                    <h3 class="timeline-title">Full-Stack Developer</h3>
+                    <p style="color: var(--accent); margin-bottom: 0.5rem;">Freelance • Upwork</p>
+                    <p>Developed 10+ production apps for international clients. Secure authentication, payment integrations, 5-star ratings.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">SUMMER 2024</div>
+                    <h3 class="timeline-title">Software Engineering Intern</h3>
+                    <p style="color: var(--accent); margin-bottom: 0.5rem;">Netsol Technologies</p>
+                    <p>Enterprise automotive finance software. .NET, SQL Server, Angular. Optimized queries by 35%.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">2023 - 2024</div>
+                    <h3 class="timeline-title">Open Source Contributor</h3>
+                    <p style="color: var(--accent); margin-bottom: 0.5rem;">Various Projects • GitHub</p>
+                    <p>TensorFlow, IoT frameworks, web libraries. 20+ successful pull requests and merges.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">2022 - 2023</div>
+                    <h3 class="timeline-title">Robotics Team Lead</h3>
+                    <p style="color: var(--accent); margin-bottom: 0.5rem;">NUST National Science Bee</p>
+                    <p>Led team of 5. 1st place in Robowars and Roborace. Implemented ML for obstacle detection.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="manga-panel">
+        <div class="panel-corner top-left"></div>
+        <div class="panel-corner top-right"></div>
+        <div class="panel-corner bottom-left"></div>
+        <div class="panel-corner bottom-right"></div>
+        
+        <h2 class="section-title">連絡 • CONTACT</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        <a href="mailto:mueezahmad69@gmail.com" style="color: var(--text-primary); text-decoration: none;">mueezahmad69@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <strong>Phone</strong><br>
+                        +92 316 4119937
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Location</strong><br>
+                        Lahore, Pakistan
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <strong>LinkedIn</strong><br>
+                        <a href="https://linkedin.com/in/mueezahmed" style="color: var(--text-primary); text-decoration: none;">linkedin.com/in/mueezahmed</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💻</div>
+                    <div>
+                        <strong>GitHub</strong><br>
+                        <a href="https://github.com/mueezahmed455" style="color: var(--text-primary); text-decoration: none;">github.com/mueezahmed455</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>NAME • 名前</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL • メール</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>SUBJECT • 件名</label>
+                        <input type="text" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label>MESSAGE • メッセージ</label>
+                        <textarea name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">送信 • SEND MESSAGE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Mueez Ahmed • アーメド・ムイーズ</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+            Full-Stack Engineer • Cloud Architect • AI Systems Designer
+        </p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-title">アシスタント • Assistant</div>
+            <button class="chatbot-close" id="chatbotClose">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="chat-message bot">
+                こんにちは！ Hello! I'm Mueez's assistant. Ask me anything about his work, skills, or projects!
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message...">
+            <button class="chat-send" id="chatSend">送信</button>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        let isDark = false;
+
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            themeToggle.textContent = isDark ? '🌙' : '☀️';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            isDark = true;
+            body.setAttribute('data-theme', 'dark');
+            themeToggle.textContent = '🌙';
+        }
+
+        // Speed Lines Animation
+        function createSpeedLines() {
+            const container = document.getElementById('speedLines');
+            for (let i = 0; i < 20; i++) {
+                const line = document.createElement('div');
+                line.className = 'speed-line';
+                const angle = Math.random() * 360;
+                const length = Math.random() * 500 + 200;
+                const width = Math.random() * 2 + 1;
+                
+                line.style.width = `${width}px`;
+                line.style.height = `${length}px`;
+                line.style.left = `${Math.random() * 100}%`;
+                line.style.top = `${Math.random() * 100}%`;
+                line.style.transform = `rotate(${angle}deg)`;
+                
+                container.appendChild(line);
+            }
+        }
+
+        // Chatbot Functionality
+        const chatToggle = document.getElementById('chatToggle');
+        const chatbot = document.getElementById('chatbot');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+
+        chatToggle.addEventListener('click', () => {
+            chatbot.classList.add('active');
+        });
+
+        chatbotClose.addEventListener('click', () => {
+            chatbot.classList.remove('active');
+        });
+
+        // Chatbot responses
+        const responses = {
+            'skills': 'Mueez specializes in Full-Stack Development (MERN, Next.js), Cloud Architecture (AWS, Azure), AI/ML (TensorFlow), and has expertise in microservices, Docker, and CI/CD pipelines.',
+            'projects': 'Key projects include: E-Commerce Platform (2k+ transactions/hr), Task Management SaaS (1k+ users), Decentralized Cloud Storage with AI, and Award-winning AI Robot Car.',
+            'education': 'Mueez is studying Computer Science at LUMS with a 3.8/4.0 GPA (Dean\'s List), expected graduation 2028.',
+            'awards': 'Awards include: Teknofest Turkey (Top 3 Worldwide), INTEL ISEF Best Project, NUST National Science Bee 1st Place in Robowars & Roborace.',
+            'contact': 'You can reach Mueez at mueezahmad69@gmail.com or +92 316 4119937. He\'s also on LinkedIn and GitHub.',
+            'experience': 'Mueez has experience as a Full-Stack Developer on Upwork, Software Engineering Intern at Netsol Technologies, and Open Source Contributor to projects like TensorFlow.',
+            'hello': 'こんにちは！ Hello! How can I help you learn more about Mueez?',
+            'hi': 'こんにちは！ Hello! How can I help you learn more about Mueez?',
+            'default': 'Interesting question! You can ask me about Mueez\'s skills, projects, education, awards, experience, or contact information.'
+        };
+
+        function addMessage(text, isUser) {
+            const message = document.createElement('div');
+            message.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+            message.textContent = text;
+            chatMessages.appendChild(message);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getBotResponse(userMessage) {
+            const lower = userMessage.toLowerCase();
+            for (const [key, response] of Object.entries(responses)) {
+                if (lower.includes(key)) {
+                    return response;
+                }
+            }
+            return responses.default;
+        }
+
+        chatSend.addEventListener('click', () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                chatInput.value = '';
+                
+                setTimeout(() => {
+                    const response = getBotResponse(message);
+                    addMessage(response, false);
+                }, 500);
+            }
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                chatSend.click();
+            }
+        });
+
+        // Scroll to Top
+        const scrollTop = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Weather Widget (Simulated)
+        function updateWeather() {
+            const temps = [22, 24, 26, 28, 25, 23];
+            const conditions = [
+                { icon: '☀️', desc: 'Sunny' },
+                { icon: '🌤️', desc: 'Partly Cloudy' },
+                { icon: '☁️', desc: 'Cloudy' },
+                { icon: '🌧️', desc: 'Rainy' }
+            ];
+            
+            const temp = temps[Math.floor(Math.random() * temps.length)];
+            const condition = conditions[Math.floor(Math.random() * conditions.length)];
+            
+            document.querySelector('.weather-icon').textContent = condition.icon;
+            document.getElementById('weatherTemp').textContent = `${temp}°C`;
+            document.getElementById('weatherDesc').textContent = condition.desc;
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            const subject = encodeURIComponent(data.subject);
+            const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
+            window.location.href = `mailto:mueezahmad69@gmail.com?subject=${subject}&body=${body}`;
+            
+            alert('Opening your email client...');
+            this.reset();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Loading Animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Initialize
+        createSpeedLines();
+        updateWeather();
+        setInterval(updateWeather, 30000); // Update weather every 30 seconds
+
+        // Add hover effects to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.project-title').textContent;
+                addMessage(`Tell me more about the ${title}!`, true);
+                chatbot.classList.add('active');
+                
+                setTimeout(() => {
+                    const description = card.querySelector('.project-body p').textContent;
+                    addMessage(description, false);
+                }, 500);
+            });
+        });
+
+        // Parallax effect for speed lines
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const speedLines = document.querySelectorAll('.speed-line');
+            speedLines.forEach((line, index) => {
+                const speed = (index % 3 + 1) * 0.1;
+                line.style.transform = `rotate(${index * 18}deg) translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add floating animation to hero content
+        const heroContent = document.querySelector('.hero-content');
+        if (heroContent) {
+            heroContent.classList.add('floating');
+        }
+    </script>
+</body>
+</html>
