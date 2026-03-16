@@ -1,0 +1,82 @@
+---
+layout: default
+title: Projects
+---
+
+<div class="manga-panel">
+    <div class="panel-corner top-left"></div>
+    <div class="panel-corner top-right"></div>
+    <div class="panel-corner bottom-left"></div>
+    <div class="panel-corner bottom-right"></div>
+    
+    <h1 class="section-title">プロジェクト • PROJECTS</h1>
+    
+    <div class="filter-controls" style="text-align: center; margin-bottom: 3rem;">
+        <button class="tech-tag filter-btn active" data-filter="all">All</button>
+        <button class="tech-tag filter-btn" data-filter="React">React</button>
+        <button class="tech-tag filter-btn" data-filter="Python">Python</button>
+        <button class="tech-tag filter-btn" data-filter="Node.js">Node.js</button>
+        <button class="tech-tag filter-btn" data-filter="AI">AI/ML</button>
+        <button class="tech-tag filter-btn" data-filter="Cloud">Cloud</button>
+    </div>
+
+    <div class="projects-grid" id="projectsGrid">
+        {% assign projects = site.projects | sort: 'order' %}
+        {% for project in projects %}
+        <div class="project-card" data-tags="{{ project.tags | join: ',' }}">
+            <div class="project-header">
+                <div class="project-icon">{{ project.icon }}</div>
+                <h3 class="project-title">{{ project.title }}</h3>
+                <div class="project-meta">{{ project.date_range }} • {{ project.status }}</div>
+            </div>
+            <div class="project-body">
+                <p>{{ project.description }}</p>
+                <div class="tech-tags">
+                    {% for tag in project.tags %}
+                    <span class="tech-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+
+            projects.forEach(project => {
+                const tags = project.getAttribute('data-tags').split(',');
+                if (filter === 'all' || tags.includes(filter) || (filter === 'AI' && (tags.includes('ML') || tags.includes('TensorFlow') || tags.includes('CV')))) {
+                    project.style.display = 'block';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+
+<style>
+.filter-btn {
+    cursor: pointer;
+    background: var(--bg-primary);
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+}
+.filter-btn.active {
+    background: var(--accent);
+    color: var(--bg-primary);
+}
+</style>

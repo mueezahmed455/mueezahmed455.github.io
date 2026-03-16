@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    
+    {% seo %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+</head>
+<body data-theme="light">
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-text">読み込み中...</div>
+    </div>
+
+    <!-- Speed Lines Background -->
+    <div class="speed-lines" id="speedLines"></div>
+
+    <!-- Navigation -->
+    {% include nav.html %}
+
+    <!-- Weather Widget -->
+    {% include weather.html %}
+
+    <!-- Main Content -->
+    <main>
+        {{ content }}
+    </main>
+
+    <!-- Footer -->
+    {% include footer.html %}
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <!-- Chatbot -->
+    {% include chatbot.html %}
+
+    <!-- Main Script -->
+    <script src="{{ site.baseurl }}/assets/js/main.js"></script>
+    
+    <!-- Three.js Background Script (Phase 2) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/three-bg.js"></script>
+</body>
+</html>

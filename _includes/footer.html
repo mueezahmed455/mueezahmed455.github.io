@@ -1,0 +1,15 @@
+<footer>
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }} • アーメド・ムイーズ</p>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+        {{ site.description }}
+    </p>
+    <div class="social-links" style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" target="_blank" title="GitHub" style="color: var(--text-primary); font-size: 1.5rem;">💻</a>
+        {% endif %}
+        {% if site.twitter_username %}
+        <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" title="Twitter" style="color: var(--text-primary); font-size: 1.5rem;">🐦</a>
+        {% endif %}
+        <a href="https://linkedin.com/in/mueezahmed" target="_blank" title="LinkedIn" style="color: var(--text-primary); font-size: 1.5rem;">💼</a>
+    </div>
+</footer>

@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+<div class="manga-panel">
+    <div class="panel-corner top-left"></div>
+    <div class="panel-corner top-right"></div>
+    <div class="panel-corner bottom-left"></div>
+    <div class="panel-corner bottom-right"></div>
+    
+    <article class="post">
+        <header class="post-header" style="margin-bottom: 3rem; text-align: center;">
+            <div class="timeline-date" style="font-size: 1.2rem;">{{ page.date | date: "%B %d, %Y" }}</div>
+            <h1 class="section-title">{{ page.title }}</h1>
+            <div class="tech-tags" style="justify-content: center;">
+                {% for tag in page.tags %}
+                <span class="tech-tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </header>
+
+        <div class="post-content" style="font-size: 1.1rem; line-height: 2;">
+            {{ content }}
+        </div>
+    </article>
+    
+    <div style="margin-top: 4rem; text-align: center;">
+        <a href="{{ site.baseurl }}/blog/" class="chat-toggle" style="text-decoration: none; display: inline-block;">← Back to Blog • 戻る</a>
+    </div>
+</div>

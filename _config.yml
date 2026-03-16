@@ -1,0 +1,24 @@
+title: Mueez Ahmed
+email: mueezahmad69@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Full-Stack Engineer • Cloud Architect • AI Systems Designer. 
+  Portfolio showcasing projects in MERN, Next.js, AWS, and AI/ML.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://mueezahmed455.github.io" # the base hostname & protocol for your site
+twitter_username: mueezahmed
+github_username:  mueezahmed455
+
+# Build settings
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+sass:
+  style: compressed
