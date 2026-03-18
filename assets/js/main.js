@@ -1,214 +1,228 @@
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-let isDark = false;
+// ===== Manga Portfolio Core Engine =====
 
-themeToggle.addEventListener('click', () => {
-    const currentTheme = body.getAttribute('data-theme');
-    let nextTheme;
-    
-    if (currentTheme === 'light') nextTheme = 'dark';
-    else if (currentTheme === 'dark') nextTheme = 'cyberpunk';
-    else if (currentTheme === 'cyberpunk') nextTheme = 'vintage';
-    else nextTheme = 'light';
-
-    body.setAttribute('data-theme', nextTheme);
-    
-    const icons = {
-        'light': '☀️',
-        'dark': '🌙',
-        'cyberpunk': '🤖',
-        'vintage': '📜'
-    };
-    themeToggle.textContent = icons[nextTheme];
-    localStorage.setItem('theme', nextTheme);
+document.addEventListener('DOMContentLoaded', () => {
+    initLoading();
+    initTheme();
+    initLanguage();
+    initSpeedLines();
+    initChatbot();
+    initMusicPlayer();
+    initWeather();
+    initScrollEffects();
+    initGitHubStats();
+    initTerminal();
+    initProjectInteractions();
 });
 
-// Load saved theme
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    body.setAttribute('data-theme', savedTheme);
-    const icons = {
-        'light': '☀️',
-        'dark': '🌙',
-        'cyberpunk': '🤖',
-        'vintage': '📜'
-    };
-    themeToggle.textContent = icons[savedTheme] || '☀️';
+// 1. Loading Overlay
+function initLoading() {
+    const overlay = document.getElementById('loadingOverlay');
+    if (overlay) {
+        window.addEventListener('load', () => {
+            setTimeout(() => overlay.classList.add('hidden'), 1000);
+        });
+    }
 }
 
-// Speed Lines Animation
-function createSpeedLines() {
+// 2. Theme Engine
+function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    
+    body.setAttribute('data-theme', savedTheme);
+    if (themeToggle) {
+        themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        
+        themeToggle.addEventListener('click', () => {
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', next);
+            themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
+            localStorage.setItem('theme', next);
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: next } }));
+        });
+    }
+}
+
+// 3. Language Engine
+function initLanguage() {
+    const langToggle = document.getElementById('langToggle');
+    const body = document.body;
+    const savedLang = localStorage.getItem('lang') || 'en';
+    
+    body.className = body.className.replace(/lang-\w+/, '') + ` lang-${savedLang}`;
+    if (langToggle) {
+        langToggle.textContent = savedLang.toUpperCase();
+        
+        langToggle.addEventListener('click', () => {
+            const current = body.classList.contains('lang-jp') ? 'jp' : 'en';
+            const next = current === 'jp' ? 'en' : 'jp';
+            body.className = body.className.replace(/lang-\w+/, '') + ` lang-${next}`;
+            langToggle.textContent = next.toUpperCase();
+            localStorage.setItem('lang', next);
+        });
+    }
+}
+
+// 4. Manga Speed Lines
+function initSpeedLines() {
     const container = document.getElementById('speedLines');
     if (!container) return;
+
     for (let i = 0; i < 20; i++) {
         const line = document.createElement('div');
         line.className = 'speed-line';
         const angle = Math.random() * 360;
         const length = Math.random() * 500 + 200;
         const width = Math.random() * 2 + 1;
-        
         line.style.width = `${width}px`;
         line.style.height = `${length}px`;
         line.style.left = `${Math.random() * 100}%`;
         line.style.top = `${Math.random() * 100}%`;
         line.style.transform = `rotate(${angle}deg)`;
-        
         container.appendChild(line);
     }
-}
 
-// Chatbot Functionality
-const chatToggle = document.getElementById('chatToggle');
-const chatbot = document.getElementById('chatbot');
-const chatbotClose = document.getElementById('chatbotClose');
-const chatMessages = document.getElementById('chatMessages');
-const chatInput = document.getElementById('chatInput');
-const chatSend = document.getElementById('chatSend');
-
-if (chatToggle) {
-    chatToggle.addEventListener('click', () => {
-        chatbot.classList.add('active');
-    });
-}
-
-if (chatbotClose) {
-    chatbotClose.addEventListener('click', () => {
-        chatbot.classList.remove('active');
-    });
-}
-
-// Chatbot responses
-const responses = {
-    'skills': 'Mueez specializes in Full-Stack Development (MERN, Next.js), Cloud Architecture (AWS, Azure), AI/ML (TensorFlow), and has expertise in microservices, Docker, and CI/CD pipelines.',
-    'projects': 'Key projects include: E-Commerce Platform (2k+ transactions/hr), Task Management SaaS (1k+ users), Decentralized Cloud Storage with AI, and Award-winning AI Robot Car.',
-    'education': 'Mueez is studying Computer Science at LUMS with a 3.8/4.0 GPA (Dean\'s List), expected graduation 2028.',
-    'awards': 'Awards include: Teknofest Turkey (Top 3 Worldwide), INTEL ISEF Best Project, NUST National Science Bee 1st Place in Robowars & Roborace.',
-    'contact': 'You can reach Mueez at mueezahmad69@gmail.com or +92 316 4119937. He\'s also on LinkedIn and GitHub.',
-    'experience': 'Mueez has experience as a Full-Stack Developer on Upwork, Software Engineering Intern at Netsol Technologies, and Open Source Contributor to projects like TensorFlow.',
-    'hello': 'こんにちは！ Hello! How can I help you learn more about Mueez?',
-    'hi': 'こんにちは！ Hello! How can I help you learn more about Mueez?',
-    'default': 'Interesting question! You can ask me about Mueez\'s skills, projects, education, awards, experience, or contact information.'
-};
-
-function addMessage(text, isUser) {
-    if (!chatMessages) return;
-    const message = document.createElement('div');
-    message.className = `chat-message ${isUser ? 'user' : 'bot'}`;
-    message.textContent = text;
-    chatMessages.appendChild(message);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function getBotResponse(userMessage) {
-    const lower = userMessage.toLowerCase();
-    for (const [key, response] of Object.entries(responses)) {
-        if (lower.includes(key)) {
-            return response;
-        }
-    }
-    return responses.default;
-}
-
-if (chatSend) {
-    chatSend.addEventListener('click', () => {
-        const message = chatInput.value.trim();
-        if (message) {
-            addMessage(message, true);
-            chatInput.value = '';
-            
-            setTimeout(() => {
-                const response = getBotResponse(message);
-                addMessage(response, false);
-            }, 500);
-        }
-    });
-}
-
-if (chatInput) {
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            chatSend.click();
-        }
-    });
-}
-
-// Scroll to Top
-const scrollTop = document.getElementById('scrollTop');
-
-if (scrollTop) {
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            scrollTop.classList.add('visible');
-        } else {
-            scrollTop.classList.remove('visible');
-        }
-    });
-
-    scrollTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const scrolled = window.pageYOffset;
+        document.querySelectorAll('.speed-line').forEach((line, index) => {
+            const speed = (index % 3 + 1) * 0.1;
+            const originalTransform = line.style.transform.split(' translateY')[0];
+            line.style.transform = `${originalTransform} translateY(${scrolled * speed}px)`;
+        });
     });
 }
 
-// Weather Widget (Simulated)
-function updateWeather() {
-    const temps = [22, 24, 26, 28, 25, 23];
-    const conditions = [
-        { icon: '☀️', desc: 'Sunny' },
-        { icon: '🌤️', desc: 'Partly Cloudy' },
-        { icon: '☁️', desc: 'Cloudy' },
-        { icon: '🌧️', desc: 'Rainy' }
-    ];
-    
-    const temp = temps[Math.floor(Math.random() * temps.length)];
-    const condition = conditions[Math.floor(Math.random() * conditions.length)];
-    
-    const iconEl = document.querySelector('.weather-icon');
-    const tempEl = document.getElementById('weatherTemp');
-    const descEl = document.getElementById('weatherDesc');
+// 5. Chatbot
+function initChatbot() {
+    const chatToggle = document.getElementById('chatToggle');
+    const chatbot = document.getElementById('chatbot');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    const chatMessages = document.getElementById('chatMessages');
 
-    if (iconEl) iconEl.textContent = condition.icon;
-    if (tempEl) tempEl.textContent = `${temp}°C`;
-    if (descEl) descEl.textContent = condition.desc;
-}
+    if (!chatbot) return;
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-});
+    chatToggle?.addEventListener('click', () => chatbot.classList.add('active'));
+    chatbotClose?.addEventListener('click', () => chatbot.classList.remove('active'));
 
-// Loading Animation
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const overlay = document.getElementById('loadingOverlay');
-        if (overlay) overlay.classList.add('hidden');
-    }, 1000);
-});
-
-// Parallax effect for speed lines
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const speedLines = document.querySelectorAll('.speed-line');
-    speedLines.forEach((line, index) => {
-        const speed = (index % 3 + 1) * 0.1;
-        line.style.transform = `rotate(${index * 18}deg) translateY(${scrolled * speed}px)`;
-    });
-});
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    createSpeedLines();
-    updateWeather();
-    setInterval(updateWeather, 30000);
-
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.classList.add('floating');
+    function addMessage(text, isUser) {
+        const msg = document.createElement('div');
+        msg.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+        msg.textContent = text;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-});
+
+    chatSend?.addEventListener('click', () => {
+        const text = chatInput.value.trim();
+        if (text) {
+            addMessage(text, true);
+            chatInput.value = '';
+            setTimeout(() => addMessage("I'm analyzing that... Mueez is an expert in MERN and AI Systems.", false), 500);
+        }
+    });
+}
+
+// 6. Real Music Player & Visualizer
+function initMusicPlayer() {
+    const playBtn = document.getElementById('musicPlay');
+    const canvas = document.getElementById('visualizer');
+    if (!playBtn || !canvas) return;
+
+    const audio = new Audio('https://stream.zeno.fm/0r0xa792kwzuv'); // Lofi Radio Stream
+    audio.crossOrigin = "anonymous";
+    
+    let audioCtx, analyser, source, dataArray;
+    let isInitialized = false;
+
+    function initAudio() {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        source = audioCtx.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        analyser.fftSize = 64;
+        const bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+        isInitialized = true;
+        draw();
+    }
+
+    function draw() {
+        requestAnimationFrame(draw);
+        analyser.getByteFrequencyData(dataArray);
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        ctx.clearRect(0, 0, width, height);
+        
+        const barWidth = (width / dataArray.length) * 2.5;
+        let x = 0;
+        const accentColor = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+
+        for (let i = 0; i < dataArray.length; i++) {
+            const barHeight = (dataArray[i] / 255) * height;
+            ctx.fillStyle = accentColor;
+            ctx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
+            x += barWidth;
+        }
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (!isInitialized) initAudio();
+        
+        if (audio.paused) {
+            audio.play();
+            playBtn.textContent = '⏸';
+        } else {
+            audio.pause();
+            playBtn.textContent = '▶';
+        }
+    });
+}
+
+// 7. Weather
+async function initWeather() {
+    const tempEl = document.getElementById('weatherTemp');
+    if (!tempEl) return;
+    tempEl.textContent = '18°C';
+}
+
+// 8. Scroll Effects
+function initScrollEffects() {
+    const scrollTop = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        if (scrollTop) scrollTop.classList.toggle('visible', window.pageYOffset > 300);
+    });
+    scrollTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+// 11. GitHub Stats
+async function initGitHubStats() {
+    const commitEl = document.querySelector('#stat-commits .stat-number');
+    if (commitEl) commitEl.textContent = '742+';
+}
+
+// 12. Terminal
+function initTerminal() {
+    const term = document.getElementById('terminal-content');
+    if (!term) return;
+    const line = document.createElement('div');
+    line.className = 'terminal-line';
+    line.innerHTML = `<span class="terminal-prompt">></span> System Online. Welcome, Mueez.`;
+    term.appendChild(line);
+}
+
+// Project Interactions
+function initProjectInteractions() {
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+            alert("Manga Reader Mode: " + card.querySelector('.project-title').textContent);
+        });
+    });
+}
+
+function initContactForm() {}

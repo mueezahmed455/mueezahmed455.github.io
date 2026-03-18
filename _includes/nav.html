@@ -1,12 +1,25 @@
 <nav class="nav-bar">
     <a href="{{ site.baseurl }}/" class="logo-japanese">MA</a>
     <div class="nav-links">
-        <a href="{{ site.baseurl }}/">Home</a>
-        <a href="{{ site.baseurl }}/projects/">Projects</a>
-        <a href="{{ site.baseurl }}/blog/">Blog</a>
+        <a href="{{ site.baseurl }}/">
+            <span class="en-text">Home</span>
+            <span class="jp-text">ホーム</span>
+        </a>
+        <a href="{{ site.baseurl }}/#skills">
+            <span class="en-text">Skills</span>
+            <span class="jp-text">スキル</span>
+        </a>
+        <a href="{{ site.baseurl }}/projects/">
+            <span class="en-text">Projects</span>
+            <span class="jp-text">プロジェクト</span>
+        </a>
     </div>
     <div class="nav-controls">
-        <button class="theme-toggle" id="themeToggle" title="Toggle Theme" aria-label="Toggle between Light, Dark, Cyberpunk, and Vintage themes">☀️</button>
-        <button class="chat-toggle" id="chatToggle" aria-label="Open AI Assistant Chat">チャット</button>
+        <button class="lang-toggle" id="langToggle">EN</button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">☀️</button>
+        <button class="chat-toggle" id="chatToggle">
+            <span class="en-text">CHAT</span>
+            <span class="jp-text">チャット</span>
+        </button>
     </div>
 </nav>

@@ -1,11 +1,11 @@
-let scene, camera, renderer, particles;
+// ===== Manga Portfolio Three.js Shader Engine =====
+
+let scene, camera, renderer, material, mesh;
 
 function initThree() {
-    const container = document.body;
-    
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.z = 1;
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -17,103 +17,74 @@ function initThree() {
     canvas.style.left = '0';
     canvas.style.zIndex = '-1';
     canvas.style.pointerEvents = 'none';
-    container.appendChild(canvas);
+    document.body.appendChild(canvas);
 
-    // Create particles
-    const particleCount = 200;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
+    // Custom Shader Material
+    const geometry = new THREE.PlaneGeometry(2, 2);
+    material = new THREE.ShaderMaterial({
+        uniforms: {
+            u_time: { value: 1.0 },
+            u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+            u_color: { value: new THREE.Color(0xd32f2f) }, // Default accent
+            u_scroll: { value: 0.0 }
+        },
+        vertexShader: `
+            void main() {
+                gl_Position = vec4(position, 1.0);
+            }
+        `,
+        fragmentShader: `
+            uniform float u_time;
+            uniform vec2 u_resolution;
+            uniform vec3 u_color;
+            uniform float u_scroll;
 
-    for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 10;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-
-        // Colors based on theme (will update in loop)
-        colors[i * 3] = 0.8;
-        colors[i * 3 + 1] = 0.1;
-        colors[i * 3 + 2] = 0.1;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const material = new THREE.PointsMaterial({
-        size: 0.05,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.4
+            void main() {
+                vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                uv.y += u_scroll * 0.5;
+                
+                float d = 0.0;
+                vec2 st = uv * 10.0;
+                
+                // Manga speed line effect via shader
+                float line = step(0.95, fract(st.x + u_time * 0.2));
+                float noise = fract(sin(dot(uv.xy ,vec2(12.9898,78.233))) * 43758.5453);
+                
+                vec3 finalColor = u_color * line * noise * 0.3;
+                gl_FragColor = vec4(finalColor, 0.1);
+            }
+        `,
+        transparent: true
     });
 
-    particles = new THREE.Points(geometry, material);
-    scene.add(particles);
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
     animate();
 }
 
 function animate() {
     requestAnimationFrame(animate);
-
-    const time = Date.now() * 0.0005;
-    particles.rotation.y = time * 0.1;
-    particles.rotation.x = time * 0.05;
-
-    // Pulse effect
-    const scale = 1 + Math.sin(time) * 0.1;
-    particles.scale.set(scale, scale, scale);
-
+    if (material) {
+        material.uniforms.u_time.value += 0.05;
+        material.uniforms.u_scroll.value = window.pageYOffset / 1000;
+    }
     renderer.render(scene, camera);
 }
 
-function onWindowResize() {
+window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-window.addEventListener('resize', onWindowResize, false);
-
-// Initialize after DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    initThree();
-    updateParticleColors();
+    material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
 });
 
-// Update colors based on current theme
-function updateParticleColors() {
-    if (!particles) return;
-    
-    const theme = document.body.getAttribute('data-theme');
-    const colors = particles.geometry.attributes.color.array;
-    
-    let r, g, b;
-    if (theme === 'dark') {
-        r = 1.0; g = 0.4; b = 0.4; // Soft red
-    } else if (theme === 'cyberpunk') {
-        r = 1.0; g = 0.0; b = 1.0; // Magenta
-    } else if (theme === 'vintage') {
-        r = 0.5; g = 0.2; b = 0.0; // Sepia/Rust
-    } else {
-        r = 0.8; g = 0.1; b = 0.1; // Deep red
-    }
-
-    for (let i = 0; i < colors.length / 3; i++) {
-        colors[i * 3] = r;
-        colors[i * 3 + 1] = g;
-        colors[i * 3 + 2] = b;
-    }
-    
-    particles.geometry.attributes.color.needsUpdate = true;
-}
-
-// Observer to watch for theme changes
-const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-            updateParticleColors();
-        }
-    });
+window.addEventListener('themeChanged', (e) => {
+    const theme = e.detail.theme;
+    let color = new THREE.Color(0xd32f2f); // Light/Red
+    if (theme === 'dark') color = new THREE.Color(0xff6b6b);
+    if (theme === 'cyberpunk') color = new THREE.Color(0x00ff00);
+    if (material) material.uniforms.u_color.value = color;
 });
 
-observer.observe(document.body, { attributes: true });
+document.addEventListener('DOMContentLoaded', initThree);

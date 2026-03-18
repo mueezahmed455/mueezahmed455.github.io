@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: 'en' }}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
     
-    {% seo %}
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}");
+        }
+    </script>
 </head>
-<body data-theme="light">
-    <!-- Loading Screen -->
+<body data-theme="light" class="lang-en">
+    
+    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-text">読み込み中...</div>
     </div>
 
-    <!-- Speed Lines Background -->
+    <!-- Manga Speed Lines -->
     <div class="speed-lines" id="speedLines"></div>
 
     <!-- Navigation -->
@@ -27,6 +38,43 @@
 
     <!-- Weather Widget -->
     {% include weather.html %}
+
+    <!-- Achievements Widget -->
+    <div class="achievements-widget">
+        <div style="font-weight: 700; margin-bottom: 0.5rem; text-align: center;">
+            <span class="jp-text">実績</span>
+            <span class="en-text">AWARDS</span>
+        </div>
+        <div class="achievement-badge">
+            <span>🏆</span>
+            <span style="font-size: 0.75rem;">
+                <span class="jp-text">トルコ トップ3</span>
+                <span class="en-text">Turkey Top 3</span>
+            </span>
+        </div>
+        <div class="achievement-badge">
+            <span>🥇</span>
+            <span style="font-size: 0.75rem;">INTEL ISEF</span>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="music-controls">
+            <button class="music-btn" id="musicPrev">⏮</button>
+            <button class="music-btn" id="musicPlay">▶</button>
+            <button class="music-btn" id="musicNext">⏭</button>
+        </div>
+        <div class="visualizer-container">
+            <canvas id="visualizer"></canvas>
+        </div>
+        <div class="music-info">
+            <div id="musicTitle">
+                <marquee scrollamount="3" class="jp-text">ローファイ コーディング ビート • 24/7 集中音楽</marquee>
+                <marquee scrollamount="3" class="en-text">Lo-fi Coding Beats • 24/7 Focus Music</marquee>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main>
@@ -36,17 +84,13 @@
     <!-- Footer -->
     {% include footer.html %}
 
-    <!-- Scroll to Top Button -->
-    <div class="scroll-top" id="scrollTop">↑</div>
-
     <!-- Chatbot -->
     {% include chatbot.html %}
 
-    <!-- Main Script -->
-    <script src="{{ site.baseurl }}/assets/js/main.js"></script>
-    
-    <!-- Three.js Background Script (Phase 2) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="{{ site.baseurl }}/assets/js/three-bg.js"></script>
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/three-bg.js' | relative_url }}"></script>
 </body>
 </html>
