@@ -47,6 +47,23 @@ function initVisitorGlobe() {
 
     camera.position.z = 12;
 
+    window.neuralGlobePing = () => {
+        const pingGeo = new THREE.SphereGeometry(0.2, 8, 8);
+        const pingMat = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const ping = new THREE.Mesh(pingGeo, pingMat);
+        
+        const lat = (Math.random() - 0.5) * Math.PI;
+        const lon = Math.random() * Math.PI * 2;
+        const r = 5;
+        
+        ping.position.x = r * Math.cos(lat) * Math.cos(lon);
+        ping.position.y = r * Math.sin(lat);
+        ping.position.z = r * Math.cos(lat) * Math.sin(lon);
+        
+        globe.add(ping);
+        setTimeout(() => globe.remove(ping), 2000);
+    };
+
     function animateGlobe() {
         requestAnimationFrame(animateGlobe);
         globe.rotation.y += 0.005;
@@ -146,6 +163,9 @@ function initChatbot() {
                     bestMatch = doc;
                 }
             });
+
+            // Milestone 3: NeuralCore Sentiment Analysis
+            if (window.neuralCore) window.neuralCore.analyzeSentiment(query);
 
             thinkingMsg.remove();
             if (bestMatch) {

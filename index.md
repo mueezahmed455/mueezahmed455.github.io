@@ -67,8 +67,9 @@ title: Home
                 <div class="terminal-dot red"></div>
                 <div class="terminal-dot yellow"></div>
                 <div class="terminal-dot green"></div>
+                <span style="margin-left: 10px; font-size: 0.7rem; opacity: 0.5;">neural-sh — 80x24</span>
             </div>
-            <div id="terminal-content">
+            <div id="terminal-content" style="height: 200px; overflow-y: auto;">
                 <div class="terminal-line">
                     <span class="terminal-prompt">$</span> cat education.txt
                 </div>
@@ -81,6 +82,10 @@ title: Home
                     <span class="jp-text">📚 フルスタック開発、クラウドアーキテクチャ、AI/ML</span>
                     <span class="en-text">📚 Full-Stack, Cloud Architecture, AI/ML</span>
                 </div>
+            </div>
+            <div class="terminal-input-row" style="display: flex; align-items: center; margin-top: 10px; border-top: 1px solid rgba(0,255,0,0.1); padding-top: 5px;">
+                <span class="terminal-prompt" style="color: var(--accent); margin-right: 10px;">$</span>
+                <input type="text" id="terminal-input" style="background: transparent; border: none; color: #00ff00; font-family: 'JetBrains Mono', monospace; outline: none; flex: 1;" placeholder="type 'help'...">
             </div>
         </div>
     </div>
@@ -257,6 +262,30 @@ title: Home
             <div id="sre-logs" style="font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; height: 60px; overflow-y: hidden;">
                 > Booting health monitors...<br>
                 > All systems nominal.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Milestone 4: Distributed Systems & Security Lab -->
+<div class="manga-panel">
+    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
+    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
+    
+    <h2 class="section-title">SECURITY & DISTRIBUTED LAB</h2>
+    <div class="dashboard-grid">
+        <div class="live-pulse-card">
+            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ BLOCKCHAIN SIM ]</h4>
+            <div id="blockchain-list" style="height: 100px; overflow-y: auto; margin-bottom: 1rem; border: 1px solid rgba(0,255,0,0.2); padding: 5px;">
+                <div class="terminal-line" style="font-size: 0.7rem;">GENESIS_BLOCK [HASH: 000...]</div>
+            </div>
+            <button id="mine-block" class="submit-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">MINE NEW BLOCK</button>
+        </div>
+        <div class="live-pulse-card">
+            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ JWT DEBUGGER ]</h4>
+            <input type="text" id="jwt-input" placeholder="Paste JWT here..." style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #00ff00; font-family: 'JetBrains Mono', monospace; padding: 5px; font-size: 0.7rem; margin-bottom: 10px;">
+            <div id="jwt-output" style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; color: #aaa;">
+                Awaiting valid JWT structure...
             </div>
         </div>
     </div>
