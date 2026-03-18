@@ -161,7 +161,7 @@ title: Home
     <div class="projects-grid">
         {% assign projects = site.projects | sort: 'order' %}
         {% for project in projects limit:6 %}
-        <div class="project-card">
+        <div class="project-card" data-repo="{{ project.github_repo }}" data-architecture="{{ project.architecture | escape }}">
             <div class="project-header">
                 <div class="project-icon">{{ project.icon }}</div>
                 <h3 class="project-title">{{ project.title }}</h3>
@@ -189,37 +189,163 @@ title: Home
     <div class="panel-corner bottom-left"></div>
     <div class="panel-corner bottom-right"></div>
     
+    <h2 class="section-title">LIVE CODING PULSE</h2>
+    <div class="dashboard-grid">
+        <div class="live-pulse-card">
+            <div class="pulse-header">
+                <h4 style="font-family: 'JetBrains Mono', monospace;">ACTIVITY</h4>
+                <div class="pulse-dot"></div>
+            </div>
+            <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                Last 7 Days: <span style="color: var(--accent); font-weight: 700;">42.5 hrs</span><br>
+                Status: <span style="color: #00ff00;">READY_TO_DEPLOY</span>
+            </div>
+        </div>
+        <div class="live-pulse-card">
+            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">TECH STACK</h4>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+                    <span>Typescript</span><span>45%</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: rgba(0,255,0,0.1);">
+                    <div style="width: 45%; height: 100%; background: #00ff00;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+                    <span>Python</span><span>30%</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: rgba(0,255,0,0.1);">
+                    <div style="width: 30%; height: 100%; background: #00ff00;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Milestone 3: SRE Health Dashboard -->
+<div class="manga-panel">
+    <div class="panel-corner top-left"></div>
+    <div class="panel-corner top-right"></div>
+    <div class="panel-corner bottom-left"></div>
+    <div class="panel-corner bottom-right"></div>
+    
+    <h2 class="section-title">SYSTEM HEALTH (SRE)</h2>
+    <div class="dashboard-grid" id="sre-dashboard">
+        <div class="live-pulse-card">
+            <div class="pulse-header">
+                <h4 style="font-family: 'JetBrains Mono', monospace; color: var(--accent);">[ API GATEWAY ]</h4>
+                <div class="pulse-dot" id="status-api"></div>
+            </div>
+            <div style="font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
+                LATENCY: <span id="latency-api" style="color: #00ff00;">-- ms</span><br>
+                UPTIME: <span style="color: #00ff00;">99.99%</span><br>
+                LOAD: <span style="color: var(--accent);">OPTIMIZED</span>
+            </div>
+        </div>
+        <div class="live-pulse-card">
+            <div class="pulse-header">
+                <h4 style="font-family: 'JetBrains Mono', monospace; color: var(--accent);">[ E-COMMERCE ]</h4>
+                <div class="pulse-dot" id="status-ecommerce"></div>
+            </div>
+            <div style="font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
+                LATENCY: <span id="latency-ecommerce" style="color: #00ff00;">-- ms</span><br>
+                UPTIME: <span style="color: #00ff00;">99.98%</span><br>
+                STATUS: <span style="color: #00ff00;">STABLE</span>
+            </div>
+        </div>
+        <div class="live-pulse-card">
+            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ SRE LOGS ]</h4>
+            <div id="sre-logs" style="font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; height: 60px; overflow-y: hidden;">
+                > Booting health monitors...<br>
+                > All systems nominal.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Milestone 5: Wasm Python Playground -->
+<div class="manga-panel">
+    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
+    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
+    
+    <h2 class="section-title">WASM CODE PLAYGROUND</h2>
+    <div class="code-terminal">
+        <div class="terminal-header">
+            <span style="color: var(--accent); font-family: 'JetBrains Mono', monospace;">[ python_runtime.wasm ]</span>
+        </div>
+        <textarea id="python-code" style="width: 100%; height: 100px; background: transparent; border: none; color: #00ff00; font-family: 'JetBrains Mono', monospace; outline: none; resize: none;">print("Hello from Mueez's Wasm Runtime!")
+# Try running some logic here</textarea>
+        <button id="run-python" class="submit-btn" style="margin-top: 1rem; width: auto; padding: 0.5rem 2rem;">RUN CODE</button>
+        <div id="wasm-output" style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.5rem; font-size: 0.8rem; color: #00ff00;">> Output will appear here...</div>
+    </div>
+</div>
+
+<div class="manga-panel">
+    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
+    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
+    
+    <h2 class="section-title">
+        <span class="jp-text">経験 • EXPERIENCE</span>
+        <span class="en-text">EXPERIENCE • 経験</span>
+    </h2>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div style="font-weight: 700; color: var(--accent);">2024 - PRESENT</div>
+                <h3>Backend Developer @ SFB</h3>
+                <p>Developing high-scale backend services and system architectures.</p>
+            </div>
+            <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div style="font-weight: 700; color: var(--accent);">2023 - PRESENT</div>
+                <h3>Founder @ Inayat NGO</h3>
+                <p>Leading social impact initiatives and community-driven technology solutions.</p>
+            </div>
+            <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div style="font-weight: 700; color: var(--accent);">2022 - 2024</div>
+                <h3>Digital Marketing & Tech Expert @ AUZBIZ</h3>
+                <p>Architected digital strategies and technology integrations for enterprise clients.</p>
+            </div>
+            <div class="timeline-dot"></div>
+        </div>
+    </div>
+</div>
+
+<div class="manga-panel">
+    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
+    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
+    
     <h2 class="section-title">
         <span class="jp-text">連絡 • CONTACT</span>
         <span class="en-text">CONTACT • 連絡</span>
     </h2>
     <div class="contact-grid">
         <div class="contact-info">
-            <div style="margin-bottom: 1.5rem;">
-                <strong>Email:</strong><br>
-                <a href="mailto:{{ site.email }}" style="color: var(--text-primary); text-decoration: none;">{{ site.email }}</a>
+            <div id="globe-container" style="width: 100%; height: 250px; margin-bottom: 1rem;"></div>
+            <div style="margin-bottom: 1rem;">
+                <strong>📍 Locations:</strong> Lahore, PK | Keele, UK
             </div>
-            <div style="margin-bottom: 1.5rem;">
-                <strong>Location:</strong><br>
-                Keele University, UK
+            <div style="margin-bottom: 1rem;">
+                <strong>📧 Email:</strong> <a href="mailto:mueezahmad69@gmail.com" style="color: var(--accent);">mueezahmad69@gmail.com</a>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <strong>📱 Phone:</strong> +92 316 4119937
             </div>
         </div>
 
         <div class="contact-form">
+            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">[ REAL-TIME GUESTBOOK ]</h4>
+            <div id="guestbook-wall" style="height: 150px; overflow-y: auto; border: 2px solid var(--border); padding: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem;">
+                <div style="margin-bottom: 0.5rem;"><strong>System:</strong> Welcome to the wall!</div>
+            </div>
             <form id="contactForm">
-                <div class="form-group">
-                    <label>NAME</label>
-                    <input type="text" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label>EMAIL</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label>MESSAGE</label>
-                    <textarea name="message" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">SEND</button>
+                <input type="text" name="name" placeholder="YOUR NAME" required style="margin-bottom: 0.5rem;">
+                <textarea name="message" placeholder="MESSAGE THE WALL" required></textarea>
+                <button type="submit" class="submit-btn">POST MESSAGE</button>
             </form>
         </div>
     </div>

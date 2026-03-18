@@ -4,6 +4,14 @@ icon: 🛒
 date_range: 2025-2026
 status: PRODUCTION
 order: 1
+github_repo: mueezahmed455/ecommerce-platform
+architecture: |
+  graph TD
+    A[User Browser] --> B[Next.js Frontend]
+    B --> C[API Gateway]
+    C --> D[Auth Service]
+    C --> E[Inventory Service]
+    E --> F[MongoDB Cluster]
 tags:
   - React
   - Node.js

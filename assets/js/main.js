@@ -1,104 +1,111 @@
-// ===== Manga Portfolio Core Engine =====
+// Milestone 1-5: The NeuralOS Full Integration
 
 document.addEventListener('DOMContentLoaded', () => {
     initLoading();
     initTheme();
     initLanguage();
     initSpeedLines();
-    initChatbot();
+    initChatbot(); 
     initMusicPlayer();
     initWeather();
     initScrollEffects();
     initGitHubStats();
     initTerminal();
     initProjectInteractions();
+    initDevMode();
+    initVoiceControl();
+    initSREHealth();
+    initVisitorGlobe(); // Milestone 4
+    initWasmPlayground(); // Milestone 5
 });
 
-// 1. Loading Overlay
-function initLoading() {
-    const overlay = document.getElementById('loadingOverlay');
-    if (overlay) {
-        window.addEventListener('load', () => {
-            setTimeout(() => overlay.classList.add('hidden'), 1000);
-        });
-    }
-}
-
-// 2. Theme Engine
-function initTheme() {
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    
-    body.setAttribute('data-theme', savedTheme);
-    if (themeToggle) {
-        themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-        
-        themeToggle.addEventListener('click', () => {
-            const current = body.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            body.setAttribute('data-theme', next);
-            themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
-            localStorage.setItem('theme', next);
-            window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: next } }));
-        });
-    }
-}
-
-// 3. Language Engine
-function initLanguage() {
-    const langToggle = document.getElementById('langToggle');
-    const body = document.body;
-    const savedLang = localStorage.getItem('lang') || 'en';
-    
-    body.className = body.className.replace(/lang-\w+/, '') + ` lang-${savedLang}`;
-    if (langToggle) {
-        langToggle.textContent = savedLang.toUpperCase();
-        
-        langToggle.addEventListener('click', () => {
-            const current = body.classList.contains('lang-jp') ? 'jp' : 'en';
-            const next = current === 'jp' ? 'en' : 'jp';
-            body.className = body.className.replace(/lang-\w+/, '') + ` lang-${next}`;
-            langToggle.textContent = next.toUpperCase();
-            localStorage.setItem('lang', next);
-        });
-    }
-}
-
-// 4. Manga Speed Lines
-function initSpeedLines() {
-    const container = document.getElementById('speedLines');
+// --- Milestone 4: 3D Visitor Globe ---
+function initVisitorGlobe() {
+    const container = document.getElementById('globe-container');
     if (!container) return;
 
-    for (let i = 0; i < 20; i++) {
-        const line = document.createElement('div');
-        line.className = 'speed-line';
-        const angle = Math.random() * 360;
-        const length = Math.random() * 500 + 200;
-        const width = Math.random() * 2 + 1;
-        line.style.width = `${width}px`;
-        line.style.height = `${length}px`;
-        line.style.left = `${Math.random() * 100}%`;
-        line.style.top = `${Math.random() * 100}%`;
-        line.style.transform = `rotate(${angle}deg)`;
-        container.appendChild(line);
-    }
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    container.appendChild(renderer.domElement);
 
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        document.querySelectorAll('.speed-line').forEach((line, index) => {
-            const speed = (index % 3 + 1) * 0.1;
-            const originalTransform = line.style.transform.split(' translateY')[0];
-            line.style.transform = `${originalTransform} translateY(${scrolled * speed}px)`;
-        });
+    const geometry = new THREE.SphereGeometry(5, 32, 32);
+    const material = new THREE.MeshPhongMaterial({
+        color: 0x1a1a1a,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.3
     });
+    const globe = new THREE.Mesh(geometry, material);
+    scene.add(globe);
+
+    const light = new THREE.PointLight(0xd32f2f, 1, 100);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040));
+
+    camera.position.z = 12;
+
+    function animateGlobe() {
+        requestAnimationFrame(animateGlobe);
+        globe.rotation.y += 0.005;
+        renderer.render(scene, camera);
+    }
+    animateGlobe();
 }
 
-// 5. Chatbot
+// --- Milestone 5: Wasm Python Playground ---
+async function initWasmPlayground() {
+    const output = document.getElementById('wasm-output');
+    const runBtn = document.getElementById('run-python');
+    const codeInput = document.getElementById('python-code');
+    
+    if (!runBtn) return;
+
+    runBtn.onclick = async () => {
+        output.textContent = "Loading WebAssembly Runtime...";
+        try {
+            // Loading Pyodide from CDN
+            if (!window.pyodide) {
+                window.pyodide = await loadPyodide();
+            }
+            const code = codeInput.value;
+            const result = await window.pyodide.runPythonAsync(code);
+            output.textContent = result || "Execution successful (no output).";
+        } catch (e) {
+            output.textContent = `Error: ${e.message}`;
+        }
+    };
+}
+
+// --- Expanded Knowledge Base (RAG-Lite) ---
+const KNOWLEDGE_BASE = [
+    {
+        topic: 'experience',
+        content: 'Mueez has worked at M/S AUZBIZ as a Digital Marketing & Tech Expert, Indus Hospital as an Internee, and is the Founder of Inayat NGO and X.group. He is also a Backend Developer at SFB.',
+        keywords: ['work', 'experience', 'job', 'auzbiz', 'founder', 'ngo', 'sfb']
+    },
+    {
+        topic: 'awards',
+        content: 'Awards include: Teknofest Turkey Best Category (2019), Intel ISEF National Winner (2020), PYPT International Team (2018-19), and NUST National Science Bee 1st Place in Robowars/Roborace (2023).',
+        keywords: ['awards', 'winner', 'competition', 'intel', 'teknofest', 'nust', 'roborace', 'robowars']
+    },
+    {
+        topic: 'projects',
+        content: 'Mueez has built a Wifi Deauther (IoT), P4wn Pie (Raspberry Pi), 4 DOF Arm (Arduino), AI Robot Car, and Decentralized Cloud Storage.',
+        keywords: ['projects', 'wifi', 'deauther', 'robot', 'car', 'storage', 'cloud', 'arm']
+    },
+    {
+        topic: 'contact',
+        content: 'Mueez is based in Lahore, Pakistan (+92 316 4119937) and Keele, UK. Email: mueezahmad69@gmail.com.',
+        keywords: ['contact', 'email', 'phone', 'location', 'lahore', 'pakistan']
+    }
+];
+
 function initChatbot() {
     const chatToggle = document.getElementById('chatToggle');
     const chatbot = document.getElementById('chatbot');
-    const chatbotClose = document.getElementById('chatbotClose');
     const chatInput = document.getElementById('chatInput');
     const chatSend = document.getElementById('chatSend');
     const chatMessages = document.getElementById('chatMessages');
@@ -106,123 +113,249 @@ function initChatbot() {
     if (!chatbot) return;
 
     chatToggle?.addEventListener('click', () => chatbot.classList.add('active'));
-    chatbotClose?.addEventListener('click', () => chatbot.classList.remove('active'));
+    document.getElementById('chatbotClose')?.addEventListener('click', () => chatbot.classList.remove('active'));
 
     function addMessage(text, isUser) {
         const msg = document.createElement('div');
         msg.className = `chat-message ${isUser ? 'user' : 'bot'}`;
-        msg.textContent = text;
+        msg.innerHTML = text; // Allow HTML for citations
         chatMessages.appendChild(msg);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    chatSend?.addEventListener('click', () => {
-        const text = chatInput.value.trim();
-        if (text) {
-            addMessage(text, true);
-            chatInput.value = '';
-            setTimeout(() => addMessage("I'm analyzing that... Mueez is an expert in MERN and AI Systems.", false), 500);
-        }
-    });
-}
+    async function handleChat() {
+        const query = chatInput.value.trim().toLowerCase();
+        if (!query) return;
 
-// 6. Real Music Player & Visualizer
-function initMusicPlayer() {
-    const playBtn = document.getElementById('musicPlay');
-    const canvas = document.getElementById('visualizer');
-    if (!playBtn || !canvas) return;
+        addMessage(query, true);
+        chatInput.value = '';
 
-    const audio = new Audio('https://stream.zeno.fm/0r0xa792kwzuv'); // Lofi Radio Stream
-    audio.crossOrigin = "anonymous";
-    
-    let audioCtx, analyser, source, dataArray;
-    let isInitialized = false;
+        // Simulated RAG Processing
+        addMessage('<span style="opacity:0.5"><i>Analyzing knowledge base...</i></span>', false);
+        const thinkingMsg = chatMessages.lastChild;
 
-    function initAudio() {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = audioCtx.createAnalyser();
-        source = audioCtx.createMediaElementSource(audio);
-        source.connect(analyser);
-        analyser.connect(audioCtx.destination);
-        analyser.fftSize = 64;
-        const bufferLength = analyser.frequencyBinCount;
-        dataArray = new Uint8Array(bufferLength);
-        isInitialized = true;
-        draw();
+        setTimeout(() => {
+            let bestMatch = null;
+            let maxOverlap = 0;
+
+            KNOWLEDGE_BASE.forEach(doc => {
+                let overlap = 0;
+                doc.keywords.forEach(kw => { if (query.includes(kw)) overlap++; });
+                if (overlap > maxOverlap) {
+                    maxOverlap = overlap;
+                    bestMatch = doc;
+                }
+            });
+
+            thinkingMsg.remove();
+            if (bestMatch) {
+                addMessage(`${bestMatch.content}<br><br><small style="color:var(--accent)">[Source: Mueez_Portfolio_v2.doc]</small>`, false);
+            } else {
+                addMessage("I couldn't find a specific match in my local knowledge base. Would you like me to ping Mueez directly via email?", false);
+            }
+        }, 800);
     }
 
-    function draw() {
-        requestAnimationFrame(draw);
-        analyser.getByteFrequencyData(dataArray);
-        const ctx = canvas.getContext('2d');
-        const width = canvas.width;
-        const height = canvas.height;
-        ctx.clearRect(0, 0, width, height);
-        
-        const barWidth = (width / dataArray.length) * 2.5;
-        let x = 0;
-        const accentColor = getComputedStyle(document.body).getPropertyValue('--accent').trim();
-
-        for (let i = 0; i < dataArray.length; i++) {
-            const barHeight = (dataArray[i] / 255) * height;
-            ctx.fillStyle = accentColor;
-            ctx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
-            x += barWidth;
-        }
-    }
-
-    playBtn.addEventListener('click', () => {
-        if (!isInitialized) initAudio();
-        
-        if (audio.paused) {
-            audio.play();
-            playBtn.textContent = '⏸';
-        } else {
-            audio.pause();
-            playBtn.textContent = '▶';
-        }
-    });
+    chatSend?.addEventListener('click', handleChat);
+    chatInput?.addEventListener('keypress', (e) => e.key === 'Enter' && handleChat());
 }
 
-// 7. Weather
-async function initWeather() {
-    const tempEl = document.getElementById('weatherTemp');
-    if (!tempEl) return;
-    tempEl.textContent = '18°C';
+// --- Milestone 1 & 2 Features (Restored & Optimized) ---
+
+async function fetchCommits(repo) {
+    if (!repo) return [];
+    try {
+        const res = await fetch(`https://api.github.com/repos/${repo}/commits?per_page=5`);
+        return await res.json();
+    } catch (e) { return []; }
 }
 
-// 8. Scroll Effects
-function initScrollEffects() {
-    const scrollTop = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => {
-        if (scrollTop) scrollTop.classList.toggle('visible', window.pageYOffset > 300);
-    });
-    scrollTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-}
-
-// 11. GitHub Stats
-async function initGitHubStats() {
-    const commitEl = document.querySelector('#stat-commits .stat-number');
-    if (commitEl) commitEl.textContent = '742+';
-}
-
-// 12. Terminal
-function initTerminal() {
-    const term = document.getElementById('terminal-content');
-    if (!term) return;
-    const line = document.createElement('div');
-    line.className = 'terminal-line';
-    line.innerHTML = `<span class="terminal-prompt">></span> System Online. Welcome, Mueez.`;
-    term.appendChild(line);
-}
-
-// Project Interactions
 function initProjectInteractions() {
     document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('click', () => {
-            alert("Manga Reader Mode: " + card.querySelector('.project-title').textContent);
+        card.addEventListener('click', async () => {
+            const title = card.querySelector('.project-title')?.textContent || 'Project';
+            const body = card.querySelector('.project-body p')?.innerHTML || '';
+            const tags = card.querySelector('.tech-tags')?.innerHTML || '';
+            const repo = card.getAttribute('data-repo');
+            const architecture = card.getAttribute('data-architecture');
+            showMangaReader(title, body, tags, repo, architecture);
         });
     });
 }
 
-function initContactForm() {}
+async function showMangaReader(title, body, tags, repo, architecture) {
+    let modal = document.getElementById('manga-reader');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'manga-reader';
+        modal.className = 'manga-panel active';
+        modal.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10001; width: 95%; max-width: 900px; max-height: 90vh; overflow-y: auto; display: block; border: 3px solid var(--border);';
+        modal.innerHTML = `
+            <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
+            <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
+            <button id="reader-close" style="position: absolute; right: 1rem; top: 1rem; border: 3px solid var(--border); background: var(--accent); color: white; cursor: pointer; padding: 0.5rem; z-index: 10;">X</button>
+            <h2 class="section-title" id="reader-title"></h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 1rem;">
+                <div>
+                    <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ OVERVIEW ]</h4>
+                    <div class="speech-bubble" id="reader-body" style="margin: 0; max-width: none;"></div>
+                    <div class="tech-tags" id="reader-tags" style="margin-top: 1rem;"></div>
+                </div>
+                <div>
+                    <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ ARCHITECTURE ]</h4>
+                    <div id="architecture-diagram" class="mermaid" style="background: white; padding: 1rem; border-radius: 4px;"></div>
+                </div>
+            </div>
+            <div id="time-machine" style="border-top: 3px solid var(--border); padding: 2rem; margin-top: 1rem;">
+                <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">🕒 COMMIT TIME MACHINE</h4>
+                <div id="commit-list" style="font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">Loading history...</div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        const overlay = document.createElement('div');
+        overlay.id = 'reader-overlay';
+        overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000;';
+        document.body.appendChild(overlay);
+        overlay.onclick = closeReader;
+        document.getElementById('reader-close').onclick = closeReader;
+    }
+    
+    document.getElementById('reader-title').textContent = title;
+    document.getElementById('reader-body').innerHTML = body;
+    document.getElementById('reader-tags').innerHTML = tags;
+    
+    const diagDiv = document.getElementById('architecture-diagram');
+    if (architecture) {
+        diagDiv.style.display = 'block';
+        diagDiv.innerHTML = architecture;
+        diagDiv.removeAttribute('data-processed');
+        mermaid.contentLoaded();
+    } else { diagDiv.style.display = 'none'; }
+
+    document.getElementById('manga-reader').style.display = 'block';
+    document.getElementById('reader-overlay').style.display = 'block';
+
+    const commitList = document.getElementById('commit-list');
+    commitList.innerHTML = 'Scanning timeline...';
+    if (repo) {
+        const commits = await fetchCommits(repo);
+        if (commits.length > 0) {
+            commitList.innerHTML = commits.map(c => `
+                <div style="margin-bottom: 0.8rem; border-left: 2px solid var(--accent); padding-left: 1rem;">
+                    <div style="color: var(--accent); font-weight: 700;">${new Date(c.commit.author.date).toLocaleDateString()}</div>
+                    <div>${c.commit.message}</div>
+                </div>
+            `).join('');
+        } else { commitList.innerHTML = 'Timeline restricted or repository private.'; }
+    } else { commitList.innerHTML = 'No repository linked.'; }
+}
+
+function closeReader() {
+    document.getElementById('manga-reader').style.display = 'none';
+    document.getElementById('reader-overlay').style.display = 'none';
+}
+
+function initDevMode() {
+    let keys = '';
+    window.addEventListener('keydown', (e) => {
+        keys += e.key.toLowerCase();
+        if (keys.endsWith('dev')) { document.body.classList.toggle('binary-mode'); keys = ''; }
+        if (keys.length > 10) keys = keys.slice(-3);
+    });
+}
+
+function initVoiceControl() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.lang = 'en-US';
+    recognition.onresult = (event) => {
+        const command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+        if (command.includes('home')) window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (command.includes('projects')) document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+    };
+    window.addEventListener('dblclick', () => recognition.start());
+}
+
+// CORE HELPERS
+function initLoading() {
+    const overlay = document.getElementById('loadingOverlay');
+    if (overlay) window.addEventListener('load', () => setTimeout(() => overlay.classList.add('hidden'), 1000));
+}
+
+function initTheme() {
+    const toggle = document.getElementById('themeToggle');
+    const body = document.body;
+    body.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+    toggle?.addEventListener('click', () => {
+        const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: next } }));
+    });
+}
+
+function initLanguage() {
+    const toggle = document.getElementById('langToggle');
+    const body = document.body;
+    body.className = body.className.replace(/lang-\w+/, '') + ` lang-${localStorage.getItem('lang') || 'en'}`;
+    toggle?.addEventListener('click', () => {
+        const next = body.classList.contains('lang-jp') ? 'en' : 'jp';
+        body.className = body.className.replace(/lang-\w+/, '') + ` lang-${next}`;
+        localStorage.setItem('lang', next);
+        toggle.textContent = next.toUpperCase();
+    });
+}
+
+function initSpeedLines() {
+    const container = document.getElementById('speedLines');
+    if (!container) return;
+    for (let i = 0; i < 20; i++) {
+        const line = document.createElement('div');
+        line.className = 'speed-line';
+        line.style.cssText = `width:${Math.random()*2+1}px; height:${Math.random()*500+200}px; left:${Math.random()*100}%; top:${Math.random()*100}%; transform:rotate(${Math.random()*360}deg); position:absolute; background:var(--border); opacity:0.05;`;
+        container.appendChild(line);
+    }
+}
+
+function initMusicPlayer() {
+    const playBtn = document.getElementById('musicPlay');
+    const canvas = document.getElementById('visualizer');
+    if (!playBtn || !canvas) return;
+    const audio = new Audio('https://stream.zeno.fm/0r0xa792kwzuv');
+    audio.crossOrigin = "anonymous";
+    let isInit = false, analyser, dataArray;
+    playBtn.onclick = () => {
+        if (!isInit) {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = ctx.createAnalyser();
+            const src = ctx.createMediaElementSource(audio);
+            src.connect(analyser); analyser.connect(ctx.destination);
+            analyser.fftSize = 64; dataArray = new Uint8Array(analyser.frequencyBinCount);
+            isInit = true; 
+            const draw = () => {
+                requestAnimationFrame(draw); analyser.getByteFrequencyData(dataArray);
+                const c = canvas.getContext('2d'); c.clearRect(0, 0, canvas.width, canvas.height);
+                const bar = (canvas.width / dataArray.length) * 2.5; let x = 0;
+                const col = getComputedStyle(document.body).getPropertyValue('--accent');
+                for (let i = 0; i < dataArray.length; i++) {
+                    const h = (dataArray[i] / 255) * canvas.height;
+                    c.fillStyle = col; c.fillRect(x, canvas.height - h, bar - 1, h);
+                    x += bar;
+                }
+            }; draw();
+        }
+        audio.paused ? audio.play() : audio.pause();
+        playBtn.textContent = audio.paused ? '▶' : '⏸';
+    };
+}
+
+function initWeather() { if (document.getElementById('weatherTemp')) document.getElementById('weatherTemp').textContent = '18°C'; }
+function initScrollEffects() {
+    const st = document.getElementById('scrollTop');
+    window.onscroll = () => st?.classList.toggle('visible', window.pageYOffset > 300);
+    st && (st.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+async function initGitHubStats() { if (document.querySelector('#stat-commits .stat-number')) document.querySelector('#stat-commits .stat-number').textContent = '850+'; }
+function initTerminal() { if (document.getElementById('terminal-content')) document.getElementById('terminal-content').innerHTML += '<div class="terminal-line">> SRE_CORE_BOOTED [OK]</div>'; }
