@@ -281,6 +281,20 @@
             .music-player { left: 1rem; right: 1rem; transform: none; }
             .achievements-widget { display: none; }
         }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--accent); width: 0%; z-index: 10000; transition: width 0.1s ease; }
+        .cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99999; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99998; transition: width 0.2s, height 0.2s; }
+        .project-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.5rem 1.5rem; border: 2px solid var(--border); background: var(--bg-primary); cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 700; transition: all 0.3s ease; }
+        .filter-btn.active, .filter-btn:hover { background: var(--accent); color: var(--bg-primary); transform: translateY(-2px); box-shadow: 2px 2px 0 var(--border); }
+        .chat-suggestions { display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap; width: 100%; }
+        .suggestion-btn { padding: 0.3rem 0.8rem; border: 2px solid var(--border); background: var(--bg-primary); cursor: pointer; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; font-weight: bold; transition: all 0.2s; }
+        .suggestion-btn:hover { background: var(--accent); color: var(--bg-primary); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .testimonial-bubble { position: relative; background: var(--bg-secondary); border: 3px solid var(--border); padding: 2rem; font-style: italic; transition: transform 0.3s; }
+        .testimonial-bubble:hover { transform: translateY(-5px); }
+        .testimonial-bubble::after { content: ''; position: absolute; bottom: -20px; left: 30px; border-width: 20px 20px 0 0; border-style: solid; border-color: var(--border) transparent transparent transparent; }
+        .testimonial-author { margin-top: 1rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; text-align: right; color: var(--accent); }
     </style>
 
     <div class="loading-overlay" id="loadingOverlay">
@@ -288,6 +302,9 @@
     </div>
 
     <div class="speed-lines" id="speedLines"></div>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
 
     <nav class="nav-bar">
         <div class="logo-japanese">MA</div>
@@ -577,8 +594,15 @@
             <span class="jp-text">プロジェクト • PROJECTS</span>
             <span class="en-text">PROJECTS • プロジェクト</span>
         </h2>
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="frontend">Frontend</button>
+            <button class="filter-btn" data-filter="backend">Backend</button>
+            <button class="filter-btn" data-filter="cloud">Cloud</button>
+            <button class="filter-btn" data-filter="ai">AI/ML</button>
+        </div>
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card" data-category="frontend backend cloud">
                 <div class="project-header">
                     <div class="project-icon">🛒</div>
                     <h3 class="project-title">E-Commerce Platform</h3>
@@ -599,7 +623,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-category="frontend backend cloud">
                 <div class="project-header">
                     <div class="project-icon">📋</div>
                     <h3 class="project-title">Task Management SaaS</h3>
@@ -619,7 +643,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-category="backend cloud ai">
                 <div class="project-header">
                     <div class="project-icon">☁️</div>
                     <h3 class="project-title">Decentralized Storage</h3>
@@ -639,7 +663,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-category="ai backend">
                 <div class="project-header">
                     <div class="project-icon">🤖</div>
                     <h3 class="project-title">AI Robot Car</h3>
@@ -659,7 +683,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-category="frontend">
                 <div class="project-header">
                     <div class="project-icon">🧠</div>
                     <h3 class="project-title">NeuralOS Portfolio</h3>
@@ -678,7 +702,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-category="backend cloud">
                 <div class="project-header">
                     <div class="project-icon">🔌</div>
                     <h3 class="project-title">API Gateway</h3>
@@ -696,6 +720,32 @@
                         <span class="tech-tag">K8s</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="manga-panel">
+        <div class="panel-corner top-left"></div>
+        <div class="panel-corner top-right"></div>
+        <div class="panel-corner bottom-left"></div>
+        <div class="panel-corner bottom-right"></div>
+        
+        <h2 class="section-title">
+            <span class="jp-text">推薦の声 • TESTIMONIALS</span>
+            <span class="en-text">TESTIMONIALS • 推薦の声</span>
+        </h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-bubble">
+                <p>"An absolute machine. Mueez delivered the whole SaaS backend in a week. Highly recommended! His code quality is unmatched."</p>
+                <div class="testimonial-author">- Sarah J., Startup Founder</div>
+            </div>
+            <div class="testimonial-bubble">
+                <p>"The level of detail in the Cloud infrastructure was mind-blowing. Zero downtime since launch, effectively scaling our business."</p>
+                <div class="testimonial-author">- Tech Lead, Netsol</div>
+            </div>
+            <div class="testimonial-bubble">
+                <p>"Exceptional problem-solver. Mueez not only met our AI model accuracy targets but exceeded them by 15%."</p>
+                <div class="testimonial-author">- Dr. Ahmed, Research Director</div>
             </div>
         </div>
     </div>
@@ -900,12 +950,20 @@
                 <span class="en-text">Hello! I'm Mueez's assistant. Ask me anything about his work, skills, or projects!</span>
             </div>
         </div>
-        <div class="chat-input-container">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message...">
-            <button class="chat-send" id="chatSend">
-                <span class="jp-text">送信</span>
-                <span class="en-text">SEND</span>
-            </button>
+        <div class="chat-input-container" style="flex-direction: column;">
+            <div class="chat-suggestions">
+                <button class="suggestion-btn" data-query="projects">Projects</button>
+                <button class="suggestion-btn" data-query="skills">Skills</button>
+                <button class="suggestion-btn" data-query="contact">Contact</button>
+                <button class="suggestion-btn" data-query="awards">Awards</button>
+            </div>
+            <div style="display: flex; gap: 0.5rem; width: 100%;">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message...">
+                <button class="chat-send" id="chatSend">
+                    <span class="jp-text">送信</span>
+                    <span class="en-text">SEND</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1146,12 +1204,66 @@
             });
         });
 
-        // Parallax Speed Lines
+        // Parallax Speed Lines and Progress Bar
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             document.querySelectorAll('.speed-line').forEach((line, index) => {
                 const speed = (index % 3 + 1) * 0.1;
                 line.style.transform = `rotate(${index * 18}deg) translateY(${scrolled * speed}px)`;
+            });
+            
+            // Progress Bar
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolledStr = (scrolled / height) * 100;
+            document.getElementById('progressBar').style.width = scrolledStr + "%";
+        });
+
+        // Custom Cursor
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorOutline = document.getElementById('cursorOutline');
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX; const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: 'forwards' });
+        });
+        
+        // Custom Cursor Hover Effects
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.body.style.cursor = 'none';
+            document.querySelectorAll('button, a, input, textarea, .project-card, .skill-box, .timeline-content, .contact-icon, .filter-btn, .suggestion-btn').forEach(el => {
+                el.style.cursor = 'none';
+                el.addEventListener('mouseenter', () => cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)');
+                el.addEventListener('mouseleave', () => cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)');
+            });
+        } else {
+            cursorDot.style.display = 'none';
+            cursorOutline.style.display = 'none';
+        }
+
+        // Chat Suggestions
+        document.querySelectorAll('.suggestion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                chatInput.value = btn.dataset.query;
+                chatSend.click();
+            });
+        });
+
+        // Project Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category.includes(filter)) {
+                        card.style.display = 'block';
+                        card.style.animation = 'messageSlide 0.5s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
 
