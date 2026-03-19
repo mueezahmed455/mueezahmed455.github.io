@@ -6,15 +6,9 @@ title: Home
 <section class="hero-manga">
     <div class="hero-content">
         <h1 class="hero-title">MUEEZ AHMED</h1>
-        <h2 class="hero-title-japanese">アーメド・ムイーズ</h2>
         <div class="speech-bubble">
             <p>
-                <span class="jp-text">フルスタック開発者 • Full-Stack Engineer<br>
-                クラウドアーキテクト • Cloud Architect<br>
-                AI システム設計者 • AI Systems Designer</span>
-                <span class="en-text">Full-Stack Engineer • フルスタック開発者<br>
-                Cloud Architect • クラウドアーキテクト<br>
-                AI Systems Designer • AI システム設計者</span>
+                <span class="en-text">Full-Stack Engineer • Cloud Architect • AI Systems Designer</span>
             </p>
         </div>
     </div>
@@ -30,28 +24,24 @@ title: Home
         <div class="stat-box" id="stat-gpa">
             <div class="stat-number">3.8</div>
             <div class="stat-label">
-                <span class="jp-text">GPA • 成績</span>
                 <span class="en-text">GPA • GRADE</span>
             </div>
         </div>
         <div class="stat-box" id="stat-projects">
             <div class="stat-number">20+</div>
             <div class="stat-label">
-                <span class="jp-text">プロジェクト</span>
                 <span class="en-text">PROJECTS</span>
             </div>
         </div>
         <div class="stat-box" id="stat-commits">
             <div class="stat-number">--</div>
             <div class="stat-label">
-                <span class="jp-text">コミット数</span>
                 <span class="en-text">COMMITS</span>
             </div>
         </div>
         <div class="stat-box" id="stat-grad">
             <div class="stat-number">2028</div>
             <div class="stat-label">
-                <span class="jp-text">卒業年</span>
                 <span class="en-text">GRAD YEAR</span>
             </div>
         </div>
@@ -59,8 +49,7 @@ title: Home
 
     <div style="margin-top: 3rem;">
         <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center;">
-            <span class="jp-text">教育 • EDUCATION</span>
-            <span class="en-text">EDUCATION • 教育</span>
+            <span class="en-text">EDUCATION</span>
         </h3>
         <div class="code-terminal" id="terminal">
             <div class="terminal-header">
@@ -79,7 +68,6 @@ title: Home
                 <div class="terminal-line">📍 Keele University, United Kingdom</div>
                 <div class="terminal-line">📊 GPA: 3.8/4.0 (Dean's List)</div>
                 <div class="terminal-line" style="margin-top: 1rem;">
-                    <span class="jp-text">📚 フルスタック開発、クラウドアーキテクチャ、AI/ML</span>
                     <span class="en-text">📚 Full-Stack, Cloud Architecture, AI/ML</span>
                 </div>
             </div>
@@ -107,7 +95,6 @@ title: Home
             <a href="{{ site.baseurl }}/Resume%20new%20(1).pdf" class="quick-link-btn" download>
                 <div class="quick-link-icon">📄</div>
                 <div style="font-weight: 700;">
-                    <span class="jp-text">履歴書</span>
                     <span class="en-text">Resume</span>
                 </div>
             </a>
@@ -122,8 +109,7 @@ title: Home
     <div class="panel-corner bottom-right"></div>
     
     <h2 class="section-title">
-        <span class="jp-text">技術スキル • SKILLS</span>
-        <span class="en-text">SKILLS • 技術スキル</span>
+        <span class="en-text">SKILLS</span>
     </h2>
     <div class="skills-grid">
         <div class="skill-box">
@@ -160,8 +146,7 @@ title: Home
     <div class="panel-corner bottom-right"></div>
     
     <h2 class="section-title">
-        <span class="jp-text">プロジェクト • PROJECTS</span>
-        <span class="en-text">PROJECTS • プロジェクト</span>
+        <span class="en-text">PROJECTS</span>
     </h2>
     <div class="projects-grid">
         {% assign projects = site.projects | sort: 'order' %}
@@ -174,7 +159,6 @@ title: Home
             </div>
             <div class="project-body">
                 <p>
-                    <span class="jp-text">{{ project.description_jp | default: project.description }}</span>
                     <span class="en-text">{{ project.description }}</span>
                 </p>
                 <div class="tech-tags">
@@ -198,7 +182,7 @@ title: Home
     <div class="dashboard-grid">
         <div class="live-pulse-card">
             <div class="pulse-header">
-                <h4 style="font-family: 'JetBrains Mono', monospace;">ACTIVITY</h4>
+                <h4 style="font-family: 'Inter', sans-serif;">ACTIVITY</h4>
                 <div class="pulse-dot"></div>
             </div>
             <div style="font-size: 0.9rem; color: var(--text-secondary);">
@@ -207,7 +191,7 @@ title: Home
             </div>
         </div>
         <div class="live-pulse-card">
-            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">TECH STACK</h4>
+            <h4 style="font-family: 'Inter', sans-serif; margin-bottom: 1rem;">TECH STACK</h4>
             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                 <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
                     <span>Typescript</span><span>45%</span>
@@ -226,7 +210,6 @@ title: Home
     </div>
 </div>
 
-<!-- Milestone 3: SRE Health Dashboard -->
 <div class="manga-panel">
     <div class="panel-corner top-left"></div>
     <div class="panel-corner top-right"></div>
@@ -267,7 +250,6 @@ title: Home
     </div>
 </div>
 
-<!-- Milestone 4: Distributed Systems & Security Lab -->
 <div class="manga-panel">
     <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
     <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
@@ -291,7 +273,6 @@ title: Home
     </div>
 </div>
 
-<!-- Milestone 5: Wasm Python Playground -->
 <div class="manga-panel">
     <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
     <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
@@ -313,8 +294,7 @@ title: Home
     <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
     
     <h2 class="section-title">
-        <span class="jp-text">経験 • EXPERIENCE</span>
-        <span class="en-text">EXPERIENCE • 経験</span>
+        <span class="en-text">EXPERIENCE</span>
     </h2>
     <div class="timeline">
         <div class="timeline-item">
@@ -349,8 +329,7 @@ title: Home
     <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
     
     <h2 class="section-title">
-        <span class="jp-text">連絡 • CONTACT</span>
-        <span class="en-text">CONTACT • 連絡</span>
+        <span class="en-text">CONTACT</span>
     </h2>
     <div class="contact-grid">
         <div class="contact-info">

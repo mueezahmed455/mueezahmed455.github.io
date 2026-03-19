@@ -7,7 +7,7 @@
     <meta name="description" content="{{ site.description }}">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -21,23 +21,27 @@
     
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
+
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}");
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}")
+                    .then(reg => console.log('SW registered:', reg))
+                    .catch(err => console.log('SW registration failed:', err));
+            });
         }
     </script>
 </head>
-<body data-theme="light" class="lang-en">
+<body data-theme="dark">
     
     <!-- CRT Overlay -->
     <div class="crt-overlay"></div>
 
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-text">読み込み中...</div>
+        <div class="loading-text">LOADING...</div>
     </div>
 
     <!-- Manga Speed Lines -->
@@ -52,13 +56,11 @@
     <!-- Achievements Widget -->
     <div class="achievements-widget">
         <div style="font-weight: 700; margin-bottom: 0.5rem; text-align: center;">
-            <span class="jp-text">実績</span>
             <span class="en-text">AWARDS</span>
         </div>
         <div class="achievement-badge">
             <span>🏆</span>
             <span style="font-size: 0.75rem;">
-                <span class="jp-text">トルコ トップ3</span>
                 <span class="en-text">Turkey Top 3</span>
             </span>
         </div>
@@ -80,7 +82,6 @@
         </div>
         <div class="music-info">
             <div id="musicTitle">
-                <marquee scrollamount="3" class="jp-text">ローファイ コーディング ビート • 24/7 集中音楽</marquee>
                 <marquee scrollamount="3" class="en-text">Lo-fi Coding Beats • 24/7 Focus Music</marquee>
             </div>
         </div>

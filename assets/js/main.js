@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initLanguage();
     initSpeedLines();
-    initChatbot(); 
+    initChatbot();
     initMusicPlayer();
     initWeather();
     initScrollEffects();
@@ -15,8 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initDevMode();
     initVoiceControl();
     initSREHealth();
-    initVisitorGlobe(); // Milestone 4
-    initWasmPlayground(); // Milestone 5
+    initVisitorGlobe();
+    initWasmPlayground();
+    initGuestbook();
+    initBlockchainSim();
+    initJWTDebugger();
 });
 
 // --- Milestone 4: 3D Visitor Globe ---
@@ -379,3 +382,102 @@ function initScrollEffects() {
 }
 async function initGitHubStats() { if (document.querySelector('#stat-commits .stat-number')) document.querySelector('#stat-commits .stat-number').textContent = '850+'; }
 function initTerminal() { if (document.getElementById('terminal-content')) document.getElementById('terminal-content').innerHTML += '<div class="terminal-line">> SRE_CORE_BOOTED [OK]</div>'; }
+
+// SRE Health Monitoring
+function initSREHealth() {
+    const updateHealth = () => {
+        const services = ['api', 'ecommerce'];
+        services.forEach(service => {
+            const statusEl = document.getElementById(`status-${service}`);
+            const latencyEl = document.getElementById(`latency-${service}`);
+            if (statusEl && latencyEl) {
+                const latency = Math.floor(Math.random() * 50) + 10;
+                latencyEl.textContent = `${latency} ms`;
+                statusEl.style.background = latency < 100 ? '#00ff00' : '#ffaa00';
+            }
+        });
+        const logEl = document.getElementById('sre-logs');
+        if (logEl) {
+            const logs = ['Health check passed', 'Latency nominal', 'All endpoints responding', 'Cache hit rate: 98%'];
+            const randomLog = logs[Math.floor(Math.random() * logs.length)];
+            logEl.innerHTML += `<div>> ${randomLog}</div>`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+    };
+    setInterval(updateHealth, 5000);
+    updateHealth();
+}
+
+// Guestbook Functionality
+function initGuestbook() {
+    const form = document.getElementById('contactForm');
+    const wall = document.getElementById('guestbook-wall');
+    if (!form || !wall) return;
+
+    const messages = JSON.parse(localStorage.getItem('guestbook-messages') || '[]');
+    messages.forEach(msg => addGuestbookMessage(msg.name, msg.message, wall));
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = form.name.value.trim();
+        const message = form.message.value.trim();
+        if (name && message) {
+            addGuestbookMessage(name, message, wall);
+            messages.push({ name, message, date: new Date().toISOString() });
+            localStorage.setItem('guestbook-messages', JSON.stringify(messages));
+            form.reset();
+        }
+    });
+}
+
+function addGuestbookMessage(name, message, wall) {
+    const div = document.createElement('div');
+    div.style.marginBottom = '0.5rem';
+    div.innerHTML = `<strong>${name}:</strong> ${message}`;
+    wall.appendChild(div);
+    wall.scrollTop = wall.scrollHeight;
+}
+
+// Blockchain Simulation
+function initBlockchainSim() {
+    const mineBtn = document.getElementById('mine-block');
+    const list = document.getElementById('blockchain-list');
+    if (!mineBtn || !list) return;
+
+    let blockHeight = 0;
+    mineBtn.addEventListener('click', () => {
+        blockHeight++;
+        const hash = '0x' + Array(64).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+        const prevHash = blockHeight > 1 ? list.lastChild.textContent.split('→')[1].trim() : 'GENESIS';
+        const div = document.createElement('div');
+        div.className = 'terminal-line';
+        div.style.fontSize = '0.7rem';
+        div.innerHTML = `BLOCK ${blockHeight} [HASH: ${hash.substring(0, 10)}...] → ${prevHash}`;
+        list.appendChild(div);
+        list.scrollTop = list.scrollHeight;
+    });
+}
+
+// JWT Debugger
+function initJWTDebugger() {
+    const input = document.getElementById('jwt-input');
+    const output = document.getElementById('jwt-output');
+    if (!input || !output) return;
+
+    input.addEventListener('input', () => {
+        const token = input.value.trim();
+        if (!token) {
+            output.textContent = 'Awaiting valid JWT structure...';
+            return;
+        }
+        try {
+            const parts = token.split('.');
+            if (parts.length !== 3) throw new Error('Invalid JWT');
+            const header = JSON.parse(atob(parts[0].replace(/-/g, '+').replace(/_/g, '/')));
+            const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+            output.innerHTML = `<div style="color:#00ff00">Header:</div><pre>${JSON.stringify(header, null, 2)}</pre><div style="color:#00ff00">Payload:</div><pre>${JSON.stringify(payload, null, 2)}</pre>`;
+        } catch (e) {
+            output.textContent = 'Invalid JWT format';
+        }
+    });
+}
