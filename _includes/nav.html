@@ -1,32 +1,20 @@
 <nav class="nav-bar" id="navbar">
     <div class="logo-container">
-        <span class="logo">MUEEZ</span>
-        <span class="logo-badge">SYSTEMS</span>
+        <span class="logo" style="font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;">MUEEZ</span>
     </div>
     
     <div class="nav-links">
-        <a href="{{ site.baseurl }}/" class="nav-link active">
-            <span>Home</span>
-        </a>
-        <a href="{{ site.baseurl }}/#skills" class="nav-link">
-            <span>Skills</span>
-        </a>
-        <a href="{{ site.baseurl }}/#projects" class="nav-link">
-            <span>Projects</span>
-        </a>
-        <a href="{{ site.baseurl }}/#experience" class="nav-link">
-            <span>Experience</span>
-        </a>
-        <a href="{{ site.baseurl }}/#contact" class="nav-link">
-            <span>Contact</span>
-        </a>
+        <a href="{{ '/' | relative_url }}" class="nav-link active">Home</a>
+        <a href="{{ '#skills' | relative_url }}" class="nav-link">Skills</a>
+        <a href="{{ '#projects' | relative_url }}" class="nav-link">Projects</a>
+        <a href="{{ '#contact' | relative_url }}" class="nav-link">Contact</a>
     </div>
     
     <div class="nav-controls">
         <button class="btn btn-icon btn-secondary" id="themeToggle" title="Toggle Theme">
             <i class="fas fa-moon"></i>
         </button>
-        <button class="btn btn-primary" id="chatToggle">
+        <button class="btn btn-primary" id="chatToggle" style="padding: 0.5rem 1rem; border-radius: 20px;">
             <i class="fas fa-comment-dots"></i>
             <span>Chat</span>
         </button>

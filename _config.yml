@@ -4,7 +4,9 @@ description: >-
   Full-Stack Engineer • Cloud Architect • AI Systems Designer.
   Portfolio showcasing projects in MERN, Next.js, AWS, and AI/ML.
 url: "https://mueezahmed455.github.io"
+baseurl: ""
 github_username: mueezahmed455
+encoding: utf-8
 
 # Build settings
 markdown: kramdown
@@ -44,3 +46,5 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - node_modules
+  - vendor
