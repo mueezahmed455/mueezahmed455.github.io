@@ -1,0 +1,40 @@
+<div class="system-dashboard glass-panel" id="systemDashboard">
+    <div class="widget-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-size: 0.7rem;">
+            <i class="fas fa-microchip" style="color: var(--accent-cyan);"></i>
+            SYSTEM_ANALYTICS_v2.1
+        </div>
+        <div class="widget-controls">
+            <button class="control-btn btn-min" onclick="toggleWidget('systemDashboard')"></button>
+        </div>
+    </div>
+    <div style="padding: 1rem;">
+        <!-- Real-time CPU/MEM Graph -->
+        <div style="height: 120px; width: 100%; margin-bottom: 1rem;">
+            <canvas id="sysChart"></canvas>
+        </div>
+
+        <div class="stat-row">
+            <span><i class="fas fa-brain"></i> NEURAL_LOAD</span>
+            <span id="cpuLoad">12%</span>
+        </div>
+        <div class="stat-bar"><div class="stat-progress" id="cpuBar" style="width: 12%;"></div></div>
+        
+        <div class="stat-row" style="margin-top: 1rem;">
+            <span><i class="fas fa-memory"></i> BUFFER_ALLOC</span>
+            <span id="memLoad">44%</span>
+        </div>
+        <div class="stat-bar"><div class="stat-progress" id="memBar" style="width: 44%;"></div></div>
+
+        <div class="stat-row" style="margin-top: 1rem;">
+            <span><i class="fas fa-network-wired"></i> DATA_STREAM</span>
+            <span id="netLoad">8.4 MB/s</span>
+        </div>
+        <div class="stat-bar"><div class="stat-progress" id="netBar" style="width: 65%;"></div></div>
+        
+        <div style="margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-cyan); border-top: 1px solid var(--glass-border); padding-top: 0.5rem; display: flex; justify-content: space-between;">
+            <div id="sysUptime">UPTIME: 00:44:12</div>
+            <div id="sysKern">OS_REV: 2.1.4</div>
+        </div>
+    </div>
+</div>

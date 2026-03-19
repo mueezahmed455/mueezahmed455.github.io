@@ -1,15 +1,25 @@
 <footer>
-    <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }} • アーメド・ムイーズ</p>
-    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
-        {{ site.description }}
-    </p>
-    <div class="social-links" style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
-        {% if site.github_username %}
-        <a href="https://github.com/{{ site.github_username }}" target="_blank" title="GitHub" style="color: var(--text-primary); font-size: 1.5rem;">💻</a>
-        {% endif %}
-        {% if site.twitter_username %}
-        <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" title="Twitter" style="color: var(--text-primary); font-size: 1.5rem;">🐦</a>
-        {% endif %}
-        <a href="https://linkedin.com/in/mueezahmed" target="_blank" title="LinkedIn" style="color: var(--text-primary); font-size: 1.5rem;">💼</a>
+    <div class="footer-content">
+        <div class="footer-logo">MUEEZ AHMED</div>
+        <p class="footer-text">
+            Full-Stack Engineer • Cloud Architect • AI Systems Designer
+        </p>
+        <div class="social-links">
+            <a href="https://github.com/{{ site.github_username }}" target="_blank" class="social-link" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/mueezahmed" target="_blank" class="social-link" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:{{ site.email }}" class="social-link" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" class="social-link" title="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        <p class="footer-text" style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+            &copy; {{ site.time | date: '%Y' }} Mueez Ahmed. All rights reserved.
+        </p>
     </div>
 </footer>

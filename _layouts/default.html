@@ -5,102 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | {{ site.title }}</title>
     <meta name="description" content="{{ site.description }}">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Mermaid.js -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
-    
-    <!-- Pyodide (Python Wasm) -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
-    
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
+    <!-- Graphics & Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+    
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}")
-                    .then(reg => console.log('SW registered:', reg))
-                    .catch(err => console.log('SW registration failed:', err));
+                navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}");
             });
         }
     </script>
 </head>
-<body data-theme="dark">
-    
-    <!-- CRT Overlay -->
-    <div class="crt-overlay"></div>
+<body class="metal-theme">
+    <!-- Soundscape Elements (Hidden) -->
+    <audio id="snd-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+    <audio id="snd-hover" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+    <audio id="snd-sys" src="https://assets.mixkit.co/active_storage/sfx/2555/2555-preview.mp3" preload="auto" loop></audio>
 
-    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-text">LOADING...</div>
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text" id="loadingText">INITIATING_NEURAL_LINK...</div>
+        </div>
     </div>
 
-    <!-- Manga Speed Lines -->
-    <div class="speed-lines" id="speedLines"></div>
-
-    <!-- Navigation -->
     {% include nav.html %}
+    {% include system-dashboard.html %}
 
-    <!-- Weather Widget -->
-    {% include weather.html %}
+    <!-- Global Hologram Overlay Container -->
+    <div id="hologram-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9000;"></div>
 
-    <!-- Achievements Widget -->
-    <div class="achievements-widget">
-        <div style="font-weight: 700; margin-bottom: 0.5rem; text-align: center;">
-            <span class="en-text">AWARDS</span>
-        </div>
-        <div class="achievement-badge">
-            <span>🏆</span>
-            <span style="font-size: 0.75rem;">
-                <span class="en-text">Turkey Top 3</span>
-            </span>
-        </div>
-        <div class="achievement-badge">
-            <span>🥇</span>
-            <span style="font-size: 0.75rem;">INTEL ISEF</span>
-        </div>
-    </div>
-
-    <!-- Music Player -->
-    <div class="music-player">
-        <div class="music-controls">
-            <button class="music-btn" id="musicPrev">⏮</button>
-            <button class="music-btn" id="musicPlay">▶</button>
-            <button class="music-btn" id="musicNext">⏭</button>
-        </div>
-        <div class="visualizer-container">
-            <canvas id="visualizer"></canvas>
-        </div>
-        <div class="music-info">
-            <div id="musicTitle">
-                <marquee scrollamount="3" class="en-text">Lo-fi Coding Beats • 24/7 Focus Music</marquee>
+    <div class="widget-container" id="weatherWidgetContainer" style="top: 100px; right: 20px;">
+        <div class="glass-panel" id="weatherWidget">
+            <div class="widget-header">
+                <span><i class="fas fa-satellite"></i> METEO_SENSORS</span>
+                <div class="widget-controls">
+                    <button class="control-btn btn-min" onclick="toggleWidget('weatherWidget')"></button>
+                </div>
+            </div>
+            <div style="padding: 1rem;">
+                {% include weather.html %}
             </div>
         </div>
     </div>
 
-    <!-- Main Content -->
+    <div class="widget-container" id="achievementsWidgetContainer" style="top: 250px; right: 20px;">
+        <div class="glass-panel" id="achievementsWidget">
+            <div class="widget-header">
+                <span><i class="fas fa-microchip"></i> RECOGNITION_CORE</span>
+                <div class="widget-controls">
+                    <button class="control-btn btn-min" onclick="toggleWidget('achievementsWidget')"></button>
+                </div>
+            </div>
+            <div style="padding: 1rem;">
+                {% include achievements.html %}
+            </div>
+        </div>
+    </div>
+
     <main>
         {{ content }}
     </main>
 
-    <!-- Footer -->
-    {% include footer.html %}
+    <div class="control-center glass-panel" id="controlCenter">
+        <button class="metal-btn" onclick="toggleWidget('systemDashboard')" title="System Status"><i class="fas fa-bolt"></i></button>
+        <button class="metal-btn" onclick="toggleWidget('weatherWidget')" title="Weather"><i class="fas fa-sun"></i></button>
+        <button class="metal-btn" onclick="toggleWidget('achievementsWidget')" title="Achievements"><i class="fas fa-award"></i></button>
+        <button class="metal-btn" onclick="toggleWidget('musicPlayer')" title="Music"><i class="fas fa-broadcast-tower"></i></button>
+        <button class="metal-btn" onclick="toggleWidget('chatbot')" title="Neural AI"><i class="fas fa-brain"></i></button>
+    </div>
 
-    <!-- Chatbot -->
+    <div class="widget-container" id="musicPlayerContainer" style="bottom: 80px; left: 50%; transform: translateX(-50%); width: 450px;">
+        <div class="glass-panel" id="musicPlayer">
+            {% include music-player.html %}
+        </div>
+    </div>
+
     {% include chatbot.html %}
 
-    <!-- Scroll to Top Button -->
-    <div class="scroll-top" id="scrollTop">↑</div>
+    <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+    {% include footer.html %}
 
+    <!-- Scripts -->
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/performance.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/terminal-kernel.js' | relative_url }}"></script>

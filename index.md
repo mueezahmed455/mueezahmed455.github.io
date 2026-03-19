@@ -3,358 +3,351 @@ layout: default
 title: Home
 ---
 
-<section class="hero-manga">
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="hero-bg">
+        <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    </div>
     <div class="hero-content">
-        <h1 class="hero-title">MUEEZ AHMED</h1>
-        <div class="speech-bubble">
-            <p>
-                <span class="en-text">Full-Stack Engineer • Cloud Architect • AI Systems Designer</span>
-            </p>
+        <div class="hero-badge">
+            <span class="status-dot"></span>
+            <span>SYSTEM ONLINE</span>
+        </div>
+        <h1 class="hero-title glitch-title" data-text="MUEEZ AHMED">MUEEZ AHMED</h1>
+        <p class="hero-subtitle">Full-Stack Engineer • Cloud Architect • AI Systems Designer</p>
+        <p class="hero-description">
+            Building scalable systems, intelligent applications, and next-generation digital experiences. 
+            Currently architecting solutions at the intersection of cloud computing and artificial intelligence.
+        </p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-rocket"></i>
+                <span>View Projects</span>
+            </button>
+            <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-envelope"></i>
+                <span>Contact Me</span>
+            </button>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="statGpa">3.8</div>
+                <div class="stat-label">GPA</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statProjects">20+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="statCommits">--</div>
+                <div class="stat-label">Commits</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2028</div>
+                <div class="stat-label">Grad Year</div>
+            </div>
         </div>
     </div>
 </section>
 
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div>
-    <div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div>
-    <div class="panel-corner bottom-right"></div>
-    
-    <div class="stats-row">
-        <div class="stat-box" id="stat-gpa">
-            <div class="stat-number">3.8</div>
-            <div class="stat-label">
-                <span class="en-text">GPA • GRADE</span>
-            </div>
+<!-- Skills Section -->
+<section id="skills">
+    <div class="section-header">
+        <div class="section-tag">
+            <i class="fas fa-microchip"></i>
+            <span>Capabilities</span>
         </div>
-        <div class="stat-box" id="stat-projects">
-            <div class="stat-number">20+</div>
-            <div class="stat-label">
-                <span class="en-text">PROJECTS</span>
-            </div>
-        </div>
-        <div class="stat-box" id="stat-commits">
-            <div class="stat-number">--</div>
-            <div class="stat-label">
-                <span class="en-text">COMMITS</span>
-            </div>
-        </div>
-        <div class="stat-box" id="stat-grad">
-            <div class="stat-number">2028</div>
-            <div class="stat-label">
-                <span class="en-text">GRAD YEAR</span>
-            </div>
-        </div>
+        <h2 class="section-title">TECHNICAL ARSENAL</h2>
+        <p class="section-subtitle">A comprehensive toolkit for building modern digital solutions</p>
     </div>
-
-    <div style="margin-top: 3rem;">
-        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center;">
-            <span class="en-text">EDUCATION</span>
-        </h3>
-        <div class="code-terminal" id="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
-                <span style="margin-left: 10px; font-size: 0.7rem; opacity: 0.5;">neural-sh — 80x24</span>
-            </div>
-            <div id="terminal-content" style="height: 200px; overflow-y: auto;">
-                <div class="terminal-line">
-                    <span class="terminal-prompt">$</span> cat education.txt
-                </div>
-                <div class="terminal-line">
-                    <strong style="color: var(--accent);">BSc Computer Science</strong>
-                </div>
-                <div class="terminal-line">📍 Keele University, United Kingdom</div>
-                <div class="terminal-line">📊 GPA: 3.8/4.0 (Dean's List)</div>
-                <div class="terminal-line" style="margin-top: 1rem;">
-                    <span class="en-text">📚 Full-Stack, Cloud Architecture, AI/ML</span>
-                </div>
-            </div>
-            <div class="terminal-input-row" style="display: flex; align-items: center; margin-top: 10px; border-top: 1px solid rgba(0,255,0,0.1); padding-top: 5px;">
-                <span class="terminal-prompt" style="color: var(--accent); margin-right: 10px;">$</span>
-                <input type="text" id="terminal-input" style="background: transparent; border: none; color: #00ff00; font-family: 'JetBrains Mono', monospace; outline: none; flex: 1;" placeholder="type 'help'...">
-            </div>
-        </div>
-    </div>
-
-    <div style="margin-top: 2rem;">
-        <div class="quick-links">
-            <a href="https://github.com/{{ site.github_username }}" target="_blank" class="quick-link-btn">
-                <div class="quick-link-icon">💻</div>
-                <div style="font-weight: 700;">GitHub</div>
-            </a>
-            <a href="https://linkedin.com/in/mueezahmed" target="_blank" class="quick-link-btn">
-                <div class="quick-link-icon">💼</div>
-                <div style="font-weight: 700;">LinkedIn</div>
-            </a>
-            <a href="mailto:{{ site.email }}" class="quick-link-btn">
-                <div class="quick-link-icon">📧</div>
-                <div style="font-weight: 700;">Email</div>
-            </a>
-            <a href="{{ site.baseurl }}/Resume%20new%20(1).pdf" class="quick-link-btn" download>
-                <div class="quick-link-icon">📄</div>
-                <div style="font-weight: 700;">
-                    <span class="en-text">Resume</span>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="manga-panel" id="skills">
-    <div class="panel-corner top-left"></div>
-    <div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div>
-    <div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">
-        <span class="en-text">SKILLS</span>
-    </h2>
     <div class="skills-grid">
-        <div class="skill-box">
-            <div class="skill-title">Frontend</div>
-            <ul class="skill-list" style="list-style: none; padding-left: 0;">
-                <li>▸ React.js & Next.js</li>
-                <li>▸ TypeScript</li>
-                <li>▸ Three.js & WebGL</li>
-            </ul>
+        <div class="skill-card glass-panel">
+            <div class="skill-header">
+                <div class="skill-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div>
+                    <div class="skill-name">Frontend Development</div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+            </div>
+            <div class="skill-items">
+                <span class="skill-tag">React.js</span>
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Three.js</span>
+                <span class="skill-tag">WebGL</span>
+                <span class="skill-tag">Tailwind CSS</span>
+            </div>
         </div>
-        <div class="skill-box">
-            <div class="skill-title">Backend</div>
-            <ul class="skill-list" style="list-style: none; padding-left: 0;">
-                <li>▸ Node.js & Express</li>
-                <li>▸ Python & FastAPI</li>
-                <li>▸ AWS & Docker</li>
-            </ul>
+        <div class="skill-card glass-panel">
+            <div class="skill-header">
+                <div class="skill-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <div>
+                    <div class="skill-name">Backend Systems</div>
+                    <div class="skill-level">Expert</div>
+                </div>
+            </div>
+            <div class="skill-items">
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">FastAPI</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Redis</span>
+            </div>
         </div>
-        <div class="skill-box">
-            <div class="skill-title">AI/ML</div>
-            <ul class="skill-list" style="list-style: none; padding-left: 0;">
-                <li>▸ TensorFlow</li>
-                <li>▸ Neural Networks</li>
-                <li>▸ Computer Vision</li>
-            </ul>
+        <div class="skill-card glass-panel">
+            <div class="skill-header">
+                <div class="skill-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div>
+                    <div class="skill-name">Cloud Architecture</div>
+                    <div class="skill-level">Advanced</div>
+                </div>
+            </div>
+            <div class="skill-items">
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Kubernetes</span>
+                <span class="skill-tag">CI/CD</span>
+                <span class="skill-tag">Terraform</span>
+                <span class="skill-tag">Serverless</span>
+            </div>
+        </div>
+        <div class="skill-card glass-panel">
+            <div class="skill-header">
+                <div class="skill-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <div class="skill-name">AI/ML Engineering</div>
+                    <div class="skill-level">Intermediate</div>
+                </div>
+            </div>
+            <div class="skill-items">
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Computer Vision</span>
+                <span class="skill-tag">NLP</span>
+                <span class="skill-tag">Neural Networks</span>
+                <span class="skill-tag">OpenCV</span>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div>
-    <div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div>
-    <div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">
-        <span class="en-text">PROJECTS</span>
-    </h2>
+<!-- Projects Section -->
+<section id="projects">
+    <div class="section-header">
+        <div class="section-tag">
+            <i class="fas fa-folder-open"></i>
+            <span>Portfolio</span>
+        </div>
+        <h2 class="section-title">FEATURED PROJECTS</h2>
+        <p class="section-subtitle">Real-world solutions deployed at scale</p>
+    </div>
     <div class="projects-grid">
         {% assign projects = site.projects | sort: 'order' %}
         {% for project in projects limit:6 %}
-        <div class="project-card" data-repo="{{ project.github_repo }}" data-architecture="{{ project.architecture | escape }}">
-            <div class="project-header">
-                <div class="project-icon">{{ project.icon }}</div>
-                <h3 class="project-title">{{ project.title }}</h3>
-                <div class="project-meta">{{ project.date_range }}</div>
+        <div class="project-card glass-panel" data-repo="{{ project.github_repo }}" data-architecture="{{ project.architecture | escape }}">
+            <div class="project-image">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(0,102,255,0.2)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">{{ project.icon }}</div>
+                <div class="project-overlay">
+                    <button class="btn btn-primary btn-icon" onclick="event.stopPropagation(); viewProject('{{ project.title | escape }}', '{{ project.description | escape }}')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    {% if project.github_repo %}
+                    <a href="https://github.com/{{ project.github_repo }}" target="_blank" class="btn btn-secondary btn-icon" onclick="event.stopPropagation();">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    {% endif %}
+                </div>
             </div>
-            <div class="project-body">
-                <p>
-                    <span class="en-text">{{ project.description }}</span>
-                </p>
-                <div class="tech-tags">
-                    {% for tag in project.tags %}
-                    <span class="tech-tag">{{ tag }}</span>
+            <div class="project-content">
+                <span class="project-category">{{ project.status }}</span>
+                <h3 class="project-title">{{ project.title }}</h3>
+                <p class="project-description">{{ project.description | truncatewords: 20 }}</p>
+                <div class="project-tags">
+                    {% for tag in project.tags limit:4 %}
+                    <span class="project-tag">{{ tag }}</span>
                     {% endfor %}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-</div>
+</section>
 
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div>
-    <div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div>
-    <div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">LIVE CODING PULSE</h2>
-    <div class="dashboard-grid">
-        <div class="live-pulse-card">
-            <div class="pulse-header">
-                <h4 style="font-family: 'Inter', sans-serif;">ACTIVITY</h4>
-                <div class="pulse-dot"></div>
-            </div>
-            <div style="font-size: 0.9rem; color: var(--text-secondary);">
-                Last 7 Days: <span style="color: var(--accent); font-weight: 700;">42.5 hrs</span><br>
-                Status: <span style="color: #00ff00;">READY_TO_DEPLOY</span>
-            </div>
+<!-- Experience Section -->
+<section id="experience">
+    <div class="section-header">
+        <div class="section-tag">
+            <i class="fas fa-briefcase"></i>
+            <span>Career</span>
         </div>
-        <div class="live-pulse-card">
-            <h4 style="font-family: 'Inter', sans-serif; margin-bottom: 1rem;">TECH STACK</h4>
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
-                    <span>Typescript</span><span>45%</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: rgba(0,255,0,0.1);">
-                    <div style="width: 45%; height: 100%; background: #00ff00;"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
-                    <span>Python</span><span>30%</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: rgba(0,255,0,0.1);">
-                    <div style="width: 30%; height: 100%; background: #00ff00;"></div>
-                </div>
-            </div>
-        </div>
+        <h2 class="section-title">PROFESSIONAL JOURNEY</h2>
+        <p class="section-subtitle">Building impact through technology and leadership</p>
     </div>
-</div>
-
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div>
-    <div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div>
-    <div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">SYSTEM HEALTH (SRE)</h2>
-    <div class="dashboard-grid" id="sre-dashboard">
-        <div class="live-pulse-card">
-            <div class="pulse-header">
-                <h4 style="font-family: 'JetBrains Mono', monospace; color: var(--accent);">[ API GATEWAY ]</h4>
-                <div class="pulse-dot" id="status-api"></div>
-            </div>
-            <div style="font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
-                LATENCY: <span id="latency-api" style="color: #00ff00;">-- ms</span><br>
-                UPTIME: <span style="color: #00ff00;">99.99%</span><br>
-                LOAD: <span style="color: var(--accent);">OPTIMIZED</span>
-            </div>
-        </div>
-        <div class="live-pulse-card">
-            <div class="pulse-header">
-                <h4 style="font-family: 'JetBrains Mono', monospace; color: var(--accent);">[ E-COMMERCE ]</h4>
-                <div class="pulse-dot" id="status-ecommerce"></div>
-            </div>
-            <div style="font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
-                LATENCY: <span id="latency-ecommerce" style="color: #00ff00;">-- ms</span><br>
-                UPTIME: <span style="color: #00ff00;">99.98%</span><br>
-                STATUS: <span style="color: #00ff00;">STABLE</span>
-            </div>
-        </div>
-        <div class="live-pulse-card">
-            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ SRE LOGS ]</h4>
-            <div id="sre-logs" style="font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; height: 60px; overflow-y: hidden;">
-                > Booting health monitors...<br>
-                > All systems nominal.
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">SECURITY & DISTRIBUTED LAB</h2>
-    <div class="dashboard-grid">
-        <div class="live-pulse-card">
-            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ BLOCKCHAIN SIM ]</h4>
-            <div id="blockchain-list" style="height: 100px; overflow-y: auto; margin-bottom: 1rem; border: 1px solid rgba(0,255,0,0.2); padding: 5px;">
-                <div class="terminal-line" style="font-size: 0.7rem;">GENESIS_BLOCK [HASH: 000...]</div>
-            </div>
-            <button id="mine-block" class="submit-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">MINE NEW BLOCK</button>
-        </div>
-        <div class="live-pulse-card">
-            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; color: var(--accent);">[ JWT DEBUGGER ]</h4>
-            <input type="text" id="jwt-input" placeholder="Paste JWT here..." style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #00ff00; font-family: 'JetBrains Mono', monospace; padding: 5px; font-size: 0.7rem; margin-bottom: 10px;">
-            <div id="jwt-output" style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; color: #aaa;">
-                Awaiting valid JWT structure...
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">WASM CODE PLAYGROUND</h2>
-    <div class="code-terminal">
-        <div class="terminal-header">
-            <span style="color: var(--accent); font-family: 'JetBrains Mono', monospace;">[ python_runtime.wasm ]</span>
-        </div>
-        <textarea id="python-code" style="width: 100%; height: 100px; background: transparent; border: none; color: #00ff00; font-family: 'JetBrains Mono', monospace; outline: none; resize: none;">print("Hello from Mueez's Wasm Runtime!")
-# Try running some logic here</textarea>
-        <button id="run-python" class="submit-btn" style="margin-top: 1rem; width: auto; padding: 0.5rem 2rem;">RUN CODE</button>
-        <div id="wasm-output" style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.5rem; font-size: 0.8rem; color: #00ff00;">> Output will appear here...</div>
-    </div>
-</div>
-
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">
-        <span class="en-text">EXPERIENCE</span>
-    </h2>
     <div class="timeline">
         <div class="timeline-item">
-            <div class="timeline-content">
-                <div style="font-weight: 700; color: var(--accent);">2024 - PRESENT</div>
-                <h3>Backend Developer @ SFB</h3>
-                <p>Developing high-scale backend services and system architectures.</p>
+            <div class="timeline-content glass-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-size: 0.8rem; color: var(--accent-cyan); font-family: var(--font-mono);">2024 - PRESENT</span>
+                    <i class="fas fa-code" style="font-size: 1.5rem; color: var(--accent-cyan);"></i>
+                </div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Backend Developer</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">SFB</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    Developing high-scale backend services and system architectures for enterprise applications.
+                </p>
             </div>
             <div class="timeline-dot"></div>
         </div>
         <div class="timeline-item">
-            <div class="timeline-content">
-                <div style="font-weight: 700; color: var(--accent);">2023 - PRESENT</div>
-                <h3>Founder @ Inayat NGO</h3>
-                <p>Leading social impact initiatives and community-driven technology solutions.</p>
+            <div class="timeline-content glass-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-size: 0.8rem; color: var(--accent-cyan); font-family: var(--font-mono);">2023 - PRESENT</span>
+                    <i class="fas fa-users" style="font-size: 1.5rem; color: var(--accent-cyan);"></i>
+                </div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Founder</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Inayat NGO</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    Leading social impact initiatives and community-driven technology solutions.
+                </p>
             </div>
             <div class="timeline-dot"></div>
         </div>
         <div class="timeline-item">
-            <div class="timeline-content">
-                <div style="font-weight: 700; color: var(--accent);">2022 - 2024</div>
-                <h3>Digital Marketing & Tech Expert @ AUZBIZ</h3>
-                <p>Architected digital strategies and technology integrations for enterprise clients.</p>
+            <div class="timeline-content glass-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-size: 0.8rem; color: var(--accent-cyan); font-family: var(--font-mono);">2022 - 2024</span>
+                    <i class="fas fa-chart-line" style="font-size: 1.5rem; color: var(--accent-cyan);"></i>
+                </div>
+                <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;">Digital Marketing & Tech Expert</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">AUZBIZ</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    Architected digital strategies and technology integrations for enterprise clients.
+                </p>
             </div>
             <div class="timeline-dot"></div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div><div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div><div class="panel-corner bottom-right"></div>
-    
-    <h2 class="section-title">
-        <span class="en-text">CONTACT</span>
-    </h2>
+<!-- Contact Section -->
+<section id="contact">
+    <div class="section-header">
+        <div class="section-tag">
+            <i class="fas fa-paper-plane"></i>
+            <span>Connect</span>
+        </div>
+        <h2 class="section-title">GET IN TOUCH</h2>
+        <p class="section-subtitle">Let's build something extraordinary together</p>
+    </div>
     <div class="contact-grid">
-        <div class="contact-info">
-            <div id="globe-container" style="width: 100%; height: 250px; margin-bottom: 1rem;"></div>
-            <div style="margin-bottom: 1rem;">
-                <strong>📍 Locations:</strong> Lahore, PK | Keele, UK
+        <div class="contact-info glass-panel">
+            <h3 style="font-family: var(--font-display); margin-bottom: 1.5rem; color: var(--accent-cyan);">Contact Information</h3>
+            <div class="contact-item">
+                <div class="contact-item-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Email</div>
+                    <a href="mailto:{{ site.email }}" style="font-weight: 600;">{{ site.email }}</a>
+                </div>
             </div>
-            <div style="margin-bottom: 1rem;">
-                <strong>📧 Email:</strong> <a href="mailto:mueezahmad69@gmail.com" style="color: var(--accent);">mueezahmad69@gmail.com</a>
+            <div class="contact-item">
+                <div class="contact-item-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Location</div>
+                    <div style="font-weight: 600;">Lahore, PK | Keele, UK</div>
+                </div>
             </div>
-            <div style="margin-bottom: 1rem;">
-                <strong>📱 Phone:</strong> +92 316 4119937
+            <div class="contact-item">
+                <div class="contact-item-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Phone</div>
+                    <div style="font-weight: 600;">+92 316 4119937</div>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 240, 255, 0.05); border-radius: 12px; border: 1px solid var(--glass-border);">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="width: 50px; height: 50px; background: var(--accent-gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🌍</div>
+                    <div>
+                        <div style="font-weight: 700; color: var(--accent-cyan);">Open to Opportunities</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Available for freelance & full-time roles</div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="contact-form">
-            <h4 style="font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">[ REAL-TIME GUESTBOOK ]</h4>
-            <div id="guestbook-wall" style="height: 150px; overflow-y: auto; border: 2px solid var(--border); padding: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem;">
-                <div style="margin-bottom: 0.5rem;"><strong>System:</strong> Welcome to the wall!</div>
-            </div>
+        <div class="contact-form glass-panel">
+            <h3 style="font-family: var(--font-display); margin-bottom: 1.5rem; color: var(--accent-cyan);">Send Message</h3>
             <form id="contactForm">
-                <input type="text" name="name" placeholder="YOUR NAME" required style="margin-bottom: 0.5rem;">
-                <textarea name="message" placeholder="MESSAGE THE WALL" required></textarea>
-                <button type="submit" class="submit-btn">POST MESSAGE</button>
+                <div class="form-group">
+                    <label for="contactName">Your Name</label>
+                    <input type="text" id="contactName" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Email Address</label>
+                    <input type="email" id="contactEmail" name="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactMessage">Message</label>
+                    <textarea id="contactMessage" name="message" placeholder="Tell me about your project..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Send Message</span>
+                </button>
             </form>
         </div>
     </div>
+</section>
+
+<!-- Project Modal -->
+<div id="projectModal" class="glass-panel" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 900px; max-height: 90vh; overflow-y: auto; z-index: 10000; padding: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--glass-border);">
+        <h2 id="modalTitle" style="font-family: var(--font-display); color: var(--accent-cyan);"></h2>
+        <div style="display: flex; gap: 0.5rem;">
+            <button class="chatbot-btn" id="modalMinimize" title="Minimize">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button class="chatbot-btn" id="modalClose" title="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <div id="modalContent"></div>
 </div>
+<div id="modalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999;"></div>
+
+<script>
+function viewProject(title, description) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalContent').innerHTML = '<p style="color: var(--text-secondary); line-height: 1.8;">' + description + '</p>';
+    document.getElementById('projectModal').style.display = 'block';
+    document.getElementById('modalOverlay').style.display = 'block';
+}
+
+document.getElementById('modalClose').addEventListener('click', function() {
+    document.getElementById('projectModal').style.display = 'none';
+    document.getElementById('modalOverlay').style.display = 'none';
+});
+
+document.getElementById('modalMinimize').addEventListener('click', function() {
+    document.getElementById('projectModal').classList.toggle('minimized');
+});
+
+document.getElementById('modalOverlay').addEventListener('click', function() {
+    document.getElementById('projectModal').style.display = 'none';
+    document.getElementById('modalOverlay').style.display = 'none';
+});
+</script>

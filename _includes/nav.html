@@ -1,21 +1,34 @@
-<nav class="nav-bar">
-    <a href="{{ site.baseurl }}/" class="logo-japanese">MA</a>
+<nav class="nav-bar" id="navbar">
+    <div class="logo-container">
+        <span class="logo">MUEEZ</span>
+        <span class="logo-badge">SYSTEMS</span>
+    </div>
+    
     <div class="nav-links">
-        <a href="{{ site.baseurl }}/">
-            <span class="en-text">Home</span>
+        <a href="{{ site.baseurl }}/" class="nav-link active">
+            <span>Home</span>
         </a>
-        <a href="{{ site.baseurl }}/#skills">
-            <span class="en-text">Skills</span>
+        <a href="{{ site.baseurl }}/#skills" class="nav-link">
+            <span>Skills</span>
         </a>
-        <a href="{{ site.baseurl }}/projects/">
-            <span class="en-text">Projects</span>
+        <a href="{{ site.baseurl }}/#projects" class="nav-link">
+            <span>Projects</span>
+        </a>
+        <a href="{{ site.baseurl }}/#experience" class="nav-link">
+            <span>Experience</span>
+        </a>
+        <a href="{{ site.baseurl }}/#contact" class="nav-link">
+            <span>Contact</span>
         </a>
     </div>
+    
     <div class="nav-controls">
-        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">☀️</button>
-        <button class="lang-toggle" id="langToggle" title="Toggle Language">EN</button>
-        <button class="chat-toggle" id="chatToggle">
-            <span class="en-text">CHAT</span>
+        <button class="btn btn-icon btn-secondary" id="themeToggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button class="btn btn-primary" id="chatToggle">
+            <i class="fas fa-comment-dots"></i>
+            <span>Chat</span>
         </button>
     </div>
 </nav>
