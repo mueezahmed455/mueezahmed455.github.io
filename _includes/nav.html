@@ -1,27 +1,24 @@
-<nav class="nav-bar">
-    <a href="{{ site.baseurl }}/" class="logo-japanese">MA</a>
-    <div class="nav-links">
-        <a href="{{ site.baseurl }}/">
-            <span class="en-text">Home</span>
-            <span class="jp-text">ホーム</span>
-        </a>
-        <a href="{{ site.baseurl }}/#skills">
-            <span class="en-text">Skills</span>
-            <span class="jp-text">スキル</span>
-        </a>
-        <a href="{{ site.baseurl }}/projects/">
-            <span class="en-text">Projects</span>
-            <span class="jp-text">プロジェクト</span>
-        </a>
+<nav class="nav-bar" id="navbar">
+    <div class="logo-container">
+        <span class="logo" style="font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;">MUEEZ</span>
     </div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="{{ '/' | relative_url }}" class="nav-link active">Home</a>
+        <a href="{{ '#skills' | relative_url }}" class="nav-link">Skills</a>
+        <a href="{{ '#projects' | relative_url }}" class="nav-link">Projects</a>
+        <a href="{{ '#contact' | relative_url }}" class="nav-link">Contact</a>
+    </div>
+
     <div class="nav-controls">
-        <button class="lang-toggle" id="langToggle">EN</button>
-        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">☀️</button>
-        <button class="chat-toggle" id="chatToggle">
-            <span class="en-text">CHAT</span>
-            <span class="jp-text">チャット</span>
+        <button class="btn btn-icon btn-secondary" id="themeToggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
         </button>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+        <button class="btn btn-primary" id="chatToggle" style="padding: 0.5rem 1rem; border-radius: 20px;">
+            <i class="fas fa-comment-dots"></i>
+            <span>Chat</span>
+        </button>
+        <button class="metal-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu" style="display: none;">
             <i class="fas fa-bars"></i>
         </button>
     </div>
