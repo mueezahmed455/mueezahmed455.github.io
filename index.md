@@ -235,36 +235,21 @@ title: Home
     </div>
 </section>
 
-<!-- Contact Section -->
+<!-- Contact CTA Section -->
 <section id="contact" class="reveal">
-    <div class="section-header">
-        <h2 class="section-title">GET IN TOUCH</h2>
-        <p class="section-subtitle">Have a project in mind? Let's build something amazing together</p>
-    </div>
-    <div class="contact-form glass-panel" style="max-width: 600px; margin: 0 auto; padding: 2.5rem;">
-        <form id="contactForm">
-            <div class="form-group">
-                <input type="text" id="contactName" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" id="contactEmail" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-                <textarea id="contactMessage" placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-                <i class="fas fa-paper-plane"></i>
-                Send Message
-            </button>
-        </form>
-        
-        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--glass-border); text-align: center;">
-            <p style="color: rgba(255,255,255,0.6); margin-bottom: 1rem;">Or reach out directly:</p>
-            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                <a href="mailto:mueezahmad69@gmail.com" style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-cyan);">
-                    <i class="fas fa-envelope"></i> mueezahmad69@gmail.com
-                </a>
-            </div>
+    <div class="glass-panel" style="max-width: 800px; margin: 0 auto; padding: 4rem 2rem; text-align: center; border-radius: 20px; background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, rgba(112, 0, 255, 0.1) 100%); border: 1px solid var(--accent-cyan);">
+        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🚀</div>
+        <h2 class="section-title" style="margin-bottom: 1rem;">Ready to Start Your Project?</h2>
+        <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6;">
+            Let's collaborate and build something amazing together. I'm always open to discussing new projects, creative ideas, or opportunities.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="{{ '/contact/' | relative_url }}" class="btn btn-primary" style="padding: 1rem 2.5rem;">
+                <i class="fas fa-envelope"></i> Get In Touch
+            </a>
+            <a href="mailto:mueezahmad69@gmail.com" class="btn btn-secondary" style="padding: 1rem 2.5rem;">
+                <i class="fas fa-paper-plane"></i> Send Email
+            </a>
         </div>
     </div>
 </section>

@@ -27,6 +27,9 @@
     </script>
 </head>
 <body>
+    <!-- PS5-Style Particle Background -->
+    <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></canvas>
+    
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
@@ -53,6 +56,7 @@
     </button>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/particle-bg.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/performance.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/terminal-kernel.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/neural-core.js' | relative_url }}"></script>

@@ -266,12 +266,21 @@ const NeuralSystem = {
             
             const name = document.getElementById('contactName')?.value;
             const email = document.getElementById('contactEmail')?.value;
+            const subject = document.getElementById('contactSubject')?.value;
             const message = document.getElementById('contactMessage')?.value;
 
-            // Here you would typically send to a backend
-            // For now, show success message
-            alert(`Thank you ${name}! Your message has been received. I'll get back to you at ${email} soon!`);
-            form.reset();
+            // Log for now - integrate with EmailJS, Formspree, or your backend
+            console.log('Contact Form Submitted:', { name, email, subject, message });
+            
+            // Show success state
+            const successDiv = document.getElementById('formSuccess');
+            if (successDiv) {
+                form.style.display = 'none';
+                successDiv.style.display = 'block';
+            } else {
+                alert(`Thank you ${name}! Your message has been received. I'll get back to you at ${email} soon!`);
+                form.reset();
+            }
         });
     },
 
