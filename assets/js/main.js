@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initLanguage();
     initSpeedLines();
-    initChatbot(); 
+    initChatbot();
     initMusicPlayer();
     initWeather();
     initScrollEffects();
@@ -17,7 +17,48 @@ document.addEventListener('DOMContentLoaded', () => {
     initSREHealth();
     initVisitorGlobe(); // Milestone 4
     initWasmPlayground(); // Milestone 5
+    initMobileMenu(); // Mobile menu support
 });
+
+// Mobile Menu Toggle
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (!mobileMenuBtn || !navMenu) return;
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+    
+    // Close menu when clicking nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+}
 
 // --- Milestone 4: 3D Visitor Globe ---
 function initVisitorGlobe() {
