@@ -5,20 +5,19 @@
 
     <div class="nav-links" id="navLinks">
         <a href="{{ '/' | relative_url }}" class="nav-link active">Home</a>
-        <a href="{{ '#skills' | relative_url }}" class="nav-link">Skills</a>
-        <a href="{{ '#projects' | relative_url }}" class="nav-link">Projects</a>
-        <a href="{{ '#contact' | relative_url }}" class="nav-link">Contact</a>
+        <a href="{{ '/#skills' | relative_url }}" class="nav-link">Skills</a>
+        <a href="{{ '/#projects' | relative_url }}" class="nav-link">Projects</a>
+        <a href="{{ '/#experience' | relative_url }}" class="nav-link">Experience</a>
+        <a href="{{ '/blog/' | relative_url }}" class="nav-link">Blog</a>
+        <a href="{{ '/#contact' | relative_url }}" class="nav-link">Contact</a>
     </div>
 
     <div class="nav-controls">
-        <button class="btn btn-icon btn-secondary" id="themeToggle" title="Toggle Theme">
-            <i class="fas fa-moon"></i>
-        </button>
-        <button class="btn btn-primary" id="chatToggle" style="padding: 0.5rem 1rem; border-radius: 20px;">
+        <button class="btn btn-primary" id="chatToggle" style="padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.8rem;">
             <i class="fas fa-comment-dots"></i>
-            <span>Chat</span>
+            <span style="margin-left: 0.5rem;">Chat</span>
         </button>
-        <button class="metal-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu" style="display: none;">
+        <button class="metal-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
             <i class="fas fa-bars"></i>
         </button>
     </div>

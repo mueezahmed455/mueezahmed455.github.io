@@ -1,10 +1,9 @@
-// ===== NeuralOS Core Kernel v2.1.4 - Advanced Distribution =====
+// ===== NeuralOS Core Kernel v3.0 =====
 
 const NeuralSystem = {
     audio: {
-        click: document.getElementById('snd-click'),
-        hover: document.getElementById('snd-hover'),
-        sys: document.getElementById('snd-sys'),
+        click: null,
+        hover: null,
         play(type) {
             const sound = this[type];
             if (sound) {
@@ -17,278 +16,136 @@ const NeuralSystem = {
     init() {
         this.initLoading();
         this.initTheme();
-        this.initWidgets();
-        this.initSystemStats();
-        this.initCharts();
-        this.initCommandPalette();
-        this.initHolograms();
-        this.initParallax();
-        this.initSolarSync();
-        this.initMusicPlayer();
-        this.initAI();
-        this.initSoundscapes();
+        this.initNavigation();
+        this.initScrollEffects();
+        this.initStats();
+        this.initReveal();
         this.initMobileMenu();
-        console.log('NeuralOS Kernel [ULTIMATE] v2.1.4 Initialized');
+        this.initChatbot();
+        this.initContactForm();
+        this.initSmoothScroll();
+        this.initProjectModals();
+        console.log('NeuralOS Kernel v3.0 Initialized');
     },
 
-    initSoundscapes() {
-        document.addEventListener('mousedown', () => this.audio.play('click'));
-        document.querySelectorAll('button, a, .project-card').forEach(el => {
-            el.addEventListener('mouseenter', () => this.audio.play('hover'));
-        });
-    },
-
-    initCharts() {
-        const ctx = document.getElementById('sysChart')?.getContext('2d');
-        if (!ctx) return;
-
-        this.charts = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: Array(10).fill(''),
-                datasets: [{
-                    label: 'CORE_LOAD',
-                    data: Array(10).fill(0),
-                    borderColor: '#00f7ff',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    fill: true,
-                    backgroundColor: 'rgba(0, 247, 255, 0.1)',
-                    pointRadius: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { display: false },
-                    y: { display: false, min: 0, max: 100 }
-                }
-            }
-        });
-    },
-
-    initSystemStats() {
-        let startTime = Date.now();
-        setInterval(() => {
-            const cpu = Math.floor(Math.random() * 20) + 10;
-            const mem = 40 + Math.floor(Math.random() * 5);
-            
-            if (this.charts) {
-                this.charts.data.datasets[0].data.push(cpu);
-                this.charts.data.datasets[0].data.shift();
-                this.charts.update('none');
-            }
-
-            document.getElementById('cpuLoad').textContent = `${cpu}%`;
-            document.getElementById('cpuBar').style.width = `${cpu}%`;
-            document.getElementById('memLoad').textContent = `${mem}%`;
-            document.getElementById('memBar').style.width = `${mem}%`;
-            
-            const diff = Math.floor((Date.now() - startTime) / 1000);
-            const h = String(Math.floor(diff / 3600)).padStart(2, '0');
-            const m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
-            const s = String(diff % 60).padStart(2, '0');
-            document.getElementById('sysUptime').textContent = `UPTIME: ${h}:${m}:${s}`;
-        }, 1500);
-    },
-
-    initHolograms() {
-        const container = document.getElementById('hologram-overlay');
-        const cards = document.querySelectorAll('.project-card');
-        
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', (e) => {
-                this.spawnHologram(card);
-            });
-            card.addEventListener('mouseleave', () => {
-                this.removeHologram();
-            });
-        });
-    },
-
-    spawnHologram(card) {
-        const container = document.getElementById('hologram-overlay');
-        container.innerHTML = '';
-        
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
-
-        // Create Wireframe Box
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const edges = new THREE.EdgesGeometry(geometry);
-        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x00f7ff }));
-        scene.add(line);
-
-        camera.position.z = 2;
-
-        const animate = () => {
-            this.hologramReq = requestAnimationFrame(animate);
-            line.rotation.x += 0.01;
-            line.rotation.y += 0.01;
-            renderer.render(scene, camera);
-        };
-        animate();
-
-        // GSAP Follow Mouse
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(line.position, {
-                x: (e.clientX / window.innerWidth) * 4 - 2,
-                y: -(e.clientY / window.innerHeight) * 4 + 2,
-                duration: 0.5
-            });
-        });
-    },
-
-    removeHologram() {
-        cancelAnimationFrame(this.hologramReq);
-        const container = document.getElementById('hologram-overlay');
-        container.innerHTML = '';
-    },
-
-    initParallax() {
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX - window.innerWidth / 2) / 50;
-            const y = (e.clientY - window.innerHeight / 2) / 50;
-            
-            gsap.to('.glass-panel', {
-                rotationY: x,
-                rotationX: -y,
-                transformPerspective: 1000,
-                duration: 0.8,
-                ease: 'power2.out'
-            });
-        });
-    },
-
-    initSolarSync() {
-        const hour = new Date().getHours();
-        const body = document.body;
-        
-        if (hour >= 6 && hour < 17) { // Day: Silver
-            body.style.setProperty('--accent-cyan', '#00f7ff');
-        } else if (hour >= 17 && hour < 20) { // Sunset: Copper
-            body.style.setProperty('--accent-cyan', '#ff7b00');
-            body.style.setProperty('--accent-blue', '#ff4d00');
-        } else { // Night: Deep Blue
-            body.style.setProperty('--accent-cyan', '#00aaff');
-        }
-    },
-
-    initAI() {
-        const chatInput = document.getElementById('chatInput');
-        const chatSend = document.getElementById('chatSend');
-        const chatMessages = document.getElementById('chatMessages');
-
-        const sendMessage = async () => {
-            const msg = chatInput.value.trim();
-            if (!msg) return;
-
-            this.addChatMessage(msg, true);
-            chatInput.value = '';
-
-            // Simulated Streaming AI
-            const response = await this.fetchAIResponse(msg);
-            this.streamChatMessage(response);
-        };
-
-        chatSend?.addEventListener('click', sendMessage);
-        chatInput?.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
-    },
-
-    async fetchAIResponse(msg) {
-        // In a real implementation, this would call your serverless function
-        // For static, we use a highly sophisticated simulation or direct API if key exists
-        return "NEURAL_OS v2.1: Analysing request... Target identified as '" + msg + "'. Mueez Ahmed's expertise in Full-Stack and AI Architecture is ready for deployment. How would you like to proceed?";
-    },
-
-    addChatMessage(text, isUser) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
-        msgDiv.textContent = text;
-        document.getElementById('chatMessages').appendChild(msgDiv);
-        msgDiv.scrollIntoView({ behavior: 'smooth' });
-    },
-
-    streamChatMessage(text) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-message bot';
-        document.getElementById('chatMessages').appendChild(msgDiv);
-        
-        let i = 0;
-        const interval = setInterval(() => {
-            msgDiv.textContent += text[i];
-            i++;
-            if (i >= text.length) clearInterval(interval);
-            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
-        }, 20);
-    },
-
-    initMusicPlayer() {
-        const playBtn = document.getElementById('musicPlay');
-        const titleEl = document.getElementById('musicTitle');
-        // Real stream API integration
-        const audio = new Audio('https://icecast2.ufpel.edu.br/live'); 
-        let isPlaying = false;
-
-        playBtn?.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            } else {
-                audio.play();
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }
-            isPlaying = !isPlaying;
-        });
-    },
-
-    // UI Helpers
     initLoading() {
         window.addEventListener('load', () => {
-            gsap.to('#loadingOverlay', { opacity: 0, duration: 1, delay: 1, onComplete: () => {
-                document.getElementById('loadingOverlay').style.display = 'none';
-            }});
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 800);
+            }
         });
     },
 
-    toggleWidget(id) {
-        const widget = document.getElementById(id);
-        if (!widget) return;
-        const isHidden = widget.style.display === 'none';
-        
-        if (isHidden) {
-            widget.style.display = 'block';
-            gsap.fromTo(widget, { opacity: 0, y: 20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.4 });
-        } else {
-            gsap.to(widget, { opacity: 0, y: 20, scale: 0.9, duration: 0.4, onComplete: () => {
-                widget.style.display = 'none';
-            }});
+    initNavigation() {
+        const navbar = document.getElementById('navbar');
+        if (!navbar) return;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Active link highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    },
+
+    initScrollEffects() {
+        // Scroll to top button
+        const scrollTop = document.getElementById('scrollTop');
+        if (scrollTop) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollTop.classList.add('visible');
+                } else {
+                    scrollTop.classList.remove('visible');
+                }
+            });
+
+            scrollTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         }
     },
 
-    initWidgets() {
-        window.toggleWidget = this.toggleWidget;
+    initStats() {
+        // GitHub commits fetch
+        const statCommits = document.getElementById('statCommits');
+        if (statCommits) {
+            this.fetchGitHubStats();
+        }
     },
 
-    initTheme() {
-        const toggle = document.getElementById('themeToggle');
-        toggle?.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-        });
-    },
-
-    initCommandPalette() {
-        window.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'k') {
-                e.preventDefault();
-                alert('COMMAND_PALETTE: ACCESS_DENIED. Kernel upgrade required.');
+    async fetchGitHubStats() {
+        const statCommits = document.getElementById('statCommits');
+        const statProjects = document.getElementById('statProjects');
+        
+        try {
+            // Fetch total commits from GitHub API
+            const response = await fetch('https://api.github.com/users/mueezahmed455/repos?per_page=100');
+            const repos = await response.json();
+            
+            let totalCommits = 0;
+            for (const repo of repos.slice(0, 10)) {
+                try {
+                    const commitsRes = await fetch(repo.commits_url.replace('{/sha}', ''));
+                    const commits = await commitsRes.json();
+                    if (Array.isArray(commits)) {
+                        totalCommits += commits.length;
+                    }
+                } catch (e) {
+                    // Skip if rate limited
+                }
             }
-        });
+            
+            if (statCommits) {
+                statCommits.textContent = totalCommits > 0 ? `${totalCommits}+` : '100+';
+            }
+        } catch (e) {
+            if (statCommits) statCommits.textContent = '100+';
+        }
+    },
+
+    initReveal() {
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Check on load
     },
 
     initMobileMenu() {
@@ -328,7 +185,139 @@ const NeuralSystem = {
                 icon.classList.add('fa-bars');
             }
         });
+    },
+
+    initChatbot() {
+        const chatToggle = document.getElementById('chatToggle');
+        const chatbot = document.getElementById('chatbot');
+        const chatClose = document.getElementById('chatbotClose');
+        const chatSend = document.getElementById('chatSend');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+
+        if (!chatbot) return;
+
+        // Toggle chatbot
+        chatToggle?.addEventListener('click', () => {
+            chatbot.classList.toggle('active');
+        });
+
+        chatClose?.addEventListener('click', () => {
+            chatbot.classList.remove('active');
+        });
+
+        // Send message
+        const sendMessage = () => {
+            const message = chatInput?.value.trim();
+            if (!message) return;
+
+            // Add user message
+            this.addChatMessage(message, 'user');
+            if (chatInput) chatInput.value = '';
+
+            // Bot response
+            setTimeout(() => {
+                const response = this.getBotResponse(message);
+                this.addChatMessage(response, 'bot');
+            }, 800);
+        };
+
+        chatSend?.addEventListener('click', sendMessage);
+        chatInput?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    },
+
+    addChatMessage(text, type) {
+        const chatMessages = document.getElementById('chatMessages');
+        if (!chatMessages) return;
+
+        const message = document.createElement('div');
+        message.className = `chat-message ${type}`;
+        message.textContent = text;
+        chatMessages.appendChild(message);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    },
+
+    getBotResponse(message) {
+        const lowerMsg = message.toLowerCase();
+        
+        if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+            return "Hello! How can I help you today?";
+        } else if (lowerMsg.includes('project') || lowerMsg.includes('work')) {
+            return "Mueez has worked on various projects including E-Commerce platforms, AI systems, and cloud architecture solutions. Check out the Projects section!";
+        } else if (lowerMsg.includes('skill') || lowerMsg.includes('tech')) {
+            return "Mueez specializes in React, Node.js, Python, AWS, and AI/ML technologies.";
+        } else if (lowerMsg.includes('contact') || lowerMsg.includes('email')) {
+            return "You can reach Mueez at mueezahmad69@gmail.com or through the contact form!";
+        } else if (lowerMsg.includes('experience') || lowerMsg.includes('job')) {
+            return "Mueez is currently studying Computer Science at Keele University and has freelance experience with international clients.";
+        } else {
+            return "Thanks for your message! For specific inquiries, please use the contact form or email mueezahmad69@gmail.com";
+        }
+    },
+
+    initContactForm() {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName')?.value;
+            const email = document.getElementById('contactEmail')?.value;
+            const message = document.getElementById('contactMessage')?.value;
+
+            // Here you would typically send to a backend
+            // For now, show success message
+            alert(`Thank you ${name}! Your message has been received. I'll get back to you at ${email} soon!`);
+            form.reset();
+        });
+    },
+
+    initSmoothScroll() {
+        document.querySelectorAll('.scroll-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('data-target');
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    },
+
+    initProjectModals() {
+        const modal = document.getElementById('projectModal');
+        const overlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+
+        if (!modal) return;
+
+        modalClose?.addEventListener('click', () => {
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        overlay?.addEventListener('click', () => {
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    },
+
+    initTheme() {
+        // Theme toggle functionality can be added here
+        const toggle = document.getElementById('themeToggle');
+        toggle?.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+        });
     }
 };
 
-NeuralSystem.init();
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => NeuralSystem.init());
+} else {
+    NeuralSystem.init();
+}

@@ -1,24 +1,60 @@
+# Site Settings
 title: Mueez Ahmed
 email: mueezahmad69@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Full-Stack Engineer • Cloud Architect • AI Systems Designer. 
+description: >-
+  Full-Stack Engineer • Cloud Architect • AI Systems Designer.
   Portfolio showcasing projects in MERN, Next.js, AWS, and AI/ML.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://mueezahmed455.github.io" # the base hostname & protocol for your site
+baseurl: ""
+url: "https://mueezahmed455.github.io"
 twitter_username: mueezahmed
-github_username:  mueezahmed455
+github_username: mueezahmed455
 
-# Build settings
-theme: jekyll-theme-minimal
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
+# Build Settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+paginate: 10
+paginate_path: "/blog/page:num/"
 
+# Collections
 collections:
   projects:
     output: true
     permalink: /projects/:path/
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
 
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "default"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Sass/SCSS
 sass:
+  sass_dir: assets/css
   style: compressed
+  load_paths:
+    - assets/css
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules
