@@ -1,82 +1,233 @@
 ---
 layout: default
-title: Projects
+title: Selected work
+description: Case studies across AI infrastructure, product engineering, security education and research by Mueez Ahmed.
+permalink: /projects/
 ---
-
-<div class="manga-panel">
-    <div class="panel-corner top-left"></div>
-    <div class="panel-corner top-right"></div>
-    <div class="panel-corner bottom-left"></div>
-    <div class="panel-corner bottom-right"></div>
-    
-    <h1 class="section-title">プロジェクト • PROJECTS</h1>
-    
-    <div class="filter-controls" style="text-align: center; margin-bottom: 3rem;">
-        <button class="tech-tag filter-btn active" data-filter="all">All</button>
-        <button class="tech-tag filter-btn" data-filter="React">React</button>
-        <button class="tech-tag filter-btn" data-filter="Python">Python</button>
-        <button class="tech-tag filter-btn" data-filter="Node.js">Node.js</button>
-        <button class="tech-tag filter-btn" data-filter="AI">AI/ML</button>
-        <button class="tech-tag filter-btn" data-filter="Cloud">Cloud</button>
+<section class="projects-page">
+  <div class="container">
+    <div class="page-intro" data-reveal>
+      <p class="eyebrow"><span class="eyebrow-line"></span> Project archive / 2026</p>
+      <h1>The work, with<br><em>the decisions left in.</em></h1>
+      <p>These case studies describe the problem being addressed, the architecture behind each build and the current scope. Projects are labelled by their actual stage: live product, active development, browser prototype, application codebase or research draft.</p>
     </div>
 
-    <div class="projects-grid" id="projectsGrid">
-        {% assign projects = site.projects | sort: 'order' %}
-        {% for project in projects %}
-        <div class="project-card" data-tags="{{ project.tags | join: ',' }}">
-            <div class="project-header">
-                <div class="project-icon">{{ project.icon }}</div>
-                <h3 class="project-title">{{ project.title }}</h3>
-                <div class="project-meta">{{ project.date_range }} • {{ project.status }}</div>
-            </div>
-            <div class="project-body">
-                <p>{{ project.description }}</p>
-                <div class="tech-tags">
-                    {% for tag in project.tags %}
-                    <span class="tech-tag">{{ tag }}</span>
-                    {% endfor %}
-                </div>
-            </div>
+    <div class="project-controls" aria-label="Filter projects" data-reveal>
+      <span class="mono-label">FILTER BY DISCIPLINE</span>
+      <div class="filter-list">
+        <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All work</button>
+        <button class="filter-button" type="button" data-filter="ai" aria-pressed="false">AI infrastructure</button>
+        <button class="filter-button" type="button" data-filter="product" aria-pressed="false">Product engineering</button>
+        <button class="filter-button" type="button" data-filter="security" aria-pressed="false">Security</button>
+        <button class="filter-button" type="button" data-filter="research" aria-pressed="false">Research</button>
+      </div>
+      <span class="filter-count" aria-live="polite">5 entries</span>
+    </div>
+
+    <div class="case-list" id="case-list">
+      <article class="case-study" id="cognify" data-category="ai product" data-reveal>
+        <div class="case-rail">
+          <span class="case-number">01</span>
+          <span class="case-kind">AI INFRASTRUCTURE</span>
+          <span class="case-state case-state-active">ACTIVE DEVELOPMENT</span>
         </div>
-        {% endfor %}
+        <div class="case-main">
+          <div class="case-heading">
+            <div><p class="eyebrow">Runtime governance / MCP</p><h2>Cognify OS</h2></div>
+            <a class="case-external" href="https://cognify-os-seven.vercel.app" target="_blank" rel="noopener noreferrer">Open live web app <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="case-lede">A control point between AI agents and the tools they call. The model can propose an action; a separate runtime evaluates whether that action is allowed to proceed.</p>
+          <div class="case-two-col">
+            <div>
+              <h3>The problem</h3>
+              <p>Giving an agent a tool is also giving it a capability. Prompt instructions alone are not an adequate control boundary for actions that can read data, modify records or trigger external systems. Cognify is designed to make identity, policy and human approval part of the execution path.</p>
+              <h3>How it is structured</h3>
+              <p>The web control plane sits alongside an MCP server that exposes governed tools. A TypeScript policy engine evaluates scoped identities, resource rules and approval requirements at the tool-call boundary. Decisions are recorded in an append-only audit log, giving operators a trace of what was requested and what the runtime decided.</p>
+            </div>
+            <aside class="case-facts">
+              <span class="mono-label">ARCHITECTURE</span>
+              <ul>
+                <li>Next.js control plane</li>
+                <li>Express + MCP server</li>
+                <li>TypeScript governance engine</li>
+                <li>Drizzle ORM, PostgreSQL and pgvector</li>
+                <li>Redis / BullMQ worker services</li>
+                <li>Docker Compose local environment</li>
+              </ul>
+              <span class="mono-label">CORE PRIMITIVES</span>
+              <p>Agent identity · policy evaluation · approval routing · evidence log · tool registry and pinning</p>
+            </aside>
+          </div>
+          <div class="case-bottom">
+            <div class="tag-row"><span>TypeScript</span><span>Next.js</span><span>MCP</span><span>PostgreSQL</span><span>Drizzle</span><span>Docker</span></div>
+            <p><strong>Scope, stated plainly:</strong> Cognify governs calls routed through its MCP server; it does not transparently intercept arbitrary MCP traffic. Core governance, approvals and evidence are under active development. The web application is deployed; the private source repository is not linked publicly.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case-study" id="xgroup" data-category="product" data-reveal>
+        <div class="case-rail">
+          <span class="case-number">02</span>
+          <span class="case-kind">PRODUCT / PLATFORM</span>
+          <span class="case-state case-state-live">LIVE WEB PRESENCE</span>
+        </div>
+        <div class="case-main">
+          <div class="case-heading">
+            <div><p class="eyebrow">Founder-led product / automation infrastructure</p><h2>X.Group</h2></div>
+            <a class="case-external" href="https://xgroup-web.vercel.app" target="_blank" rel="noopener noreferrer">Visit the product site <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="case-lede">An operating layer for growing firms: a product direction centred on workflow automation, multi-tenant isolation and a real-time control plane.</p>
+          <div class="case-two-col">
+            <div>
+              <h3>Product intent</h3>
+              <p>X.Group approaches automation as infrastructure rather than a collection of disconnected shortcuts. The goal is to give a business a coherent operating layer for coordinating workflows while keeping the boundaries between workspaces and customers explicit.</p>
+              <h3>Implementation focus</h3>
+              <p>The current web application is built with the Next.js App Router and TypeScript. The interface uses Tailwind CSS, with Three.js / React Three Fiber and motion tooling used for the product's visual experience. The repository documents a Vercel deployment and the environment variables needed for its email integration.</p>
+            </div>
+            <aside class="case-facts">
+              <span class="mono-label">STACK</span>
+              <ul>
+                <li>Next.js 14 App Router</li>
+                <li>TypeScript</li>
+                <li>Tailwind CSS</li>
+                <li>Three.js + React Three Fiber</li>
+                <li>GSAP + Framer Motion</li>
+                <li>Lenis scroll interaction</li>
+              </ul>
+              <span class="mono-label">PRODUCT THEMES</span>
+              <p>Workflow orchestration · tenant isolation · operational visibility · automation infrastructure</p>
+            </aside>
+          </div>
+          <div class="case-bottom">
+            <div class="tag-row"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Three.js</span><span>GSAP</span></div>
+            <p><strong>Repository:</strong> <a href="https://github.com/mueezahmed455/xgroup" target="_blank" rel="noopener noreferrer">github.com/mueezahmed455/xgroup ↗</a>. The site is live; individual product capabilities should be judged by what is exposed in the current build, not inferred from the broader roadmap.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case-study" id="phishswipe" data-category="security product" data-reveal>
+        <div class="case-rail">
+          <span class="case-number">03</span>
+          <span class="case-kind">SECURITY EDUCATION</span>
+          <span class="case-state case-state-prototype">BROWSER PROTOTYPE</span>
+        </div>
+        <div class="case-main">
+          <div class="case-heading">
+            <div><p class="eyebrow">Interactive learning / static application</p><h2>PhishSwipe</h2></div>
+            <a class="case-external" href="https://github.com/mueezahmed455/phishswipe.github.io" target="_blank" rel="noopener noreferrer">View source <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="case-lede">A browser-based phishing-awareness game that makes security judgement active: inspect a message, decide whether it is safe, then learn which signals support the answer.</p>
+          <div class="case-two-col">
+            <div>
+              <h3>The interaction</h3>
+              <p>Players work through fictional email and SMS scenarios, using a left/right swipe, keyboard arrows or on-screen controls to classify each message. Feedback identifies the warning signs and explains safer next steps. A round tracks score and streaks, then presents a result breakdown.</p>
+              <h3>Why the implementation is deliberately local</h3>
+              <p>The application is a dependency-free static site built with HTML, CSS and vanilla JavaScript. Scenario metadata lives in the repository; profile details and the local leaderboard are stored in the current browser. There is no account, database or server-side score service in this version.</p>
+            </div>
+            <aside class="case-facts">
+              <span class="mono-label">DOCUMENTED FEATURES</span>
+              <ul>
+                <li>12 fictional email and SMS scenarios</li>
+                <li>Pointer and touch drag gestures</li>
+                <li>Keyboard and button controls</li>
+                <li>Evidence-led feedback</li>
+                <li>10-question rounds and score breakdown</li>
+                <li>Browser-local profile and history</li>
+              </ul>
+              <span class="mono-label">SAFETY BOUNDARY</span>
+              <p>Scenario domains are reserved examples, displayed as inert text. The app is an educational prototype, not a phishing detection service or a substitute for organisational controls.</p>
+            </aside>
+          </div>
+          <div class="case-bottom">
+            <div class="tag-row"><span>HTML</span><span>CSS</span><span>Vanilla JavaScript</span><span>Local storage</span><span>GitHub Pages workflow</span></div>
+            <p><strong>Repository:</strong> <a href="https://github.com/mueezahmed455/phishswipe.github.io" target="_blank" rel="noopener noreferrer">github.com/mueezahmed455/phishswipe.github.io ↗</a>. Source and product documentation are public. A production deployment is not claimed here.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case-study" id="auzbiz" data-category="product" data-reveal>
+        <div class="case-rail">
+          <span class="case-number">04</span>
+          <span class="case-kind">WEB APPLICATION</span>
+          <span class="case-state case-state-build">APPLICATION CODEBASE</span>
+        </div>
+        <div class="case-main">
+          <div class="case-heading">
+            <div><p class="eyebrow">Travel services / content and enquiry workflows</p><h2>AUZBIZ</h2></div>
+            <a class="case-external" href="https://github.com/mueezahmed455/AuzBiz-website" target="_blank" rel="noopener noreferrer">View source <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="case-lede">A travel-services web application bringing trip planning, enquiries and service information into one customer-facing experience.</p>
+          <div class="case-two-col">
+            <div>
+              <h3>Product surface</h3>
+              <p>The application covers air ticketing and sample fare analysis, group tours, hotels, visa services, study-abroad guidance and Umrah. It includes structured enquiry flows, a quote builder, tour and blog content, and dedicated pages for service discovery.</p>
+              <h3>Application structure</h3>
+              <p>The repository contains a Next.js App Router application with React and TypeScript. Its routes include flight and enquiry APIs, content and upload endpoints, authentication and administrative screens for managing tours and posts. This is a broader application codebase rather than a static landing page.</p>
+            </div>
+            <aside class="case-facts">
+              <span class="mono-label">STACK</span>
+              <ul>
+                <li>Next.js 16 App Router</li>
+                <li>React 19 + TypeScript</li>
+                <li>Tailwind CSS 4</li>
+                <li>NextAuth</li>
+                <li>API route handlers</li>
+                <li>Administrative content workflows</li>
+              </ul>
+              <span class="mono-label">ENGINEERING FOCUS</span>
+              <p>Customer journeys · enquiry capture · structured content · sample fare information · operational admin tools</p>
+            </aside>
+          </div>
+          <div class="case-bottom">
+            <div class="tag-row"><span>Next.js</span><span>React 19</span><span>TypeScript</span><span>Tailwind CSS 4</span><span>NextAuth</span></div>
+            <p><strong>Repository:</strong> <a href="https://github.com/mueezahmed455/AuzBiz-website" target="_blank" rel="noopener noreferrer">github.com/mueezahmed455/AuzBiz-website ↗</a>. The codebase is available for inspection; a live deployment and production usage are not asserted by this portfolio.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case-study case-study-research" id="spectra-gnn" data-category="research" data-reveal>
+        <div class="case-rail">
+          <span class="case-number">05</span>
+          <span class="case-kind">ACADEMIC RESEARCH</span>
+          <span class="case-state case-state-research">MANUSCRIPT IN PROGRESS</span>
+        </div>
+        <div class="case-main">
+          <div class="case-heading">
+            <div><p class="eyebrow">Graph representation learning</p><h2>SPECTRA-GNN</h2></div>
+            <span class="case-external case-external-muted">Research draft · not published</span>
+          </div>
+          <p class="case-lede">An academic research project exploring graph neural network methods, with a manuscript being developed in collaboration with academic colleagues.</p>
+          <div class="case-two-col">
+            <div>
+              <h3>Research direction</h3>
+              <p>The project reflects an interest in learning from relational structure: how entities, links and neighbourhood context can be represented for machine-learning tasks. The current work is a draft and should be treated as research in progress, not a published contribution.</p>
+              <h3>What belongs here next</h3>
+              <p>As the work matures, this page can document the precise research question, dataset and benchmark design, model formulation, ablation strategy and reproducible results. Those details should be added from the manuscript and experiments rather than filled with assumed claims.</p>
+            </div>
+            <aside class="case-facts">
+              <span class="mono-label">STATUS</span>
+              <ul>
+                <li>Manuscript in development</li>
+                <li>Academic collaboration</li>
+                <li>Not yet a peer-reviewed publication</li>
+                <li>Results and citations to be added after validation</li>
+              </ul>
+              <span class="mono-label">RESEARCH INTEREST</span>
+              <p>Graph neural networks · relational learning · model evaluation · reproducible experimentation</p>
+            </aside>
+          </div>
+          <div class="case-bottom">
+            <div class="tag-row"><span>Graph neural networks</span><span>Machine learning</span><span>Research</span></div>
+            <p>This entry will be expanded when the technical paper and validated experimental results are ready to share.</p>
+          </div>
+        </div>
+      </article>
     </div>
-</div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projects = document.querySelectorAll('.project-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.getAttribute('data-filter');
-
-            projects.forEach(project => {
-                const tags = project.getAttribute('data-tags').split(',');
-                if (filter === 'all' || tags.includes(filter) || (filter === 'AI' && (tags.includes('ML') || tags.includes('TensorFlow') || tags.includes('CV')))) {
-                    project.style.display = 'block';
-                } else {
-                    project.style.display = 'none';
-                }
-            });
-        });
-    });
-});
-</script>
-
-<style>
-.filter-btn {
-    cursor: pointer;
-    background: var(--bg-primary);
-    margin: 0.5rem;
-    transition: all 0.3s ease;
-}
-.filter-btn.active {
-    background: var(--accent);
-    color: var(--bg-primary);
-}
-</style>
+    <div class="projects-end-note">
+      <p class="eyebrow"><span class="eyebrow-line"></span> A note on evidence</p>
+      <p>I prefer a smaller portfolio with inspectable work to a long list of speculative claims. Deployment status, source availability and research maturity are stated separately so the reader can see what exists today.</p>
+      <a class="button button-primary" href="mailto:mueezahmad69@gmail.com">Discuss a project <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>

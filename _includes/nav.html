@@ -1,24 +1,18 @@
-<nav class="nav-bar" id="navbar">
-    <div class="logo-container">
-        <span class="logo" style="font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;">MUEEZ</span>
-    </div>
-
-    <div class="nav-links" id="navLinks">
-        <a href="{{ '/' | relative_url }}" class="nav-link active">Home</a>
-        <a href="{{ '/#skills' | relative_url }}" class="nav-link">Skills</a>
-        <a href="{{ '/#projects' | relative_url }}" class="nav-link">Projects</a>
-        <a href="{{ '/#experience' | relative_url }}" class="nav-link">Experience</a>
-        <a href="{{ '/blog/' | relative_url }}" class="nav-link">Blog</a>
-        <a href="{{ '/#contact' | relative_url }}" class="nav-link">Contact</a>
-    </div>
-
-    <div class="nav-controls">
-        <button class="btn btn-primary" id="chatToggle" style="padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 0.8rem;">
-            <i class="fas fa-comment-dots"></i>
-            <span style="margin-left: 0.5rem;">Chat</span>
-        </button>
-        <button class="metal-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-</nav>
+<header class="site-header">
+  <div class="container nav-inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Mueez Ahmed — home">
+      <span class="brand-mark">M<span>.</span></span>
+      <span class="brand-name">MUEEZ AHMED<small>SOFTWARE / SYSTEMS / RESEARCH</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+      <span></span><span></span>
+    </button>
+    <nav class="nav-links" id="primary-navigation" aria-label="Primary navigation">
+      <a href="{{ '/' | relative_url }}#work">Work</a>
+      <a href="{{ '/projects/' | relative_url }}">Case studies</a>
+      <a href="{{ '/' | relative_url }}#about">About</a>
+      <a href="{{ '/' | relative_url }}#research">Research</a>
+      <a class="nav-contact" href="mailto:mueezahmad69@gmail.com">Contact <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
