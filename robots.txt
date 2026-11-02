@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mueezahmed455.github.io/sitemap.xml

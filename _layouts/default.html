@@ -1,67 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | {{ site.title }}</title>
-    <meta name="description" content="{{ site.description }}">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-    <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}");
-        }
-    </script>
+  {% include head.html %}
 </head>
 <body>
-    <!-- PS5-Style Particle Background -->
-    <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></canvas>
-    
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div style="margin-top: 1rem; font-family: 'Orbitron', sans-serif; letter-spacing: 3px;">LOADING...</div>
-    </div>
-
-    <!-- Navigation -->
-    {% include nav.html %}
-
-    <!-- Main Content -->
-    <main>
-        {{ content }}
-    </main>
-
-    <!-- Footer -->
-    {% include footer.html %}
-
-    <!-- Chatbot -->
-    {% include chatbot.html %}
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/particle-bg.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/performance.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/terminal-kernel.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/neural-core.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/security-lab.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/multiplayer.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/three-bg.js' | relative_url }}"></script>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  {% include nav.html %}
+  <main id="main-content" class="page-main">
+    {{ content }}
+  </main>
+  {% include footer.html %}
 </body>
 </html>
