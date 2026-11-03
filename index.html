@@ -1,7 +1,7 @@
 ---
 layout: null
-title: Mueez Ahmed — Software engineer
-description: Product engineering, AI infrastructure and applied research. Selected projects, technical practice and current work by Mueez Ahmed.
+title: Mueez Ahmed — Software, systems & research
+description: Software engineering, AI infrastructure and applied research. Product work, system design and technical experiments by Mueez Ahmed.
 permalink: /
 ---
 <!doctype html>
@@ -9,302 +9,334 @@ permalink: /
 <head>
   {% include head.html %}
 </head>
-<body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
+<body class="site-shell">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   {% include nav.html %}
-  <main id="main-content">
-    <section class="hero" id="top">
-      <div class="hero-gridline" aria-hidden="true"></div>
-      <div class="container hero-layout">
+
+  <main id="main">
+    <section class="hero-section" id="home">
+      <canvas class="hero-network" id="hero-network" aria-hidden="true"></canvas>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> Software engineering / systems / research</p>
-          <h1>Complex problems.<br><span>Careful software.</span></h1>
-          <p class="hero-intro">I'm Mueez Ahmed — a computer science student and independent software builder. I work across product engineering, AI infrastructure and applied research, turning ambiguous problems into systems people can understand, trust and use.</p>
+          <div class="hero-overline"><span class="live-mark"></span><span>SOFTWARE ENGINEERING</span><i></i><span>AI SYSTEMS</span><i></i><span>RESEARCH</span></div>
+          <h1>I build software<br>from the <span>surface</span><br>to the <span>system.</span></h1>
+          <p class="hero-description">I'm Mueez Ahmed — a Computer Science student, founder and independent software builder. My work moves between product interfaces, backend architecture and the control boundaries that make complex systems dependable.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="{{ '/projects/' | relative_url }}">Explore selected work <span aria-hidden="true">↗</span></a>
-            <a class="button button-quiet" href="mailto:mueezahmad69@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
+            <a class="button button-primary" href="#selected-work">Explore the work <span aria-hidden="true">↘</span></a>
+            <button class="button button-outline" type="button" data-open-command>Open the command deck <kbd>⌘ K</kbd></button>
           </div>
-          <div class="hero-footnote">
-            <span class="status-indicator" aria-hidden="true"></span>
-            <span>Currently building <strong>Cognify OS</strong> and the next layer of X.Group.</span>
+          <div class="hero-facts">
+            <div><span class="micro-label">BASED IN</span><strong>United Kingdom</strong></div>
+            <div><span class="micro-label">STUDYING</span><strong>BSc Computer Science · Keele</strong></div>
+            <div><span class="micro-label">CURRENT FOCUS</span><strong>Agent infrastructure & product systems</strong></div>
           </div>
         </div>
 
-        <aside class="hero-art" aria-label="Illustration of a governed AI tool-call workflow">
-          <div class="art-topline">
-            <span class="mono-label">SYSTEM STUDY / 001</span>
-            <span class="art-live"><span></span> REQUEST PATH</span>
+        <aside class="hero-console" aria-label="Cognify system architecture illustration">
+          <div class="console-head">
+            <div class="console-brand"><span class="console-glyph">C</span><span><b>COGNIFY / CONTROL PATH</b><small>ARCHITECTURE STUDY · 01</small></span></div>
+            <span class="console-live"><i></i> DESIGN VIEW</span>
           </div>
-          <div class="art-title-row">
-            <div>
-              <p class="art-kicker">A system I care about</p>
-              <h2>Make the boundary<br>part of the design.</h2>
+          <div class="console-body">
+            <div class="console-intro"><span>01 — TOOL CALL LIFECYCLE</span><span>REQUEST → DECISION</span></div>
+            <div class="architecture-flow">
+              <div class="architecture-node node-agent">
+                <span class="node-index">01</span><span class="node-symbol">AG</span><span class="node-details"><b>Agent</b><small>proposes an action</small></span><span class="node-state">INPUT</span>
+              </div>
+              <div class="architecture-link"><span>request</span><i></i></div>
+              <div class="architecture-node node-policy">
+                <span class="node-index">02</span><span class="node-symbol">PG</span><span class="node-details"><b>Policy gate</b><small>identity · scope · rules</small></span><span class="node-state">EVALUATE</span>
+              </div>
+              <div class="architecture-outcomes">
+                <div class="outcome outcome-allow"><i></i><span>ALLOW</span></div>
+                <div class="outcome outcome-review"><i></i><span>APPROVAL</span></div>
+                <div class="outcome outcome-deny"><i></i><span>DENY</span></div>
+              </div>
+              <div class="architecture-link architecture-link-short"><span>decision + outcome</span><i></i></div>
+              <div class="architecture-node node-evidence">
+                <span class="node-index">03</span><span class="node-symbol">EV</span><span class="node-details"><b>Evidence log</b><small>record what happened</small></span><span class="node-state">TRACE</span>
+              </div>
             </div>
-            <span class="art-index">C / 01</span>
+            <div class="console-foot"><span>CONTROL AT THE TOOL BOUNDARY</span><span>NOT PROMPT-ONLY SECURITY</span></div>
           </div>
-          <div class="flow-diagram">
-            <div class="flow-node flow-node-agent">
-              <span class="node-number">01</span>
-              <span class="node-icon node-agent-icon" aria-hidden="true">A</span>
-              <span class="node-copy"><strong>Agent</strong><small>Proposed action</small></span>
-              <span class="node-port" aria-hidden="true"></span>
-            </div>
-            <div class="flow-connector"><span>tool call</span></div>
-            <div class="flow-node flow-node-gate">
-              <span class="node-number">02</span>
-              <span class="node-icon node-gate-icon" aria-hidden="true">G</span>
-              <span class="node-copy"><strong>Policy gate</strong><small>Identity · scope · rules</small></span>
-              <span class="node-port" aria-hidden="true"></span>
-            </div>
-            <div class="flow-branches">
-              <div class="branch-line" aria-hidden="true"></div>
-              <div class="branch-pill branch-allow"><span></span> Allow</div>
-              <div class="branch-pill branch-review"><span></span> Approval</div>
-              <div class="branch-pill branch-deny"><span></span> Deny</div>
-            </div>
-            <div class="flow-node flow-node-record">
-              <span class="node-number">03</span>
-              <span class="node-icon node-record-icon" aria-hidden="true">E</span>
-              <span class="node-copy"><strong>Evidence</strong><small>Decision · outcome · trace</small></span>
-              <span class="node-port" aria-hidden="true"></span>
-            </div>
-          </div>
-          <div class="art-foot">
-            <span>IDENTITY → POLICY → EXECUTION</span>
-            <span>TRACEABLE BY DESIGN</span>
-          </div>
-          <div class="art-corner art-corner-one" aria-hidden="true"></div>
-          <div class="art-corner art-corner-two" aria-hidden="true"></div>
+          <div class="console-footer"><span>REFERENCE: COGNIFY OS</span><a href="{{ '/projects/#cognify' | relative_url }}">READ THE CASE STUDY ↗</a></div>
+          <div class="console-decoration console-decoration-a" aria-hidden="true"></div><div class="console-decoration console-decoration-b" aria-hidden="true"></div>
         </aside>
       </div>
       <div class="container hero-bottom">
-        <div class="hero-bottom-item"><span class="mono-label">01 / FOCUS</span><strong>Product engineering</strong></div>
-        <div class="hero-bottom-item"><span class="mono-label">02 / FOCUS</span><strong>AI systems & governance</strong></div>
-        <div class="hero-bottom-item"><span class="mono-label">03 / FOCUS</span><strong>Applied research</strong></div>
-        <a class="scroll-cue" href="#work">Scroll to explore <span aria-hidden="true">↓</span></a>
+        <span class="hero-scroll-label">SCROLL TO EXPLORE <i aria-hidden="true">↓</i></span>
+        <span class="hero-bottom-note">A portfolio of products, systems and experiments — with scope stated clearly.</span>
+        <span class="hero-coordinate">53°00′ N / 2°16′ W</span>
       </div>
     </section>
 
-    <section class="section section-work" id="work">
+    <section class="section selected-work" id="selected-work">
       <div class="container">
-        <div class="section-heading section-heading-split" data-reveal>
-          <div>
-            <p class="eyebrow"><span class="eyebrow-line"></span> Selected work</p>
-            <h2>Built to solve something.<br><em>Not to fill a grid.</em></h2>
-          </div>
-          <div class="section-heading-note">
-            <p>A small selection of systems and products I've been building. Each project is described at the level of its actual scope — including what is still in progress.</p>
-            <a class="text-link" href="{{ '/projects/' | relative_url }}">Read the case studies <span aria-hidden="true">↗</span></a>
-          </div>
+        <div class="section-topline" data-reveal><span class="section-index">01 / SELECTED WORK</span><span class="section-rule"></span><span class="section-aside">PRODUCTS · PLATFORMS · RESEARCH</span></div>
+        <div class="section-heading section-heading-wide" data-reveal>
+          <h2>Work with a reason<br>to <em>exist.</em></h2>
+          <div class="section-heading-copy"><p>These are the projects that best represent how I think and build. Not all are at the same stage: active products, working prototypes, application codebases and research drafts are labelled separately.</p><a class="inline-link" href="{{ '/projects/' | relative_url }}">Full project archive <span>↗</span></a></div>
         </div>
 
-        <div class="project-grid">
-          <a class="project-card project-card-featured" href="{{ '/projects/#cognify' | relative_url }}" data-reveal>
-            <div class="project-visual visual-cognify" aria-hidden="true">
-              <div class="visual-window">
-                <div class="visual-window-bar"><span></span><span></span><span></span><small>cognify / control-plane</small></div>
-                <div class="visual-pipeline">
-                  <div class="pipeline-block">AGENT<span>identity</span></div>
-                  <i></i>
-                  <div class="pipeline-block pipeline-block-active">GATE<span>policy</span></div>
-                  <i></i>
-                  <div class="pipeline-block">TOOL<span>execution</span></div>
+        <div class="featured-projects">
+          <article class="feature-project feature-project-wide" data-reveal>
+            <a class="project-art art-cognify" href="{{ '/projects/#cognify' | relative_url }}" aria-label="Read Cognify OS case study">
+              <div class="art-label-row"><span>01 / AI INFRASTRUCTURE</span><span>RUNTIME GOVERNANCE</span></div>
+              <div class="cognify-art-window">
+                <div class="art-window-top"><span class="window-controls"><i></i><i></i><i></i></span><span>cognify / policy-evaluation</span><span>LOCAL TRACE</span></div>
+                <div class="art-window-main">
+                  <div class="art-sidebar"><span class="side-active">OVERVIEW</span><span>IDENTITIES</span><span>POLICIES</span><span>APPROVALS</span><span>EVIDENCE</span></div>
+                  <div class="art-dashboard">
+                    <div class="art-dashboard-head"><span>Action decision</span><b>TRACE / 0081</b></div>
+                    <div class="art-decision"><span class="decision-symbol">✓</span><span><b>requires_approval</b><small>tool: update_customer_record</small></span><strong>REVIEW</strong></div>
+                    <div class="art-metrics"><div><small>IDENTITY</small><b>agent_7f2a</b></div><div><small>POLICY</small><b>customer-data</b></div><div><small>DISPATCH</small><b>HELD</b></div></div>
+                    <div class="art-log"><span>13:42:08</span><b>POLICY EVALUATED</b><i>Human approval required before dispatch</i></div>
+                  </div>
                 </div>
-                <div class="visual-log"><span class="log-ok">ALLOW</span><span>decision recorded</span><span class="log-time">03 ms*</span></div>
-                <div class="visual-log"><span class="log-warn">REVIEW</span><span>human approval</span><span class="log-time">pending</span></div>
               </div>
-              <span class="visual-caption">CONTROL PLANE / CONCEPTUAL TRACE</span>
+              <div class="art-bottom-label"><span>IDENTITY / POLICY / APPROVAL / EVIDENCE</span><span>OPEN CASE STUDY ↗</span></div>
+            </a>
+            <div class="feature-project-info">
+              <div class="project-meta-line"><span>01 — Cognify OS</span><span class="status status-active"><i></i> Active development</span></div>
+              <h3>A control point for<br>AI agent actions.</h3>
+              <p>Cognify places identity, policy evaluation, approval routing and audit evidence between an AI agent and the tools it can call. The model can propose an action; the runtime decides whether it proceeds.</p>
+              <div class="tag-list"><span>TypeScript</span><span>MCP</span><span>PostgreSQL</span><span>Next.js</span><span>Drizzle</span></div>
+              <a class="project-read-more" href="{{ '/projects/#cognify' | relative_url }}">Architecture, boundaries & current status <span>↗</span></a>
             </div>
-            <div class="project-card-body">
-              <div class="project-meta"><span>01 / AI infrastructure</span><span class="project-status"><i></i> Active development</span></div>
-              <h3>Cognify OS</h3>
-              <p>A control point for AI agents and MCP tools. Policy decisions, scoped identity, human approval and an auditable record sit between an agent and the actions it can take.</p>
-              <div class="tag-row"><span>TypeScript</span><span>MCP</span><span>PostgreSQL</span><span>Policy engine</span></div>
-              <span class="card-link">Explore the architecture <b aria-hidden="true">↗</b></span>
-            </div>
-          </a>
+          </article>
 
-          <a class="project-card" href="{{ '/projects/#xgroup' | relative_url }}" data-reveal>
-            <div class="project-visual visual-xgroup" aria-hidden="true">
-              <div class="xgroup-mark">X<span>.</span></div>
-              <div class="xgroup-orbit orbit-one"></div><div class="xgroup-orbit orbit-two"></div><div class="xgroup-orbit orbit-three"></div>
-              <div class="xgroup-lines"><i></i><i></i><i></i><i></i></div>
-              <span class="visual-caption">WORKFLOWS / TENANCY / CONTROL</span>
-            </div>
-            <div class="project-card-body">
-              <div class="project-meta"><span>02 / Product & platform</span><span class="project-status"><i></i> Building</span></div>
-              <h3>X.Group</h3>
-              <p>An operating layer for growing firms, focused on automation infrastructure, multi-tenant isolation and a real-time control plane.</p>
-              <div class="tag-row"><span>Next.js</span><span>TypeScript</span><span>Three.js</span><span>Motion</span></div>
-              <span class="card-link">Explore the product <b aria-hidden="true">↗</b></span>
-            </div>
-          </a>
-
-          <a class="project-card" href="{{ '/projects/#phishswipe' | relative_url }}" data-reveal>
-            <div class="project-visual visual-phish" aria-hidden="true">
-              <div class="message-card">
-                <div class="message-head"><span class="message-avatar">?</span><span><b>Account notice</b><small>security-update.example</small></span><span class="message-dots">•••</span></div>
-                <div class="message-subject">Action required: verify your account</div>
-                <div class="message-lines"><i></i><i></i><i></i></div>
-                <div class="message-url">secure-login.example.invalid</div>
-                <div class="message-actions"><span>← PHISHING</span><span>SAFE →</span></div>
+          <article class="feature-project" data-reveal>
+            <a class="project-art art-xgroup" href="{{ '/projects/#xgroup' | relative_url }}" aria-label="Read X.Group case study">
+              <div class="art-label-row"><span>02 / PRODUCT PLATFORM</span><span>WORKFLOW INFRASTRUCTURE</span></div>
+              <div class="xgroup-art-grid">
+                <div class="xgroup-wordmark">X<span>.</span></div>
+                <div class="xgroup-coordinates"><span>WORKSPACE / A</span><b>01</b><i></i><span>FLOW / CONTROL</span></div>
+                <div class="xgroup-orbit orbit-a"></div><div class="xgroup-orbit orbit-b"></div><div class="xgroup-crosshair"></div>
               </div>
-              <span class="visual-caption">SPOT THE SIGNAL / LEARN THE WHY</span>
+              <div class="art-bottom-label"><span>WORKFLOWS / TENANCY / CONTROL</span><span>OPEN CASE STUDY ↗</span></div>
+            </a>
+            <div class="feature-project-info">
+              <div class="project-meta-line"><span>02 — X.Group</span><span class="status status-build"><i></i> Building</span></div>
+              <h3>An operating layer<br>for growing firms.</h3>
+              <p>A founder-led product direction focused on automation infrastructure, multi-tenant isolation and a real-time control plane.</p>
+              <div class="tag-list"><span>Next.js</span><span>TypeScript</span><span>Three.js</span><span>GSAP</span></div>
+              <a class="project-read-more" href="{{ '/projects/#xgroup' | relative_url }}">Product direction & implementation <span>↗</span></a>
             </div>
-            <div class="project-card-body">
-              <div class="project-meta"><span>03 / Security education</span><span class="project-status"><i></i> Browser prototype</span></div>
-              <h3>PhishSwipe</h3>
-              <p>A swipe-based phishing-awareness game that turns fictional email and SMS scenarios into short, explainable learning rounds.</p>
-              <div class="tag-row"><span>JavaScript</span><span>Accessibility</span><span>Local-first</span></div>
-              <span class="card-link">Explore the interaction model <b aria-hidden="true">↗</b></span>
-            </div>
-          </a>
+          </article>
 
-          <a class="project-card" href="{{ '/projects/#auzbiz' | relative_url }}" data-reveal>
-            <div class="project-visual visual-auz" aria-hidden="true">
-              <div class="route-map">
-                <div class="route-route"></div>
-                <span class="route-point route-point-a"></span><span class="route-point route-point-b"></span><span class="route-point route-point-c"></span>
-                <div class="route-label route-label-a">LHE</div><div class="route-label route-label-b">DXB</div>
-                <div class="route-ticket"><small>TRAVEL / OPERATIONS</small><b>Plan the details.</b><span>Flights · stays · visas</span></div>
+          <article class="feature-project" data-reveal>
+            <a class="project-art art-phishswipe" href="{{ '/projects/#phishswipe' | relative_url }}" aria-label="Read PhishSwipe case study">
+              <div class="art-label-row"><span>03 / SECURITY EDUCATION</span><span>INTERACTIVE PROTOTYPE</span></div>
+              <div class="phish-art-stage">
+                <div class="phish-message">
+                  <div class="phish-message-top"><span class="phish-avatar">!</span><span><b>Account security notice</b><small>security-team@example.invalid</small></span><span class="phish-menu">•••</span></div>
+                  <div class="phish-subject">Your access needs attention</div>
+                  <div class="phish-lines"><i></i><i></i><i></i></div>
+                  <div class="phish-link">verify-account.example.invalid</div>
+                  <div class="phish-controls"><span>← PHISHING</span><span>SAFE →</span></div>
+                </div>
+                <span class="phish-stamp">TRAINING SCENARIO<br>NOT A REAL MESSAGE</span>
               </div>
-              <span class="visual-caption">TRAVEL SERVICES / DIGITAL WORKFLOW</span>
+              <div class="art-bottom-label"><span>NOTICE / REASON / LEARN</span><span>OPEN CASE STUDY ↗</span></div>
+            </a>
+            <div class="feature-project-info">
+              <div class="project-meta-line"><span>03 — PhishSwipe</span><span class="status status-prototype"><i></i> Browser prototype</span></div>
+              <h3>Security awareness<br>you can interact with.</h3>
+              <p>A swipe-based phishing-awareness game. Players classify fictional email and SMS scenarios, then get an explanation of the signals behind the answer.</p>
+              <div class="tag-list"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Local-first</span></div>
+              <a class="project-read-more" href="{{ '/projects/#phishswipe' | relative_url }}">Interaction model & privacy boundary <span>↗</span></a>
             </div>
-            <div class="project-card-body">
-              <div class="project-meta"><span>04 / Web application</span><span class="project-status"><i></i> Application codebase</span></div>
-              <h3>AUZBIZ</h3>
-              <p>A travel-services application spanning enquiries, sample fare analysis, tours, visa information and content managed through an administrative interface.</p>
-              <div class="tag-row"><span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span></div>
-              <span class="card-link">Explore the application <b aria-hidden="true">↗</b></span>
+          </article>
+
+          <article class="feature-project" data-reveal>
+            <a class="project-art art-auzbiz" href="{{ '/projects/#auzbiz' | relative_url }}" aria-label="Read AUZBIZ case study">
+              <div class="art-label-row"><span>04 / WEB APPLICATION</span><span>TRAVEL SERVICES</span></div>
+              <div class="auz-art-stage">
+                <div class="auz-app-window">
+                  <div class="auz-app-nav"><b>AUZBIZ</b><span>FLIGHTS　 TOURS　 VISAS</span><i>CONTACT ↗</i></div>
+                  <div class="auz-app-hero"><small>PLAN WITH CLARITY</small><b>Travel, better<br>organised.</b><span>Flights / stays / documents</span></div>
+                  <div class="auz-app-cards"><i>01　AIR TICKETS</i><i>02　GROUP TOURS</i><i>03　VISA SUPPORT</i></div>
+                </div>
+                <div class="auz-route-dot"></div>
+              </div>
+              <div class="art-bottom-label"><span>DISCOVERY / ENQUIRY / OPERATIONS</span><span>OPEN CASE STUDY ↗</span></div>
+            </a>
+            <div class="feature-project-info">
+              <div class="project-meta-line"><span>04 — AUZBIZ</span><span class="status status-codebase"><i></i> Application codebase</span></div>
+              <h3>A service business,<br>thought through digitally.</h3>
+              <p>A Next.js application for a travel-services business, covering discovery, enquiries, sample fare analysis, tour content and administrative workflows.</p>
+              <div class="tag-list"><span>Next.js</span><span>React 19</span><span>TypeScript</span><span>Tailwind CSS</span></div>
+              <a class="project-read-more" href="{{ '/projects/#auzbiz' | relative_url }}">Application structure & product scope <span>↗</span></a>
             </div>
-          </a>
+          </article>
+
+          <article class="feature-project feature-project-research" data-reveal>
+            <a class="project-art art-spectra" href="{{ '/projects/#spectra-gnn' | relative_url }}" aria-label="Read SPECTRA-GNN research note">
+              <div class="art-label-row"><span>05 / ACADEMIC RESEARCH</span><span>MANUSCRIPT IN PROGRESS</span></div>
+              <svg class="spectra-graph" viewBox="0 0 520 220" role="img" aria-label="Abstract graph representation illustration">
+                <g class="spectra-edges"><path d="M45 110 L145 43 L240 85 L355 30 L466 96 M45 110 L145 178 L240 85 L354 180 L466 96 M145 43 L145 178 M240 85 L355 30 M240 85 L354 180 M355 30 L466 96 M354 180 L466 96"/></g>
+                <g class="spectra-nodes"><circle cx="45" cy="110" r="9"/><circle cx="145" cy="43" r="7"/><circle cx="145" cy="178" r="7"/><circle cx="240" cy="85" r="12"/><circle cx="355" cy="30" r="8"/><circle cx="354" cy="180" r="8"/><circle cx="466" cy="96" r="10"/></g>
+                <g class="spectra-labels"><text x="17" y="136">INPUT</text><text x="213" y="61">EMBEDDING</text><text x="422" y="126">OUTPUT</text></g>
+              </svg>
+              <div class="art-bottom-label"><span>RELATIONS / REPRESENTATIONS / LEARNING</span><span>OPEN RESEARCH NOTE ↗</span></div>
+            </a>
+            <div class="feature-project-info">
+              <div class="project-meta-line"><span>05 — SPECTRA-GNN</span><span class="status status-research"><i></i> Research draft</span></div>
+              <h3>Learning from<br>connected structure.</h3>
+              <p>A graph neural network research project with an academic manuscript in development. The work is not yet presented as a publication or validated result.</p>
+              <div class="tag-list"><span>Graph neural networks</span><span>Machine learning</span><span>Academic collaboration</span></div>
+              <a class="project-read-more" href="{{ '/projects/#spectra-gnn' | relative_url }}">Research direction & next steps <span>↗</span></a>
+            </div>
+          </article>
         </div>
-        <div class="work-footnote" data-reveal><span class="mono-label">SCOPE NOTE</span> The project index separates active products, working prototypes, application codebases and research drafts. A link is not presented as proof of a production deployment.</div>
+
+        <div class="work-more-row" data-reveal><span>There is more in the archive — including early-stage product explorations, not just shipped work.</span><a class="button button-outline button-small" href="{{ '/projects/' | relative_url }}">View all projects <span>↗</span></a></div>
       </div>
     </section>
 
-    <section class="section section-method" id="approach">
+    <section class="section capabilities-section" id="capabilities">
       <div class="container">
-        <div class="section-heading" data-reveal>
-          <p class="eyebrow"><span class="eyebrow-line"></span> Engineering approach</p>
-          <h2>Make the difficult parts<br><em>understandable.</em></h2>
+        <div class="section-topline" data-reveal><span class="section-index">02 / TECHNICAL PRACTICE</span><span class="section-rule"></span><span class="section-aside">TOOLS ARE A MEANS, NOT A PITCH</span></div>
+        <div class="section-heading section-heading-wide" data-reveal>
+          <h2>From product surface<br>to <em>runtime.</em></h2>
+          <div class="section-heading-copy"><p>I work across the full stack, with most of my current attention going into product architecture, backend systems, AI tooling and the interfaces that make technical systems understandable.</p></div>
         </div>
-        <div class="principle-grid">
-          <article class="principle" data-reveal>
-            <span class="principle-number">01</span>
-            <h3>Start with the boundary.</h3>
-            <p>Define what a system is allowed to do, what it must never assume, and where responsibility changes hands. Then design the interfaces around those rules.</p>
-          </article>
-          <article class="principle" data-reveal>
-            <span class="principle-number">02</span>
-            <h3>Prefer visible state.</h3>
-            <p>Good software makes its decisions inspectable. Clear states, useful traces and honest failure paths beat a polished surface that hides what happened.</p>
-          </article>
-          <article class="principle" data-reveal>
-            <span class="principle-number">03</span>
-            <h3>Ship the smallest real thing.</h3>
-            <p>Keep the architecture deliberate, but let working behaviour decide what deserves to exist. A demonstrable system is more valuable than a speculative feature list.</p>
-          </article>
+        <div class="capability-grid">
+          <article class="capability-card" data-reveal><div class="capability-number">A / 01</div><div class="capability-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="7" width="38" height="34" rx="3"/><path d="M5 16h38M13 12h1m5 0h1M13 24h8m-8 6h22m-22 6h15"/></svg></div><h3>Product engineering</h3><p>Interfaces, navigation, client-side state and product flows. I care about how a person actually moves through a system, not just how a screen looks in isolation.</p><div class="capability-tags"><span>React</span><span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Accessibility</span></div></article>
+          <article class="capability-card" data-reveal><div class="capability-number">B / 02</div><div class="capability-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="6" width="34" height="12" rx="3"/><rect x="7" y="30" width="34" height="12" rx="3"/><path d="M24 18v12m-5-7 5 7 5-7M14 12h2m-2 24h2"/></svg></div><h3>Backend & data</h3><p>API boundaries, persistence, background jobs and service composition. Prefer explicit contracts, predictable failure modes and data models that explain their intent.</p><div class="capability-tags"><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>Drizzle ORM</span><span>Redis</span></div></article>
+          <article class="capability-card" data-reveal><div class="capability-number">C / 03</div><div class="capability-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5 41 14v20L24 43 7 34V14z"/><path d="m7 14 17 10 17-10M24 24v19M15 9l17 10"/></svg></div><h3>AI systems & governance</h3><p>Agent-tool interfaces, MCP servers, policy evaluation and human approval. The central question is what an agent can do at runtime — and how that decision is recorded.</p><div class="capability-tags"><span>MCP</span><span>Agent identity</span><span>Policy engines</span><span>Approval workflows</span><span>Audit evidence</span></div></article>
+          <article class="capability-card" data-reveal><div class="capability-number">D / 04</div><div class="capability-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="7"/><path d="M24 3v8m0 26v8M3 24h8m26 0h8M9 9l6 6m18 18 6 6m0-30-6 6m-18 18-6 6"/></svg></div><h3>Research & visual systems</h3><p>Graph-based learning, technical investigation and interactive visualisation. Experiments should expose what they measure and what remains unknown.</p><div class="capability-tags"><span>Python</span><span>GNNs</span><span>Three.js</span><span>GSAP</span><span>Technical writing</span></div></article>
         </div>
+        <div class="stack-footnote" data-reveal><span class="micro-label">STACK NOTE</span><p>These tools are drawn from the current project codebases and research direction. The list is not a claim of equal expertise in every technology or of production use in every project.</p></div>
       </div>
     </section>
 
-    <section class="section section-about" id="about">
-      <div class="container about-layout">
-        <div class="about-intro" data-reveal>
-          <p class="eyebrow"><span class="eyebrow-line"></span> A little context</p>
-          <h2>Engineer by practice.<br><em>Researcher by curiosity.</em></h2>
-          <p>My work sits at the intersection of software systems and the people who rely on them. I enjoy the full arc: understanding a messy problem, shaping a product around it, designing the underlying architecture and making the result usable.</p>
-          <p>I'm currently studying Computer Science at Keele University while building products independently. The through-line is simple: systems should be useful, inspectable and built with care.</p>
-        </div>
-        <div class="about-details" data-reveal>
-          <div class="detail-block">
-            <span class="mono-label">01 / LANGUAGES</span>
-            <div class="detail-tags"><span>TypeScript</span><span>JavaScript</span><span>Python</span><span>SQL</span></div>
-          </div>
-          <div class="detail-block">
-            <span class="mono-label">02 / PRODUCT ENGINEERING</span>
-            <div class="detail-tags"><span>Next.js</span><span>React</span><span>Node.js</span><span>Tailwind CSS</span><span>REST APIs</span></div>
-          </div>
-          <div class="detail-block">
-            <span class="mono-label">03 / DATA & SYSTEMS</span>
-            <div class="detail-tags"><span>PostgreSQL</span><span>Drizzle ORM</span><span>Supabase</span><span>Redis</span><span>pgvector</span><span>Docker</span></div>
-          </div>
-          <div class="detail-block">
-            <span class="mono-label">04 / AI & INTERACTION</span>
-            <div class="detail-tags"><span>Model Context Protocol</span><span>Agent governance</span><span>Graph neural networks</span><span>Three.js</span><span>GSAP</span></div>
-          </div>
-          <p class="detail-note">Technologies are listed where they are used in current or documented project work — not as a claim of equal depth across every tool.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-research" id="research">
+    <section class="section systems-lab-section" id="systems-lab">
       <div class="container">
-        <div class="research-panel" data-reveal>
-          <div class="research-main">
-            <p class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> Research & learning</p>
-            <span class="research-code">RESEARCH NOTE / 001</span>
-            <h2>SPECTRA-GNN</h2>
-            <p class="research-lede">A graph neural network research project, with a manuscript currently in development through academic collaboration.</p>
-            <p class="research-copy">The work reflects an interest in how graph-based representations can model relationships and structure. It is presented here as ongoing research, not as a published paper or a peer-reviewed result.</p>
-            <a class="text-link text-link-light" href="{{ '/projects/#spectra-gnn' | relative_url }}">Read the research note <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="research-visual" aria-hidden="true">
-            <svg viewBox="0 0 460 300" role="presentation">
-              <g class="graph-edges">
-                <path d="M55 150 L145 72 L230 122 L330 55 L405 130 M55 150 L145 230 L230 122 L310 225 L405 130 M145 72 L145 230 M230 122 L330 55 M230 122 L310 225 M330 55 L405 130"/>
-                <path d="M55 150 L230 122 L405 130"/>
-              </g>
-              <g class="graph-nodes">
-                <circle cx="55" cy="150" r="9"/><circle cx="145" cy="72" r="7"/><circle cx="145" cy="230" r="7"/><circle cx="230" cy="122" r="12"/><circle cx="330" cy="55" r="8"/><circle cx="310" cy="225" r="8"/><circle cx="405" cy="130" r="10"/>
-              </g>
-              <g class="graph-labels"><text x="35" y="178">NODE A</text><text x="210" y="98">EMBEDDING</text><text x="371" y="157">NODE G</text></g>
-            </svg>
-            <span class="mono-label">RELATIONSHIPS / REPRESENTATIONS / LEARNING</span>
-          </div>
+        <div class="section-topline" data-reveal><span class="section-index">03 / INTERACTIVE SYSTEMS LAB</span><span class="section-rule"></span><span class="section-aside">TRY THE INTERFACES</span></div>
+        <div class="section-heading section-heading-wide" data-reveal>
+          <h2>Don't take the<br>architecture on <em>trust.</em></h2>
+          <div class="section-heading-copy"><p>Explore a small version of the ideas behind my work. These are self-contained browser demos — no account, no API request and no data sent to a server.</p></div>
         </div>
 
-        <div class="credentials-grid">
-          <div class="credential" data-reveal>
-            <span class="mono-label">EDUCATION</span>
-            <h3>BSc (Hons) Computer Science</h3>
-            <p>Keele University · 2025–2029</p>
+        <div class="lab-grid">
+          <article class="lab-card lab-architecture" data-reveal>
+            <div class="lab-card-top"><span class="lab-index">LAB / 01</span><span class="lab-tag">COGNIFY MODEL</span></div>
+            <h3>Where should control live?</h3>
+            <p class="lab-description">Select a layer to see its responsibility in a governed tool-call path.</p>
+            <div class="lab-explorer">
+              <div class="lab-flow-map" role="group" aria-label="Select an architecture component">
+                <button type="button" class="lab-flow-step is-selected" data-architecture="identity" aria-pressed="true"><span>01</span><b>Identity</b><small>Who is acting?</small></button>
+                <i class="lab-flow-line" aria-hidden="true"></i>
+                <button type="button" class="lab-flow-step" data-architecture="policy" aria-pressed="false"><span>02</span><b>Policy</b><small>Is it allowed?</small></button>
+                <i class="lab-flow-line" aria-hidden="true"></i>
+                <button type="button" class="lab-flow-step" data-architecture="approval" aria-pressed="false"><span>03</span><b>Approval</b><small>Who must review?</small></button>
+                <i class="lab-flow-line" aria-hidden="true"></i>
+                <button type="button" class="lab-flow-step" data-architecture="evidence" aria-pressed="false"><span>04</span><b>Evidence</b><small>What happened?</small></button>
+              </div>
+              <div class="lab-detail" aria-live="polite">
+                <div class="lab-detail-heading"><span id="architecture-code">COMPONENT / 01</span><span class="lab-detail-state">SELECTED</span></div>
+                <h4 id="architecture-title">Agent identity</h4>
+                <p id="architecture-copy">A governed action should be attributable to a specific agent identity and bounded by the permissions assigned to it. Identity is context for policy evaluation, not a substitute for policy.</p>
+                <div class="lab-detail-foot"><span>DESIGN PRINCIPLE</span><b id="architecture-principle">Attribution before authorisation.</b></div>
+              </div>
+            </div>
+            <p class="lab-disclaimer">Conceptual flow. Cognify governs actions routed through its MCP server; it does not intercept arbitrary agent traffic outside that boundary.</p>
+          </article>
+
+          <article class="lab-card lab-jwt" data-reveal>
+            <div class="lab-card-top"><span class="lab-index">LAB / 02</span><span class="lab-tag">SECURITY UTILITY</span></div>
+            <h3>JWT structure inspector</h3>
+            <p class="lab-description">Decode the header and payload of a JSON Web Token locally. This tool does not verify the signature or establish trust.</p>
+            <label class="field-label" for="jwt-input">PASTE A TOKEN</label>
+            <textarea id="jwt-input" class="jwt-input" rows="3" spellcheck="false" placeholder="header.payload.signature"></textarea>
+            <div class="jwt-actions"><button id="jwt-inspect" class="button button-primary button-small" type="button">Inspect token <span>↗</span></button><button id="jwt-clear" class="button button-ghost button-small" type="button">Clear</button></div>
+            <div class="jwt-result" id="jwt-result" aria-live="polite"><div class="jwt-empty"><span>WAITING FOR INPUT</span><p>Header and payload appear here after inspection.</p></div></div>
+            <div class="jwt-warning"><span>!</span><p><b>Decode ≠ verify.</b> The signature is not checked. Do not paste production tokens, credentials or sensitive personal data into a public webpage.</p></div>
+          </article>
+        </div>
+
+        <article class="terminal-card" data-reveal>
+          <div class="terminal-card-head"><div><span class="terminal-dot dot-red"></span><span class="terminal-dot dot-amber"></span><span class="terminal-dot dot-green"></span><b>mueez@portfolio</b></div><span>LOCAL NAVIGATION CONSOLE</span></div>
+          <div class="terminal-window" id="terminal-output" role="log" aria-live="polite" aria-label="Command console output">
+            <div class="terminal-line terminal-muted">Portfolio console · local commands only · type <b>help</b> to begin.</div>
+            <div class="terminal-line"><span class="terminal-prompt">guest@site:~$</span> <span>whoami</span></div>
+            <div class="terminal-line terminal-output-line">Mueez Ahmed / software engineering / systems / research</div>
           </div>
-          <div class="credential" data-reveal>
-            <span class="mono-label">RECOGNITION</span>
+          <form class="terminal-form" id="terminal-form" autocomplete="off">
+            <label for="terminal-command"><span class="terminal-prompt">guest@site:~$</span></label>
+            <input id="terminal-command" name="command" type="text" spellcheck="false" autocomplete="off" placeholder="help, projects, stack, open cognify..." aria-label="Enter a local portfolio command">
+            <button type="submit" aria-label="Run command">↵</button>
+          </form>
+          <div class="terminal-hints"><span>AVAILABLE: HELP / PROJECTS / STACK / RESEARCH / CONTACT</span><button type="button" id="terminal-clear">CLEAR OUTPUT</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section studio-section" id="studio">
+      <div class="container">
+        <div class="section-topline" data-reveal><span class="section-index">04 / IN THE STUDIO</span><span class="section-rule"></span><span class="section-aside">WHAT I'M WORKING TOWARDS</span></div>
+        <div class="section-heading section-heading-wide" data-reveal>
+          <h2>Beyond the<br>current <em>builds.</em></h2>
+          <div class="section-heading-copy"><p>Some ideas are still at the product-definition stage. They belong in the portfolio as explorations, not as shipped software.</p></div>
+        </div>
+        <div class="studio-grid">
+          <article class="studio-card" data-reveal><div class="studio-card-art studio-pyflow"><span class="studio-node studio-node-a">TRIGGER</span><span class="studio-connector"></span><span class="studio-node studio-node-b">ROUTE</span><span class="studio-connector"></span><span class="studio-node studio-node-c">ACTION</span><span class="studio-art-index">CONCEPT / 001</span></div><div class="studio-card-body"><div class="project-meta-line"><span>PYFLOW / AI AUTOMATA</span><span class="status status-concept"><i></i> Product exploration</span></div><h3>Workflow orchestration, made composable.</h3><p>An exploration of a visual automation environment: connecting tools, agents and business processes through inspectable workflows rather than isolated prompts.</p><a class="project-read-more" href="{{ '/projects/#pyflow' | relative_url }}">Read the concept note <span>↗</span></a></div></article>
+          <article class="studio-card" data-reveal><div class="studio-card-art studio-kebab"><div class="kebab-ui"><span>ORDER / 0007</span><b>Build a better<br>checkout.</b><i>MENU　 CUSTOMISE　 TRACK</i></div><span class="studio-art-index">CONCEPT / 002</span></div><div class="studio-card-body"><div class="project-meta-line"><span>KEBABLAB / COMMERCE</span><span class="status status-concept"><i></i> Product exploration</span></div><h3>Restaurant ordering beyond a menu page.</h3><p>A proposed ordering experience spanning configurable products, combo logic, order tracking and an operational dashboard. The concept is not presented as a delivered client system.</p><a class="project-read-more" href="{{ '/projects/#kebablab' | relative_url }}">Read the concept note <span>↗</span></a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section journey-section" id="journey">
+      <div class="container">
+        <div class="section-topline" data-reveal><span class="section-index">05 / JOURNEY & RECOGNITION</span><span class="section-rule"></span><span class="section-aside">A RECORD OF THE WORK</span></div>
+        <div class="section-heading section-heading-wide" data-reveal>
+          <h2>Learning by<br><em>building.</em></h2>
+          <div class="section-heading-copy"><p>My route is a mix of formal study, independent product work, collaborative research and team competitions. I prefer to show the actual work over inflate a résumé timeline.</p></div>
+        </div>
+        <div class="journey-layout">
+          <div class="timeline">
+            <article class="timeline-entry" data-reveal><span class="timeline-marker"></span><div class="timeline-date">2025 — 2029</div><div class="timeline-content"><h3>BSc (Hons) Computer Science</h3><p class="timeline-organisation">Keele University</p><p>Studying the foundations of computing while developing practical experience through independent software projects and research collaboration.</p></div><span class="timeline-type">EDUCATION</span></article>
+            <article class="timeline-entry" data-reveal><span class="timeline-marker"></span><div class="timeline-date">2026 — PRESENT</div><div class="timeline-content"><h3>Founder / product builder</h3><p class="timeline-organisation">X.Group</p><p>Developing a product direction around automation infrastructure, multi-tenant systems and operational control.</p></div><span class="timeline-type">PRODUCT</span></article>
+            <article class="timeline-entry" data-reveal><span class="timeline-marker"></span><div class="timeline-date">2026 — PRESENT</div><div class="timeline-content"><h3>AI agent governance</h3><p class="timeline-organisation">Cognify OS</p><p>Building a runtime control point for agent actions, including policy evaluation, approvals and evidence capture.</p></div><span class="timeline-type">ENGINEERING</span></article>
+            <article class="timeline-entry" data-reveal><span class="timeline-marker"></span><div class="timeline-date">IN PROGRESS</div><div class="timeline-content"><h3>Research collaboration</h3><p class="timeline-organisation">SPECTRA-GNN</p><p>Contributing to a graph neural network manuscript currently in development. Not yet a published paper.</p></div><span class="timeline-type">RESEARCH</span></article>
+          </div>
+          <aside class="recognition-panel" data-reveal>
+            <span class="micro-label">TEAM RECOGNITION</span>
+            <div class="recognition-icon">HK</div>
             <h3>Hack Keele</h3>
-            <p>Member of a winning team.</p>
-          </div>
-          <div class="credential" data-reveal>
-            <span class="mono-label">CURRENT INTEREST</span>
-            <h3>Trustworthy AI systems</h3>
-            <p>Governance, coordination, evaluation and human oversight.</p>
-          </div>
+            <p>Part of a winning team at the Keele hackathon.</p>
+            <span class="recognition-year">KEELE UNIVERSITY</span>
+            <div class="recognition-divider"></div>
+            <span class="micro-label">CURRENT ACADEMIC INTERESTS</span>
+            <div class="interest-list"><span>Agent governance</span><span>Graph representation learning</span><span>Human–AI collaboration</span><span>Product systems</span></div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="section section-contact" id="contact">
-      <div class="container contact-layout">
-        <div data-reveal>
-          <p class="eyebrow"><span class="eyebrow-line"></span> Contact</p>
-          <h2>Good work starts<br>with a <em>clear conversation.</em></h2>
-          <p class="contact-intro">For engineering opportunities, technical collaborations, research conversations or a product problem worth working through, send me a note.</p>
+    <section class="section research-section" id="research">
+      <div class="container">
+        <div class="research-feature" data-reveal>
+          <div class="research-feature-copy"><div class="section-topline section-topline-light"><span class="section-index">06 / RESEARCH NOTE</span><span class="section-rule"></span><span class="section-aside">MANUSCRIPT IN PROGRESS</span></div><p class="research-kicker">GRAPH REPRESENTATION LEARNING</p><h2>SPECTRA<span>—</span>GNN</h2><p class="research-feature-lede">A study of graph neural network methods and the structure of connected information.</p><p class="research-feature-detail">The manuscript is being developed through academic collaboration. This page will grow with the precise research question, dataset, model formulation, evaluation protocol and reproducible results as they are validated.</p><a class="button button-primary" href="{{ '/projects/#spectra-gnn' | relative_url }}">Read research status <span>↗</span></a></div>
+          <div class="research-feature-graphic" aria-hidden="true"><svg viewBox="0 0 530 360"><g class="research-mesh"><path d="M40 175 130 65 245 120 365 45 492 155M40 175 130 290 245 120 370 285 492 155M130 65 130 290M245 120 365 45M245 120 370 285M365 45 492 155M370 285 492 155M130 65 245 120M130 290 245 120"/></g><g class="research-points"><circle cx="40" cy="175" r="8"/><circle cx="130" cy="65" r="7"/><circle cx="130" cy="290" r="7"/><circle cx="245" cy="120" r="13"/><circle cx="365" cy="45" r="8"/><circle cx="370" cy="285" r="8"/><circle cx="492" cy="155" r="11"/></g><g class="research-pulse"><circle cx="245" cy="120" r="29"/><circle cx="492" cy="155" r="25"/></g></svg><span>RELATIONAL STRUCTURE / NODE EMBEDDINGS / MODEL EVALUATION</span></div>
         </div>
-        <div class="contact-card" data-reveal>
-          <span class="mono-label">DIRECT CONTACT</span>
-          <a class="contact-email" href="mailto:mueezahmad69@gmail.com">mueezahmad69@gmail.com <span aria-hidden="true">↗</span></a>
-          <div class="contact-links">
-            <a href="https://github.com/mueezahmed455" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a href="https://www.linkedin.com/in/mueezahmed/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-            <a href="{{ '/projects/' | relative_url }}">Project index <span aria-hidden="true">↗</span></a>
-          </div>
-          <p class="contact-note">No contact form that pretends to send. Email opens directly in your mail app.</p>
-        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-layout" data-reveal>
+        <div><div class="section-topline"><span class="section-index">07 / CONTACT</span><span class="section-rule"></span></div><h2>Let's talk about<br>something <em>real.</em></h2><p>For engineering opportunities, product collaborations, research conversations or a technical problem worth unpacking, email is the most reliable way to reach me.</p></div>
+        <div class="contact-panel"><span class="micro-label">DIRECT EMAIL</span><a class="contact-email" href="mailto:mueezahmad69@gmail.com">mueezahmad69@gmail.com <span>↗</span></a><div class="contact-actions"><button type="button" class="button button-primary button-small" id="copy-email" data-copy="mueezahmad69@gmail.com">Copy email</button><a class="button button-outline button-small" href="mailto:mueezahmad69@gmail.com?subject=Portfolio%20enquiry">Compose email ↗</a></div><div class="contact-socials"><a href="https://github.com/mueezahmed455" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/mueezahmed/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="{{ '/projects/' | relative_url }}">Projects ↗</a></div><p class="contact-privacy">No fake form submission. No external contact service. Your email app handles the message.</p></div>
       </div>
     </section>
   </main>
+
   {% include footer.html %}
+  {% include command-deck.html %}
+  {% include portfolio-guide.html %}
+  <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">↑</button>
 </body>
 </html>

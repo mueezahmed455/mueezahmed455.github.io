@@ -1,0 +1,15 @@
+<div class="guide-dock">
+  <button class="guide-launch" id="guide-launch" type="button" aria-haspopup="dialog" aria-controls="guide-dialog"><span class="guide-launch-mark">?</span><span>Portfolio guide</span><span class="guide-launch-arrow">↗</span></button>
+</div>
+<dialog class="guide-dialog" id="guide-dialog" aria-labelledby="guide-title">
+  <div class="guide-head"><div><span class="micro-label">LOCAL INDEX / NO AI API</span><h2 id="guide-title">Find your way around.</h2></div><button class="dialog-close" type="button" data-close-dialog="guide-dialog" aria-label="Close portfolio guide">×</button></div>
+  <p class="guide-intro">This is a small local guide to the portfolio, not a live AI assistant. Choose a topic to see relevant information and links.</p>
+  <div class="guide-choices">
+    <button type="button" data-guide-topic="cognify">What is Cognify OS?</button>
+    <button type="button" data-guide-topic="stack">What technologies are used?</button>
+    <button type="button" data-guide-topic="research">Tell me about the research.</button>
+    <button type="button" data-guide-topic="contact">How can I get in touch?</button>
+  </div>
+  <div class="guide-answer" id="guide-answer" aria-live="polite"><span class="micro-label">START HERE</span><p>Select a topic above. You can also use the command deck to jump directly to a section.</p></div>
+  <div class="guide-foot"><span>LOCAL CONTENT ONLY</span><button type="button" data-close-dialog="guide-dialog">Close guide</button></div>
+</dialog>

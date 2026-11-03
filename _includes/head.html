@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111b24">
+<meta name="theme-color" content="#0a1118">
 <meta name="description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
 <meta name="author" content="Mueez Ahmed">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
@@ -9,12 +9,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
-<script src="{{ '/assets/js/portfolio.js' | relative_url }}" defer></script>
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("mueez-theme");
+      var preferred = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", saved || preferred);
+    } catch (error) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  })();
+</script>
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/labs.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/network-field.js' | relative_url }}" defer></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mueez Ahmed">
 <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
 <meta property="og:description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description | escape }}{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{{ '/assets/og-card.svg' | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
 <title>{% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>

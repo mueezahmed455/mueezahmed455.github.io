@@ -1,47 +1,46 @@
 # Mueez Ahmed — Engineering Portfolio
 
-A custom, static portfolio published with GitHub Pages and Jekyll.
+A static, Jekyll-powered portfolio published through GitHub Pages.
 
-## Direction
+## Design direction
 
-The site is an engineering portfolio rather than a generic résumé template. It documents a small set of projects with explicit scope, architecture, current status and evidence links. It avoids unsupported metrics, fabricated testimonials, placeholder project descriptions and contact forms that simulate delivery without a backend.
+A dark, technical editorial system with restrained motion, project-specific diagrams and practical interactive tools. The site is deliberately not built around stock imagery, fabricated metrics, fake visitor telemetry or AI-labelled interactions without an AI service.
 
-## Featured work
+## Project coverage
 
-- **Cognify OS** — AI agent and MCP tool governance control plane. The web application is deployed; the source repository is private and is intentionally not linked.
-- **X.Group** — automation infrastructure and operating-layer product. Public source and live web presence are linked from the case study.
-- **PhishSwipe** — browser-based phishing-awareness game using fictional scenarios and browser-local data.
-- **AUZBIZ** — Next.js travel-services application codebase covering enquiries, sample fare analysis, tours and content management.
-- **SPECTRA-GNN** — academic research manuscript in progress; not presented as a publication.
+- Cognify OS — AI agent and MCP tool governance; private source repository, deployed web app.
+- X.Group — workflow and automation infrastructure product.
+- PhishSwipe — local-first phishing-awareness browser prototype.
+- AUZBIZ — Next.js travel-services application codebase.
+- SPECTRA-GNN — academic research manuscript in progress.
+- PyFlow / AI Automata — product exploration; not presented as shipped software.
+- KebabLab — restaurant-commerce product exploration; not presented as a delivered client platform.
 
-## Structure
+## Interactive features
 
-- `index.html` — homepage and portfolio overview
-- `projects/index.html` — filterable project case studies
-- `contact.html` — direct contact links (mailto; no simulated form)
-- `blog/index.html` — published notes index
-- `_layouts/` and `_includes/` — shared Jekyll shell
-- `assets/css/portfolio.css` — responsive design system
-- `assets/js/portfolio.js` — navigation, reveal and project filtering interactions
-- `assets/favicon.svg` — site mark
+- Responsive navigation, dark/light themes and scroll progress.
+- Keyboard command deck (Ctrl/Cmd + K, or / outside input fields).
+- Local portfolio guide with authored answers; no model API.
+- Canvas network field that pauses when off-screen and respects reduced motion.
+- Cognify architecture explorer.
+- Client-side JWT structure inspector. It decodes header and payload only and does not verify signatures.
+- Local command console for navigating project information.
+- Contact links and clipboard copy.
+- All interactive tools run in the browser; pasted JWT text is not sent to a server.
 
-## Local preview
+## Local development
 
-The site has no JavaScript build step or package manager requirement. With Ruby and Bundler installed:
+Requires Ruby and Bundler.
 
-```bash
-bundle install
-bundle exec jekyll serve
-```
+    bundle install
+    bundle exec jekyll serve
 
-Then open http://127.0.0.1:4000.
+Open http://127.0.0.1:4000.
 
 ## Deployment
 
-The repository name is `mueezahmed455.github.io`, so GitHub Pages can publish the root of the default branch as the personal site. The current source is Jekyll-compatible and does not require a Vercel project or a separate build pipeline.
+The repository name is mueezahmed455.github.io. GitHub Pages publishes the root of the main branch. The site uses standard Jekyll and does not need a Node build pipeline.
 
-After reviewing the redesign branch, merge it into `main` and confirm the Pages deployment in the repository's Actions / Pages settings.
+## Content integrity
 
-## Content policy
-
-Project stage, deployment status, source availability and research maturity are described separately. Add measured performance figures only when they have a reproducible source, and publish research claims only after the relevant analysis and review are complete.
+The portfolio distinguishes product status, repository visibility, deployment state and research maturity. Performance figures and claims should be included only when they have reproducible evidence. Concept work is marked as concept work.

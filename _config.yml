@@ -2,7 +2,7 @@ title: Mueez Ahmed
 email: mueezahmad69@gmail.com
 description: >-
   Software engineering, AI infrastructure and applied research.
-  Selected projects and technical work by Mueez Ahmed.
+  Product work, system design and technical experiments by Mueez Ahmed.
 url: "https://mueezahmed455.github.io"
 baseurl: ""
 github_username: mueezahmed455
@@ -12,8 +12,9 @@ highlighter: rouge
 permalink: pretty
 
 collections:
-  notes:
-    output: false
+  projects:
+    output: true
+    permalink: /projects/:path/
 
 defaults:
   - scope:
@@ -26,6 +27,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-paginate
 
 exclude:
   - Gemfile

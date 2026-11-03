@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-# Match the GitHub Pages Jekyll environment for local preview.
+# Use the same Jekyll and plugin versions as GitHub Pages.
 gem "github-pages", group: :jekyll_plugins

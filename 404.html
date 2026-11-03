@@ -3,11 +3,11 @@ layout: default
 title: Page not found
 permalink: /404.html
 ---
-<section class="not-found">
-  <div class="container not-found-inner">
-    <span class="mono-label">ERROR / 404</span>
+<section class="inner-page not-found-page">
+  <div class="container">
+    <p class="eyebrow"><span class="eyebrow-line"></span> ERROR / 404</p>
     <h1>This route<br><em>doesn't exist.</em></h1>
-    <p>The page may have moved, or the address may be wrong. The project index is a good place to continue.</p>
-    <a class="button button-primary" href="{{ '/' | relative_url }}">Return home <span aria-hidden="true">↗</span></a>
+    <p class="inner-page-lede">The page may have moved, or the address may be wrong. Return to the portfolio or open the project archive to continue.</p>
+    <div class="hero-actions"><a class="button button-primary" href="{{ '/' | relative_url }}">Return home <span>↗</span></a><a class="button button-outline" href="{{ '/projects/' | relative_url }}">Browse projects <span>↗</span></a></div>
   </div>
 </section>

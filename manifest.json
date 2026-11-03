@@ -4,8 +4,8 @@
   "description": "Software engineering, AI infrastructure and applied research.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f2f2eb",
-  "theme_color": "#111b24",
+  "background_color": "#0a1118",
+  "theme_color": "#0a1118",
   "icons": [
     {
       "src": "/assets/favicon.svg",

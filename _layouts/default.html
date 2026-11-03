@@ -3,12 +3,14 @@
 <head>
   {% include head.html %}
 </head>
-<body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
+<body class="site-shell">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   {% include nav.html %}
-  <main id="main-content" class="page-main">
-    {{ content }}
-  </main>
+  <main id="main" class="page-main">{{ content }}</main>
   {% include footer.html %}
+  {% include command-deck.html %}
+  {% include portfolio-guide.html %}
+  <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">↑</button>
 </body>
 </html>
